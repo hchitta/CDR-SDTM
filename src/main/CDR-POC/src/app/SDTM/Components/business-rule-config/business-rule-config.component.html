@@ -95,7 +95,7 @@
               <kendo-grid-column [width]="130" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="domainLabel" title="SDTM Domain">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                    {{(rowIndex == 0) ? dataItem[1] : ""}}
+                  {{dataItem[1]}}
                 </ng-template>
                </kendo-grid-column> 
               <kendo-grid-column [width]="125" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
