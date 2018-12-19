@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.cdr.sdtm.model.Domain;
 import com.cdr.sdtm.model.LookUp;
+import com.cdr.sdtm.model.PathToSdtmDashBoard;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
 import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
@@ -247,5 +248,10 @@ public class SdtmMatrixController {
 		matricesTwo = sdtmMatrixService.findAll(matrix);
 		lookup.add(matricesTwo);
 		return lookup;
+	}
+	
+	@GetMapping("/pathToSdtmDashBoard")
+	public List<PathToSdtmDashBoard> fetchPathToSdtmHomeDashBoard() {
+		return sdtmMatrixService.fetchDashBoardData();
 	}
 }
