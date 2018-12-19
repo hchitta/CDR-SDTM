@@ -1,0 +1,391 @@
+
+
+.studyHeading{
+  font-size: 13px;
+  font-weight: bold;
+  margin-top: 13px;
+}
+
+
+.info-box {
+  display: block;
+  min-height: 60px;
+ 
+
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+  border-radius: 2px;
+  margin-bottom: 15px;
+}
+
+.info-box-content{
+  padding: 5px 10px;
+  margin-left: 40px;
+  
+}
+
+.info-box-number {
+  display: block;
+  font-weight: bold;
+  font-size: 18px;
+}
+
+.info-box-text {
+  display: block;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-bottom: 20px;
+  padding-top: 12px;
+  text-overflow: ellipsis;
+}
+
+.study-label{
+    font-size: 12px;
+    padding-right: 7px;
+    font-family: Open Sans Regular; 
+}
+
+.panel-heading{
+  font-size: 15px;
+  font-weight: bold;
+  font-family: Open Sans Regular; 
+}
+
+.panel-table{
+  padding: 5px 10px;
+  margin-left: 40px;
+}
+.panel-body{
+  border: 1px solid  #808080;
+  border-radius: 0.9rem;
+  padding:15px 15px 15px 15px;
+  margin-right :20px;
+}
+.table>thead>tr>th{
+	background-color:white;
+	border-bottom:0px;
+}
+.table>tbody>tr>td{
+	border-top:0px;
+}
+
+#studHeading h1 {
+  padding: 0px;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#studHeading hr {
+  /*padding: 0px;*/
+  /*font-size: 15px;*/
+  /*font-weight: bold;*/
+  /*height: 1px;*/
+  margin-top: 0em;
+}
+
+#studyId h1 {
+  font-size: 13px;
+}
+
+#studyId {
+  /*font-size: 13px;*/
+  border: 1px solid black;
+  padding: 5px;
+  height: 60px;
+}
+
+#phase h1 {
+  font-size: 12px;
+  font-weight: 400;
+  padding-right: 3px;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: .5rem;
+  font-size: 15px;
+  font-weight: bold;
+}
+
+#domain {
+  /*background-color: rgb(77,77,137);*/
+  /*color: black;*/
+  /*border-color: black;*/
+  border: 1px solid black;
+  padding: 5px;
+  height: 60px;
+  width: 120px;
+}
+
+#heading hr {
+  padding: 0px;
+}
+
+#heading {
+  padding: 0px;
+  margin: 0px;
+}
+
+.fa.fa-arrow-circle-down {
+  font-size: 25px;
+  color: rgb(31,105,215);
+}
+
+#studySetupHeading {
+  margin: 0.4em;
+  padding: 5px;
+}
+
+.study-heading-arrow {
+  /*margin: 0.4em;*/
+  /*padding: 5px;*/
+  font-size: 17px;
+}
+
+.study-heading {
+  margin: 0em;
+  /*padding: 0px;*/
+  padding-left: 10px;
+  width: 250px;
+  font-size: 15px;
+}
+
+.item {
+  /*background: yellow;*/
+  text-align: center;
+  /*width: 250px;*/
+  /*height: 50px;*/
+  /*border: 1px solid white;*/
+  /*direction: ltr;*/
+  padding: 5px;
+}
+
+.graph {
+  width: 150px;
+  height: 170px;
+  background: rgb(215,215,203);
+}
+
+.fa.fa-square.graph-icons {
+  font-size: 0.5em;
+  /*font-color: green;*/
+  color: greeen;
+}
+
+.h6, h6 {
+  font-size: 0.6em;
+}
+
+#dbLock label {
+  border-left: 2px solid black;
+  font-size: 12px;
+  padding-left: 2px;
+}
+
+#dbLock h1 {
+  /*border-left: 2px solid black;*/
+  font-size: 11px;
+  /*padding-left: 2px;*/
+  font-weight: 200;
+}
+
+#studyId-study {
+  height: 20px;
+}
+
+.label-value {
+  font-size: 12px;
+}
+
+#domain h4 {
+  font-size: 20px;
+  padding: 0px;
+  font-weight: bolder;
+}
+
+#domain {
+  font-size: 13px;
+  border: 1px solid black;
+  padding: 5px;
+  height: 60px;
+  margin-left: 10px;
+  border-radius: 0.4em;
+}
+
+.accordion-group {
+  margin-bottom: 20px;
+}
+
+.accordion-heading .accordion-toggle {
+  display: block;
+  padding: 8px 15px;
+}
+
+.accordion-toggle {
+  background: rgb(248, 251, 252);
+}
+
+.collapse.show {
+  display: block;
+}
+
+
+
+.study-section{
+  height:90px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+}
+.study-name{
+  
+  text-align: left;
+  padding-left: 15px;
+  /* padding-top: 15px; */
+  margin-top: 10px;
+
+}
+
+.business-config-header {
+  color: #444;
+  display: block;
+ 
+  position: relative;
+}
+
+.text-center {
+  text-align: center;
+}
+.box {
+  position: relative;
+  border-radius: 3px;
+  background: #ffffff;
+  border-top: 3px solid #d2d6de;
+  margin-bottom: 20px;
+  width: 100%;
+  box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.chart {
+  position: relative;
+  overflow: hidden;
+  
+}
+
+.business-section{
+  height:220px;
+  border: 1px solid black;
+  border-radius: 0.5rem;
+}
+
+#studyId {
+  font-size: 13px;
+  border: 1px solid black;
+  padding: 5px;
+  height: 60px;
+}
+
+#domain-version {
+  border: 1px solid black;
+  padding: 5px;
+  padding-top: 10px;
+  height: 60px;
+  margin-left: 20px;
+  width: 150px;
+  border-radius: 0.4em;
+}
+
+.version-heading {
+  font-size: 12px;
+  margin: 0ox;
+  margin: 0px;
+}
+
+#lastjob-run {
+  border: 1px solid black;
+  padding: 5px;
+  height: 60px;
+  width: 130px;
+  margin-left: 15px;
+  border-radius: 0.4em;
+}
+
+#lastjob-run label {
+  font-size: 13px;
+  padding: 0px;
+  margin: 0px;
+}
+
+#lastjob-run h6 {
+  font-size: 13px;
+  /*padding: 0px;*/
+  /*margin: 0px;*/
+}
+
+#notification {
+  border: 1px solid black;
+  padding: 5px;
+  height: 60px;
+  width: 170px;
+  margin-left: 15px;
+}
+
+#notification i {
+  -left: 15px;
+  font-size: 20px;
+  color: red;
+}
+
+#notification h6 {
+  -left: 15px;
+  font-size: 12px;
+  /*color: red;*/
+}
+
+#studyName {
+  /*height: 30px;*/
+  /*width: 300px;*/
+}
+
+#studyName label {
+  /*height: 45px;*/
+  font-size: 14px;
+  width: 110px;
+  padding-right: 15px;
+}
+
+#studyName h1 {
+  /*height: 45px;*/
+  /*width: 110px;*/
+  font-size: 15px;
+}
+
+.study-roles-label {
+  font-size: 12px;
+}
+
+.study-roles-heading {
+  font-size: 12px;
+  padding-left: 5px;
+}
+
+.col-12.d-flex.study-functions {
+  margin: 0.4em;
+  padding: 5px;
+}
+
+#business-config-section {
+  border: 1px solid black;
+  border-radius: 0.4em;
+}
+
+#business-config-section h6 {
+  /*border: 1px solid black;*/
+  /*border-radius: 0.4em;*/
+  padding: 4px;
+}
+
+.graph-legend-label {
+  font-size: 10px;
+  margin: 0px;
+  padding-left: 2px;
+}
+

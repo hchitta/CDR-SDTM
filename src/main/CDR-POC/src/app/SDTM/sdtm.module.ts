@@ -25,6 +25,8 @@ import { SdtmComponent } from './Components/sdtm/sdtm.component';
 import { CarouselModule } from 'ngx-bootstrap';
 import { DataLineageComponent } from './Components/data-lineage/data-lineage.component';
 import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
+import { ChartsModule } from '@progress/kendo-angular-charts';
+import 'hammerjs';
 
 @NgModule({
   imports: [
@@ -43,7 +45,8 @@ import { DateInputsModule } from '@progress/kendo-angular-dateinputs';
     RouterModule,
     SharedModule,
     CarouselModule.forRoot(),
-    DateInputsModule
+    DateInputsModule,
+    ChartsModule
    ],
    declarations: [
     BusinessRuleConfigComponent,

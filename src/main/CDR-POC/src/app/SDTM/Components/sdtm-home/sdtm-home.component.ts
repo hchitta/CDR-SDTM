@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { SeriesLabels } from '@progress/kendo-angular-charts';
 
 @Component({
   selector: 'sdtm-home',
@@ -8,16 +9,49 @@ import { Component, OnInit } from '@angular/core';
 export class SdtmHomeComponent implements OnInit {
   navBarItems: Object[];
   appName: string;
+  public isCollapsed = false;
+  public pieData: any = [
+    { category: 'In Progress', value: 20 },
+    { category: 'Ready for Review', value: 11 },
+    { category: 'Approved', value: 4 }
+  ];
+  public pieDataTwo: any = [
+    { category: 'Enabled', value: 3 },
+    { category: 'Disabled', value: 1 }
+  ];
+  public seriesData: any[] = [{
+    study: 'This Study',
+    domains: 35
+    }];
+
+    public seriesDataTwo: any[] = [{
+      study: 'Overdue',
+      domains: 3,
+      color: 'red'
+      },
+      {
+        study: 'Due in 7 Days',
+        domains: 7,
+        color: 'brown'
+      }];
+
+      public seriesLabels: SeriesLabels = {
+      visible: true, // Note that visible defaults to false
+        padding: 3,
+        font: 'bold 12px Open Sans'
+      };
+
+      public hidden: any = { visible: false };
 
   constructor() { }
 
   ngOnInit() {
     this.appName = " - Path to SDTM";
     this.navBarItems = [
-      {"navBarTitle": "Home", "navBarLink": "/sdtmHome"},
-      {"navBarTitle": "Study Configuration", "navBarLink": "studySetup"},
-      {"navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules"},
-      {"navBarTitle": "Job Execution", "navBarLink": "jobExecution"}];
+      { "navBarTitle": "Home", "navBarLink": "/sdtmHome" },
+      { "navBarTitle": "Study Configuration", "navBarLink": "studySetup" },
+      { "navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules" },
+      { "navBarTitle": "Job Execution", "navBarLink": "jobExecution" }];
   }
 
 }

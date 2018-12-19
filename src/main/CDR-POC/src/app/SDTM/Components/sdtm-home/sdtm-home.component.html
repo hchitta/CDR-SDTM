@@ -1,11 +1,293 @@
+<div class="main-container ace-save-state" id="main-container">
 
-<div class="row">
-<div class="col">
-<img src="assets/images/construction.png" width="1300px"/>
+	<div class="container">
+		<h4
+			style="margin-left: -50px; margin-top: 10px; text-align: left; font-family: Open Sans Regular; font-weight: 100; font-size: 13px; color: black">
+			Welcome,admin!</h4>
+	</div>
+
+	<!-- grey box -->
+	<div class="panel panel-default"
+		style="height: 950px; margin-left: 15px; margin-right: 15px; border-radius: 10px; border-width: 1px; width: 97%; background: #e6e6e6;">
+
+		<div class="container">
+
+			<div>
+				<h4 style="margin-top: 5px; font-size: 14px; text-transform: none;">
+					My Studies</h4>
+				<hr style="margin-top: 0px; border-top: 2px solid #074982">
+			</div>
+
+			<div
+				style="background-color: white; box-shadow: 1px 2px #e6e6e6; padding-bottom: 0px; margin-bottom: 0px;">
+
+				<!-- First panel -->
+				<div class="row" style="padding-top: 10px">
+
+					<div class="col-md-2 info-box-content pull-left"
+						style="margin-top: 15px">
+						<span class="info-box-text"
+							style="font-size: 15px; font-weight: bold; text-align: left; padding: 0px; margin: 0px;">
+							M45-9059282</span>
+						<hr
+							style="margin-top: 10px; border-top: 1px solid #074982; margin-bottom: 10px" />
+
+						<span
+							style="font-size: 12px; font-family: Open Sans Regular; text-align: left; padding: 0px; margin: 0px;">
+							Phase2 | <b>DB Lock :</b>15-Jan-2019
+						</span>
+					</div>
+
+					<div
+						class="col-md-2 info-box-content pull-left info-box bg-primary"
+						style="border-radius: 0.9rem; height: 60px;">
+						<span class="info-box-text"
+							style="font-size: 19px; font-weight: bold;">4/35</span> <span>Domains
+							Approved</span>
+					</div>
+
+					<div class="col-md-3 info-box-content pull-left"
+						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
+						<span
+							style="display: block; margin-bottom: 19px; padding-top: 10px;">
+							<span class="study-label"><b>Current Version :</b></span> SDTM
+							v2.3
+						</span> <span> <span class="study-label" style="font-weight: bold">Latest
+								Version :</span> SDTM v2.3
+						</span>
+					</div>
+
+					<div class="col-md-1 info-box-content pull-left"
+						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
+						<span class="info-box-text study-label"
+							style="display: block; margin-bottom: 19px; padding-top: 10px;"><b>Last
+								Job Run: </b></span> <span>04-Dec-2018</span>
+					</div>
 
 
+					<div class="col-md-1 info-box-content pull-left">
+						<img src="../assets/images/Attention.png" style="width: 30px;">
+						<span class="info-box-text"
+							style="font-size: 12px; font-family: Open Sans Regular;">
+							1 item requires attention</span>
+					</div>
+				</div>
+
+				<!-- Second panel STUDY SETUP-->
+				<div class="row" style="padding-top: 10px; height: 70px">
+					<div class="panel-table">
+						<h4
+							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
+							Study Setup</h4>
+
+						<div class="panel-body">
+							<div class="row" style="text-align: left; padding-left: 20px">
+								<span class="study-label"><b>Study Name:</b></span><span>&nbsp;CALERIE:</span>
+								<span>&nbsp;Comprehensive Assessment of Long Term Effects
+									of Reducing Intake of Energy</span>
+							</div>
+							<div class="row" style="margin-top: 25px; text-align: left;">
+								<div class="col-md-3 pull-left"
+									style="padding-left: 20px; width: 200px">
+									<span class="study-label"><b>Study Analyst:</b></span><span>Bob
+										Smith</span>
+								</div>
+								<div class="col-md-3 pull-left" style="padding-left: 20px;">
+									<span class="study-label"> <b>Study Manager:</b></span><span>Britney
+										Spears</span>
+								</div>
+								<div class="col-md-3 pull-left" style="padding-left: 20px;">
+									<span class="study-label"> <b>Study Setup Date:</b></span><span>30-Nov-2018</span>
+								</div>
+								<div class="col-md-3 pull-left" style="padding-left: 20px;">
+									<span class="study-label"><b>Status:</b></span><span>Active</span>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Third panel BRC-->
+				<div class="row" style="padding-top: 35px; height: 300px">
+					<div class="panel-table">
+						<h4
+							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
+							Business Rule Configuration</h4>
+
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<kendo-chart [seriesColors]="['#4682B4', '#57A0D3', '#89CFF0']"
+										style="width: 250px; height: 250px;"> <kendo-chart-legend
+										position="bottom"></kendo-chart-legend> <kendo-chart-title
+										text="Domain Config Status" font="12px Open Sans Regular"
+										position="top" align="right"></kendo-chart-title> <kendo-chart-tooltip>
+									<ng-template kendoChartSeriesTooltipTemplate let-value="value"
+										let-category="category"> {{ category }} Value is
+									{{value}} </ng-template> </kendo-chart-tooltip> <kendo-chart-series> <kendo-chart-series-item
+										type="pie" [labels]="seriesLabels" [data]="pieData"
+										field="value" categoryField="category">
+									</kendo-chart-series-item> </kendo-chart-series> </kendo-chart>
+								</div>
+								<div class="col-md-4">
+
+									<kendo-chart style="width: 250px; height: 250px;" type="bar"
+										[seriesColors]="['green']"> <kendo-chart-title
+										text="# of Target Domains" font="12px Open Sans"
+										position="top" align="right"></kendo-chart-title> <kendo-chart-tooltip>
+									<ng-template kendoChartSeriesTooltipTemplate let-value="value">
+									Value is {{value}} </ng-template> </kendo-chart-tooltip> <kendo-chart-category-axis>
+									<kendo-chart-category-axis-item [majorGridLines]="hidden"
+										[minorGridLines]="hidden"> </kendo-chart-category-axis-item> </kendo-chart-category-axis>
+									<kendo-chart-value-axis> <kendo-chart-value-axis-item
+										[minorTicks]="hidden"> </kendo-chart-value-axis-item> </kendo-chart-value-axis> <kendo-chart-series>
+									<kendo-chart-series-item [labels]="seriesLabels" type="column"
+										[data]="seriesData" field="domains" categoryField="study">
+									</kendo-chart-series-item> </kendo-chart-series> </kendo-chart>
+								</div>
+								<div class="col-md-4">
+
+									<kendo-chart style="width: 250px; height: 250px;">
+									<kendo-chart-title text="Upcoming & Overdue Tasks"
+										font="12px Open Sans Regular" position="top" align="right"></kendo-chart-title>
+									<kendo-chart-value-axis> <kendo-chart-value-axis-item
+										[title]="{ text: 'Days' }" [min]="2" [max]="8">
+
+									</kendo-chart-value-axis-item> </kendo-chart-value-axis> <kendo-chart-tooltip> <ng-template
+										kendoChartSeriesTooltipTemplate let-value="value">
+									Value is {{value}} </ng-template> </kendo-chart-tooltip> <kendo-chart-series>
+									<kendo-chart-series-item [color]="color"
+										[labels]="seriesLabels" type="column" [data]="seriesDataTwo"
+										field="domains" categoryField="study">
+									</kendo-chart-series-item> </kendo-chart-series> </kendo-chart>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end of panel -->
+
+
+				<!-- Fouth panel BRC-->
+				<div class="row" style="padding-top: 50px; height: 430px">
+					<div class="panel-table">
+						<h4
+							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
+							Job Execution</h4>
+
+						<div class="panel-body">
+							<div class="row">
+								<div class="col-md-4">
+									<p class="text-center"
+										style="margin-top: 10px; margin-bottom: 15px; margin-left: -40px">
+										Domain Details</p>
+
+									<div style="width: 250px; padding-left: 40px;">
+										<table class="table" style="text-align: left;">
+											<thead>
+												<tr>
+													<th>Domain</th>
+													<th>Status</th>
+
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Demographics</td>
+													<td><span><img
+															src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png"
+															style="width: 25px;">
+															</span><span>
+															<img style="width: 25px;"
+															src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen1.png">
+													</span></td>
+
+												</tr>
+												<tr>
+													<td>Medical History</td>
+													<td><span><img
+															src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png"
+															style="width: 25px;"></span><span> <img
+															src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey1.png"
+															style="width: 25px;"></span></td>
+
+
+												</tr>
+												<tr>
+													<td>Adverse Events</td>
+													<td><span><img
+															src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png"
+															style="width: 25px;"></span><span> <img
+															src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed1.png"
+															style="width: 25px;"></span></td>
+
+												</tr>
+												<tr>
+													<td>Exposure</td>
+													<td><span><img
+															src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png"
+															style="width: 25px;"></span><span> <img
+															src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow1.png"
+															style="width: 25px;"></span></td>
+
+
+												</tr>
+
+											</tbody>
+										</table>
+									</div>
+
+
+
+
+								</div>
+
+								<div class="col-md-4">
+									<p class="text-center"
+										style="margin-top: 10px; margin-bottom: 15px;">Job
+										Enablement Status</p>
+									<div class="row">
+
+										<kendo-chart [seriesColors]="['#2E8B57','#50C878']"
+											style="width: 250px; height: 250px;"> <kendo-chart-legend
+											position="bottom"></kendo-chart-legend> <kendo-chart-title
+											text="Domain Config Status" font="12px Open Sans"
+											position="top" align="right"></kendo-chart-title> <kendo-chart-tooltip>
+										<ng-template kendoChartSeriesTooltipTemplate let-value="value"
+											let-category="category"> {{ category }} Value
+										is {{value}} </ng-template> </kendo-chart-tooltip> <kendo-chart-series> <kendo-chart-series-item
+											type="pie" [labels]="seriesLabels" [data]="pieDataTwo"
+											field="value" categoryField="category">
+										</kendo-chart-series-item> </kendo-chart-series> </kendo-chart>
+
+									</div>
+
+								</div>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- end of panel -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+			</div>
+		</div>
+		<!-- container -->
+	</div>
 </div>
-</div>
-  
-
-      
