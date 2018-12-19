@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SeriesLabels } from '@progress/kendo-angular-charts';
+import { HttpClient} from '@angular/common/http';
 
 @Component({
   selector: 'sdtm-home',
@@ -7,6 +8,7 @@ import { SeriesLabels } from '@progress/kendo-angular-charts';
   styleUrls: ['./sdtm-home.component.css']
 })
 export class SdtmHomeComponent implements OnInit {
+  dashBoardData: any[] = [];
   navBarItems: Object[];
   appName: string;
   public isCollapsed = false;
@@ -43,7 +45,7 @@ export class SdtmHomeComponent implements OnInit {
 
       public hidden: any = { visible: false };
 
-  constructor() { }
+  constructor( private http: HttpClient) { }
 
   ngOnInit() {
     this.appName = " - Path to SDTM";
@@ -52,6 +54,10 @@ export class SdtmHomeComponent implements OnInit {
       { "navBarTitle": "Study Configuration", "navBarLink": "studySetup" },
       { "navBarTitle": "Business Rule Configuration", "navBarLink": "businessRules" },
       { "navBarTitle": "Job Execution", "navBarLink": "jobExecution" }];
+
+      this.http.get<any[]>(`/api/CDR/pathToSdtmDashBoard`).subscribe(data => {
+        this.dashBoardData = data;
+      });
   }
 
 }
