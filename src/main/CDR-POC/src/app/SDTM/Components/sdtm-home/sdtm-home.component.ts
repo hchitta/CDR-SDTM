@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SeriesLabels } from '@progress/kendo-angular-charts';
+import { LegendLabels } from '@progress/kendo-angular-charts';
 import { HttpClient} from '@angular/common/http';
 
 @Component({
@@ -40,8 +41,20 @@ export class SdtmHomeComponent implements OnInit {
       public seriesLabels: SeriesLabels = {
       visible: true, // Note that visible defaults to false
         padding: 3,
-        font: 'bold 12px Open Sans'
+        font: 'bold 12px Open Sans',
       };
+
+      public seriesPieLabels: SeriesLabels = {
+        visible: true, // Note that visible defaults to false
+          font: 'bold 10px Open Sans',
+          color: 'white',
+          position: 'center',
+        };
+
+        public legendLabels: LegendLabels = {
+            font: '10px Open Sans',
+            color: 'black'
+          };
 
       public hidden: any = { visible: false };
 
