@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.cdr.sdtm.model.Domain;
+import com.cdr.sdtm.model.PathToSdtmDashBoard;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
 import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
@@ -39,5 +40,7 @@ public interface SdtmMatrixService {
 	List<TherapeuticAreas> getAllTherapeuticAreas();
 	
 	List<Object[]> fetchObjectLevelByStudyAndDomain(String study, String domain);
+	
+	List<PathToSdtmDashBoard> fetchDashBoardData();
 
 }

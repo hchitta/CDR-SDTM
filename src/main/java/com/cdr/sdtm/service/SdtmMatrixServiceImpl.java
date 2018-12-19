@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import com.cdr.sdtm.model.Domain;
 import com.cdr.sdtm.model.JobRunStatus;
+import com.cdr.sdtm.model.PathToSdtmDashBoard;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
 import com.cdr.sdtm.model.TherapeuticAreas;
 import com.cdr.sdtm.model.Transformation;
@@ -220,6 +221,10 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	
 	public List<Object[]> fetchObjectLevelByStudyAndDomain(String study, String domain) {
 		return sdtmMatrixRepository.fetchObjectLevelByStudyAndDomain(study, domain);
+	}
+	
+	public List<PathToSdtmDashBoard> fetchDashBoardData() {
+		return sdtmMatrixRepository.fetchDashBoardData();
 	}
 
 
