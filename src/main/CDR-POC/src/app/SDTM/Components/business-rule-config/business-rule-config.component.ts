@@ -325,7 +325,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     public KendoGridOne() {
         this.kendoOneShow = !this.kendoOneShow;
         if (this.kendoOneShow) {
-            this.kendoTwoHeight = 170;
+            this.kendoTwoHeight = 300;
         } else {
             this.kendoTwoHeight = 300;
         }
