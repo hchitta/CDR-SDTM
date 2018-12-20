@@ -70,14 +70,13 @@
 .togglebutton{
 	border-radius:50%;
 	border:none;
-	box-shadow:0 1px 1px rgba(0,0,0,0.1);
+	box-shadow:0 1px 1px #a6a6a6;
 	padding: 20px;
-    text-align: center;
-    text-decoration: none;
     display: inline-block;
     margin-top: -10px;
 }
 button:focus {outline:0 !important;}
+
 .btn{
 	background-color:white !important;
 	width:40px;
