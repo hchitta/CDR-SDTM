@@ -10,7 +10,29 @@ input[type=text], select, textarea {
     resize: vertical;
     font-size:11px;
     font-family: Open Sans;
+    color: #858585;
 }
+
+input::placeholder {
+    color: #858585;
+    font-family: Open Sans;
+    font-size: 11px;
+    opacity: 1;
+} 
+
+textarea::placeholder {
+    color:#858585;
+    font-family: Open Sans;
+    font-size: 11px;
+    opacity: 1;
+} 
+
+.defaultOption {
+    color:  #858585;
+    font-family: Open Sans;
+    font-size: 11px;
+    opacity: 1;
+  }
 
 img {
     width: 50%;

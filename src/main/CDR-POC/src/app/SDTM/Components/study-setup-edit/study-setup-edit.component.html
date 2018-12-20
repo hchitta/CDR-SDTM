@@ -39,7 +39,7 @@
     </div>
     <div class="col-75">
       <select id="phase" class="searchLabel"  formControlName="phase" name="phase">
-        <option [ngValue]="null" style="display: none;">Select an Option</option>
+        <option [ngValue]="null" style="display: none;" class="defaultOption">Select an Option</option>
         <option *ngFor="let phase of studyPhases" value="{{phase.phase}}">{{phase.phaseDescription}}</option>
       </select><span style="color: red">*</span>
     </div>
@@ -50,7 +50,7 @@
     </div>
     <div class="col-75">
       <select id="status" class="searchLabel" formControlName="status" name="status" >
-        <option [ngValue]="null" style="display: none;">Select an Option</option>
+        <option [ngValue]="null" style="display: none;" class="defaultOption">Select an Option</option>
         <option *ngFor="let status of studyStatuses" value="{{status.status}}">{{status.statusDescription}}</option>
       </select><span style="color: red">*</span> 
     </div>
@@ -62,7 +62,7 @@
     <div class="col-75">
       <!--<input type="text" class="searchLabel" placeholder="Enter Therapeutic Area" formControlName="therapeuticArea" />-->
       <select placeholder="Therapeutic Area" formControlName="therapeuticArea">
-          <option  [ngValue]="null" disabled selected style="display: none;">Select an Option</option>
+          <option  [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select an Option</option>
           <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
       </select><span style="color: red">*</span>
     </div>
@@ -74,7 +74,7 @@
     <div class="col-75">
      <!-- <input type="text" placeholder="Enter Source" class="searchLabel" formControlName="source" />-->
      <select placeholder="Source" formControlName="source">
-      <option  [ngValue]="null" disabled selected style="display: none;">Select an Option</option>
+      <option  [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select an Option</option>
       <option *ngFor="let source of studySources" value="{{source.source}}">{{source.sourceDescription}}</option>
       </select><span style="color: red">*</span>
     </div>

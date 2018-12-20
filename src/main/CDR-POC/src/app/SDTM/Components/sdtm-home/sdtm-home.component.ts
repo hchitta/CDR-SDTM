@@ -9,6 +9,7 @@ import { HttpClient} from '@angular/common/http';
   styleUrls: ['./sdtm-home.component.css']
 })
 export class SdtmHomeComponent implements OnInit {
+  boxSize = 970;
   dashBoardData: any[] = [];
   navBarItems: Object[];
   appName: string;
@@ -57,7 +58,6 @@ export class SdtmHomeComponent implements OnInit {
           };
 
       public hidden: any = { visible: false };
-
   constructor( private http: HttpClient) { }
 
   ngOnInit() {
@@ -70,7 +70,22 @@ export class SdtmHomeComponent implements OnInit {
 
       this.http.get<any[]>(`/api/CDR/pathToSdtmDashBoard`).subscribe(data => {
         this.dashBoardData = data;
+        this.boxSize = (this.boxSize * this.dashBoardData.length) + 100;
+        this.setDataForAccordion();
       });
   }
 
+  public setDataForAccordion () {
+     let index = 0;
+     for (const study of this.dashBoardData) {
+       index = this.dashBoardData.indexOf(study);
+      if ( index === 0 ) {
+          this.dashBoardData[index].isSectionCollapsed = true;
+        } else {
+            this.dashBoardData[index].isSectionCollapsed = false;
+          }
+   		//this.dashBoardData[index].isStudySectionCollapsed = false;
+     }
+  }
+  
 }

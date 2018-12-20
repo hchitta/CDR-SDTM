@@ -8,7 +8,8 @@
 
 	<!-- grey box -->
 	<div class="panel panel-default"
-		style="height: 950px; margin-left: 15px; margin-right: 15px; border-radius: 10px; border-width: 1px; width: 97%; background: #e6e6e6;">
+		style="height: boxSize px; margin-left: 15px; margin-right: 15px; border-radius: 10px; 
+		border-width: 1px; width: 97%; background: #e6e6e6;">
 
 		<div class="container">
 
@@ -17,9 +18,10 @@
 					My Studies</h4>
 				<hr style="margin-top: 0px; border-top: 2px solid #074982">
 			</div>
-
-			<div
-				style="background-color: white; box-shadow: 1px 2px #e6e6e6; padding-bottom: 0px; margin-bottom: 0px;">
+            <!-- Display for each study -->
+			<div *ngFor="let study of dashBoardData">
+			<div style="background-color: white; box-shadow: 1px 2px #a6a6a6; padding-bottom: 0px; 
+			margin-bottom: 0px;margin-top:10px">
 
 				<!-- First panel -->
 				<div class="row" style="padding-top: 10px">
@@ -28,13 +30,13 @@
 						style="margin-top: 15px">
 						<span class="info-box-text"
 							style="font-size: 15px; font-weight: bold; text-align: left; padding: 0px; margin: 0px;">
-							M45-9059282</span>
+							{{study.studyID}}</span>
 						<hr
 							style="margin-top: 10px; border-top: 1px solid #074982; margin-bottom: 10px" />
 
 						<span
 							style="font-size: 12px; font-family: Open Sans Regular; text-align: left; padding: 0px; margin: 0px;">
-							Phase2 | <b>DB Lock :</b>15-Jan-2019
+							{{study.studyPhase == 'Not Applicable' ? 'N/A' : study.studyPhase}} | <b>DB Lock :</b>{{study.dbLockDate}}
 						</span>
 					</div>
 
@@ -42,7 +44,7 @@
 						class="col-md-2 info-box-content pull-left info-box bg-primary"
 						style="border-radius: 0.9rem; height: 60px;">
 						<span class="info-box-text"
-							style="font-size: 19px; font-weight: bold;">4/35</span> <span>Domains
+							style="font-size: 19px; font-weight: bold;">{{study.countOfDomains == null ? 0 : study.countOfDomains}}/{{study.countOfAllDomains}}</span> <span>Domains
 							Approved</span>
 					</div>
 
@@ -50,10 +52,9 @@
 						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
 						<span
 							style="display: block; margin-bottom: 19px; padding-top: 10px;">
-							<span class="study-label"><b>Current Version :</b></span> SDTM
-							v2.3
+							<span class="study-label"><b>Current Version :</b></span> {{study.currentDomainVersion == null ? 'N/A' : study.currentDomainVersion}}
 						</span> <span> <span class="study-label" style="font-weight: bold">Latest
-								Version :</span> SDTM v2.3
+								Version :</span> {{study.lastDomainVersion}}
 						</span>
 					</div>
 
@@ -61,7 +62,7 @@
 						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
 						<span class="info-box-text study-label"
 							style="display: block; margin-bottom: 19px; padding-top: 10px;"><b>Last
-								Job Run: </b></span> <span>04-Dec-2018</span>
+								Job Run: </b></span> <span>{{study.lastJobRun == null ? 'N/A' : study.lastJobRun  | date : 'dd-MMM-yyyy'}}</span>
 					</div>
 
 
@@ -72,7 +73,21 @@
 							1 item requires attention</span>
 					</div>
 				</div>
-
+                
+                <div *ngIf="study.isSectionCollapsed" >
+                
+               <!--  <button class="btn btn-sm pull-left" type="button" 
+				(click)="study.isStudySectionCollapsed = !(study.isStudySectionCollapsed);">
+				
+				<i class="fa fa-angle-right" *ngIf="study.isStudySectionCollapsed" 
+				style="margin-top:0px;padding-right:20px;height:30px;width:30px;margin-left:-5px;padding-top:-15px">
+				
+				</i>
+				<i class="fa fa-angle-down" *ngIf="!(study.isStudySectionCollapsed)"
+				style="margin-top:0px;padding-right:20px;height:30px;width:30px;margin-left:-5px;padding-top:-15px">
+				
+				</i>
+      			</button> -->
 				<!-- Second panel STUDY SETUP-->
 				<div class="row" style="padding-top: 10px; height: 70px">
 					<div class="panel-table">
@@ -80,27 +95,24 @@
 							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
 							Study Setup</h4>
 
-						<div class="panel-body">
+						<div  class="panel-body"><!-- *ngIf="study.isStudySectionCollapsed" -->
 							<div class="row" style="text-align: left; padding-left: 20px">
-								<span class="study-label"><b>Study Name:</b></span><span>&nbsp;CALERIE:</span>
-								<span>&nbsp;Comprehensive Assessment of Long Term Effects
-									of Reducing Intake of Energy</span>
+								<span class="study-label"><b>Study Name:</b></span><span>&nbsp;{{study.studyTitle}}:</span>
+								<span>&nbsp;{{study.studyDescription}}</span>
 							</div>
 							<div class="row" style="margin-top: 25px; text-align: left;">
 								<div class="col-md-3 pull-left"
 									style="padding-left: 20px; width: 200px">
-									<span class="study-label"><b>Study Analyst:</b></span><span>Bob
-										Smith</span>
+									<span class="study-label"><b>Study Analyst:</b></span><span>{{study.studyAnalyst}}</span>
 								</div>
 								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"> <b>Study Manager:</b></span><span>Britney
-										Spears</span>
+									<span class="study-label"> <b>Study Manager:</b></span><span>{{study.studyManager}}</span>
 								</div>
 								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"> <b>Study Setup Date:</b></span><span>30-Nov-2018</span>
+									<span class="study-label"> <b>Study Setup Date:</b></span><span>{{study.studySetUpdate == null ? 'N/A' : study.studySetUpdate | date : 'dd-MMM-yyyy'}}</span>
 								</div>
 								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"><b>Status:</b></span><span>Active</span>
+									<span class="study-label"><b>Status:</b></span><span>{{study.studyStatus}}</span>
 								</div>
 							</div>
 						</div>
@@ -169,7 +181,7 @@
 
 
 				<!-- Fouth panel BRC-->
-				<div class="row" style="padding-top: 50px; height: 430px">
+				<div class="row" style="padding-top: 50px; height: 400px;">
 					<div class="panel-table">
 						<h4
 							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
@@ -266,8 +278,28 @@
 					</div>
 				</div>
 				<!-- end of panel -->
+				
+		    </div> <!-- end of collapsible panel details --> <!-- toggle for more/less -->
+				
+		    
+            </div><!-- white box -- Display for each study -->
+            <button class="btn btn-sm togglebutton" type="button" 
+				style="	background-color:white;"
+				(click)="study.isSectionCollapsed = !(study.isSectionCollapsed);">
+				
+				<i class="fa fa-angle-double-up" *ngIf="study.isSectionCollapsed" 
+				style="color:#074982;margin-top:0px;padding-right:20px;height:30px;width:30px;
+				margin-left:-5px;padding-top:-15px">
+				</i>
+				<i class="fa fa-angle-double-down" *ngIf="!(study.isSectionCollapsed)"
+				style="color:#074982;margin-top:0px;padding-right:20px;height:30px;width:30px;
+				margin-left:-5px;padding-top:-15px">
+				</i>
+      			</button>
+            </div><!-- close for loop -->
+           
+		</div><!-- container -->
 </div>
-		</div>
-		<!-- container -->
-	</div>
+
+
 </div>

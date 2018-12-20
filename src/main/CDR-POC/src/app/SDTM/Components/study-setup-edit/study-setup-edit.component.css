@@ -10,6 +10,14 @@
       resize: vertical;
       font-size:11px;
       font-family: Open Sans;
+      color: #858585; 
+  }
+
+  input::placeholder{
+    color:  #858585;
+    font-family: Open Sans;
+    font-size: 11px;
+    opacity: 1;
   }
   
   label {
@@ -21,6 +29,12 @@
       color:black
   }
   
+  .defaultOption {
+    color:  #858585;
+    font-family: Open Sans;
+    font-size: 11px;
+    opacity: 1;
+  }
   
   .container {
       border-radius: 5px;
