@@ -9,8 +9,9 @@ import { UserService } from '../../Services';
 })
 export class HomeComponent implements OnInit {
   userName = '';
+  isSdtmUser=false;
+  isAdminUser=false;
   constructor(private userService: UserService) { }
-
   ngOnInit() {
     const userDetails = this.userService.getUser();
     if (userDetails !== undefined) {
@@ -21,6 +22,13 @@ export class HomeComponent implements OnInit {
     } else {
       this.userName = 'Admin';
     }
+    if (this.userName=='sdtm sdtm')
+    {
+      this.isSdtmUser=true;
+    }
+    if (this.userName=='Admin')
+    {
+      this.isAdminUser=true;
+    }
   }
-
 }
