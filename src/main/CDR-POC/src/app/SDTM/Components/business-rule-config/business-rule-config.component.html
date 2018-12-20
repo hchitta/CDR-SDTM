@@ -88,7 +88,7 @@
                 <span class="k-icon k-i-minus-circle" (click)="KendoGridOne()" *ngIf="kendoOneShow" style="color: rgb(7, 73, 130)"></span>
                 <b>Object Level Transformation</b>
               </div>
-              <div *ngIf="kendoOneShow">
+              <div *ngIf="kendoOneShow" style="margin-left: 15px">
               <kendo-grid [data]="view1 | async" [height]="130" [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
               [pageable]="false" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
               (remove)="removeHandler($event)"  [resizable]="true" (add)="addHandler('add',$event)" style="width: 60%;" [sortable]="sortable">
@@ -121,7 +121,7 @@
                   <span class="k-icon k-i-minus-circle" (click)="KendoGridTwo()" *ngIf="kendoTwoShow" style="color: rgb(7, 73, 130)"></span>
                 <b>Variable Level Transformation</b>
               </div>
-              <div *ngIf="kendoTwoShow"> 
+              <div *ngIf="kendoTwoShow" style="margin-left: 15px"> 
             <kendo-grid [data]="view2 | async" [height]="kendoTwoHeight" [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
             [pageable]="true" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
             (remove)="removeHandler($event)"  [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;" [sortable]="sortable">
