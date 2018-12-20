@@ -57,7 +57,7 @@
         <div class="col-75">
           <!--<input type="text" placeholder="Select Variable Name" formControlName="targetField"/>&nbsp;&nbsp;-->
           <select placeholder="Select Variable Name" formControlName="targetField">
-            <option  [ngValue]="null" disabled selected style="display: none;">Select Variable Name</option>
+            <option  [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select Variable Name</option>
             <option *ngFor="let variable of sdtmVariables" value="{{variable}}">{{variable}}</option>
           </select>&nbsp;&nbsp;
         </div>
@@ -69,7 +69,7 @@
         <div class="col-75">
           <!--<input type="text" placeholder="Select Source File" formControlName="sourceFile"/>&nbsp;-->
           <select placeholder="Select Source File" formControlName="formName" (change)="onSelect($event.target.value)">
-            <option  value="null" disabled selected style="display: none;">Select Source Name</option>
+            <option  value="null" disabled selected style="display: none;" class="defaultOption">Select Source Name</option>
             <option *ngFor="let table of lookupTables" value="{{table[0]}}">{{table[1]}}</option>
           </select>&nbsp;&nbsp;
         </div>
@@ -81,7 +81,7 @@
         <div class="col-75">
          <!-- <input type="text" placeholder="Select Source Variable" formControlName="sourceField" />&nbsp;&nbsp;-->
          <select placeholder="Select Source Variable" formControlName="sourceFile" (change)="onSelectVariable($event.target.value)">
-          <option  value="null" disabled selected style="display: none;">Select Variable Name</option>
+          <option  value="null" disabled selected style="display: none;" class="defaultOption">Select Variable Name</option>
           <option *ngFor="let variable of lookupVariables" value="{{variable.fieldName}}">{{variable.fieldDesc}}</option>
         </select>&nbsp;&nbsp;
         </div>
@@ -100,7 +100,7 @@
         </div>
         <div class="col-75">
           <select placeholder="Select Transformation" formControlName="transformation_type" (change)="changePlaceholderAndValue($event.target.value)">
-            <option  [ngValue]="null" disabled selected style="display: none;">Select Type</option>
+            <option  [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select Type</option>
             <option *ngFor="let type of transTypes" value="{{type.transType}}">{{type.transType}}</option>
           </select>&nbsp;&nbsp;
         </div>
@@ -128,7 +128,7 @@
           </div>
           <div class="col-75">
             <select placeholder="Select study" formControlName="study">
-              <option  [ngValue]="null" disabled selected style="display: none;">Study Title</option>
+              <option  [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Study Title</option>
               <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
             </select>&nbsp;
           </div>
@@ -139,7 +139,7 @@
             </div>
             <div class="col-75">
               <select placeholder="Select study" formControlName="matrixStudy" (change)="filterDomains($event.target.value);">
-                <option  [ngValue]="null" disabled selected style="display: none;">Study Title</option>
+                <option  [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Study Title</option>
                 <option *ngFor="let matrixStudy of matrixStudyTitles" value="{{matrixStudy}}">{{matrixStudy}}</option>
               </select>&nbsp;
             </div>
