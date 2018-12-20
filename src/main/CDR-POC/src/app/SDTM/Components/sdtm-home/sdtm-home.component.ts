@@ -9,6 +9,7 @@ import { HttpClient} from '@angular/common/http';
   styleUrls: ['./sdtm-home.component.css']
 })
 export class SdtmHomeComponent implements OnInit {
+  isSectionCollapsed = true;
   dashBoardData: any[] = [];
   navBarItems: Object[];
   appName: string;

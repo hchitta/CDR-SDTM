@@ -8,7 +8,7 @@
 
 	<!-- grey box -->
 	<div class="panel panel-default"
-		style="height: 950px; margin-left: 15px; margin-right: 15px; border-radius: 10px; border-width: 1px; width: 97%; background: #e6e6e6;">
+		style="height: 970px; margin-left: 15px; margin-right: 15px; border-radius: 10px; border-width: 1px; width: 97%; background: #e6e6e6;">
 
 		<div class="container">
 
@@ -17,9 +17,9 @@
 					My Studies</h4>
 				<hr style="margin-top: 0px; border-top: 2px solid #074982">
 			</div>
-
-			<div
-				style="background-color: white; box-shadow: 1px 2px #e6e6e6; padding-bottom: 0px; margin-bottom: 0px;">
+            <!-- Display for each study -->
+			<div 
+			style="background-color: white; box-shadow: 1px 2px #e6e6e6; padding-bottom: 0px; margin-bottom: 0px;">
 
 				<!-- First panel -->
 				<div class="row" style="padding-top: 10px">
@@ -72,7 +72,9 @@
 							1 item requires attention</span>
 					</div>
 				</div>
-
+                
+                <div *ngIf="isSectionCollapsed" >
+                <!-- id="panelDetailsToBeCollapsed" [ngbCollapse]="isSectionCollapsed" -->
 				<!-- Second panel STUDY SETUP-->
 				<div class="row" style="padding-top: 10px; height: 70px">
 					<div class="panel-table">
@@ -266,8 +268,14 @@
 					</div>
 				</div>
 				<!-- end of panel -->
-</div>
-		</div>
-		<!-- container -->
+				</div> <!-- end of collapsible panel details -->
+            </div><!-- white box -->
+            <!-- toggle for more/less -->
+				<button class="btn btn-sm togglebutton" type="button" 
+				style="	background-color:white;"
+				(click)="isSectionCollapsed = !isSectionCollapsed">
+				<!--  [attr.aria-expanded]="!isSectionCollapsed" aria-controls="panelDetailsToBeCollapsed"--> 				
+      			</button>
+		</div><!-- container -->
 	</div>
 </div>
