@@ -75,7 +75,19 @@
 				</div>
                 
                 <div *ngIf="study.isSectionCollapsed" >
-                <!-- id="panelDetailsToBeCollapsed" [ngbCollapse]="isSectionCollapsed" -->
+                
+               <!--  <button class="btn btn-sm pull-left" type="button" 
+				(click)="study.isStudySectionCollapsed = !(study.isStudySectionCollapsed);">
+				
+				<i class="fa fa-angle-right" *ngIf="study.isStudySectionCollapsed" 
+				style="margin-top:0px;padding-right:20px;height:30px;width:30px;margin-left:-5px;padding-top:-15px">
+				
+				</i>
+				<i class="fa fa-angle-down" *ngIf="!(study.isStudySectionCollapsed)"
+				style="margin-top:0px;padding-right:20px;height:30px;width:30px;margin-left:-5px;padding-top:-15px">
+				
+				</i>
+      			</button> -->
 				<!-- Second panel STUDY SETUP-->
 				<div class="row" style="padding-top: 10px; height: 70px">
 					<div class="panel-table">
@@ -83,7 +95,7 @@
 							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
 							Study Setup</h4>
 
-						<div class="panel-body">
+						<div  class="panel-body"><!-- *ngIf="study.isStudySectionCollapsed" -->
 							<div class="row" style="text-align: left; padding-left: 20px">
 								<span class="study-label"><b>Study Name:</b></span><span>&nbsp;{{study.studyTitle}}:</span>
 								<span>&nbsp;{{study.studyDescription}}</span>

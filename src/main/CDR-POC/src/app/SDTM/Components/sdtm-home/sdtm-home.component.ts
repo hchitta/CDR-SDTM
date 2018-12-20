@@ -95,7 +95,7 @@ export class SdtmHomeComponent implements OnInit {
        	} else{
        	  this.dashBoardData[index].isSectionCollapsed = false;
        	}
-   
+   		//this.dashBoardData[index].isStudySectionCollapsed = false;
      }
   }
   
