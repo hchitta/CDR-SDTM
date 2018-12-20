@@ -1,10 +1,10 @@
 <div class="main-container ace-save-state" id="main-container">
-  <header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle" [configTypeIcons]="configTypeIcons" [studyInHeader]="getStudy()" [domainInHeader]="searchBRStudy.brSdtmDomain"
-    (iconClick)="addHandlerIconClick($event)"></header-icons>
+  <header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle" [configTypeIcons]="configTypeIcons"
+    [studyInHeader]="getStudy()" [domainInHeader]="searchBRStudy.brSdtmDomain" (iconClick)="addHandlerIconClick($event)"></header-icons>
   <div class="panel panel-default" style="height:650px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
     <h3 class="row-label" style="height: 4%;margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
       <span *ngIf="(getDomain() == null)">Select a study and SDTM domain to see business rules</span>
-      <b><span *ngIf="(getDomain() != null)" style="font-size: 13px;">{{getDomain()}}</span></b>
+      <b><span *ngIf="(getDomain() != null)" style="font-size: 13px;padding-left: 40px;">{{getDomain()}}</span></b>
     </h3>
     <hr style="margin-top: -6px;border-width: 2px;" />
     <div id="sidebar" class="col-sm-2" style="width: 214px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px">
@@ -83,7 +83,7 @@
       <div class="main-content-inner">
         <div class="page-content">
           <div class="row" style="margin-top: -23px;">
-              <div style="text-align: start" id="kendo1">
+            <!--  <div style="text-align: start" id="kendo1">
                 <span class="k-icon k-i-plus-circle" (click)="KendoGridOne()" *ngIf="!kendoOneShow" style="color: rgb(7, 73, 130)"></span>
                 <span class="k-icon k-i-minus-circle" (click)="KendoGridOne()" *ngIf="kendoOneShow" style="color: rgb(7, 73, 130)"></span>
                 <b>Object Level Transformation</b>
@@ -115,36 +115,40 @@
                   </ng-template>
               </kendo-grid-column>
               </kendo-grid>
-              </div>
-              <div style="margin-top: 10px;text-align: start"  id="kendo2">
+              </div>-->
+            <!-- <div style="margin-top: 10px;text-align: start"  id="kendo2">
                   <span class="k-icon k-i-plus-circle" (click)="KendoGridTwo()" *ngIf="!kendoTwoShow" style="color: rgb(7, 73, 130)"></span>
                   <span class="k-icon k-i-minus-circle" (click)="KendoGridTwo()" *ngIf="kendoTwoShow" style="color: rgb(7, 73, 130)"></span>
                 <b>Variable Level Transformation</b>
-              </div>
-              <div *ngIf="kendoTwoShow" style="margin-left: 15px"> 
-            <kendo-grid [data]="view2 | async" [height]="kendoTwoHeight" [pageSize]="gridState.take" [skip]="gridState.skip" [sort]="gridState.sort"
-            [pageable]="true" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
-            (remove)="removeHandler($event)"  [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;" [sortable]="sortable">
-            <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-              field="targetField" title="SDTM Variables"></kendo-grid-column>
+              </div>-->
+            <!-- <div *ngIf="kendoTwoShow" style="margin-left: 15px"> -->
+            <kendo-grid [data]="view2 | async" [height]="kendoTwoHeight" [pageSize]="gridState.take" [skip]="gridState.skip"
+              [sort]="gridState.sort" [pageable]="true" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
+              (remove)="removeHandler($event)" [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;"
+              [sortable]="sortable">
+
               <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-              field="formLable" title="Source Form">
-              <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                {{dataItem.formLable}} {{(dataItem.formName != null && dataItem.formName != '') ? "("+(dataItem.formName)+")" : ""}}
-              </ng-template>
-             </kendo-grid-column>
+                field="formLable" title="Source Form">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                  {{dataItem.formLable}} {{(dataItem.formName != null && dataItem.formName != '') ?
+                  "("+(dataItem.formName)+")" : ""}}
+                </ng-template>
+              </kendo-grid-column>
               <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-              field="sourceField" title="Source Variable">
-              <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
-                {{dataItem.sourceField}} {{(dataItem.sourceFile != null && dataItem.sourceFile != '') ? "("+(dataItem.sourceFile)+")" : ""}} 
-              </ng-template>
-             </kendo-grid-column>
+                field="sourceField" title="Source Variable">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                  {{dataItem.sourceField}} {{(dataItem.sourceFile != null && dataItem.sourceFile != '') ?
+                  "("+(dataItem.sourceFile)+")" : ""}}
+                </ng-template>
+              </kendo-grid-column>
               <kendo-grid-column [style]="{'text-align':'left'}" [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-              field="transformation_type" title="Transformation Type"></kendo-grid-column>
-            <kendo-grid-column [style]="{'text-align':'left'}" [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-              field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
-            <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="110" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-              title="Actions">
+                field="transformation_type" title="Transformation Type"></kendo-grid-column>
+              <kendo-grid-column [style]="{'text-align':'left'}" [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
+              <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                field="targetField" title="SDTM Target Variable"></kendo-grid-column>
+              <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="110" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                title="Actions">
                 <ng-template kendoGridCellTemplate>
                   <button kendoGridEditCommand [look]="outline">
                     <span class="k-icon k-i-pencil"></span>
@@ -166,17 +170,17 @@
                 (cancel)="cancelHandler()" (delete)="deleteHandler($event)" (fetch)="fetchHandler($event)">
               </business-rule-config-edit>
             </div>
+            <!-- </div>-->
+            <!-- /.row -->
           </div>
-          <!-- /.row -->
+          <!-- /.page-content -->
         </div>
-        <!-- /.page-content -->
       </div>
     </div>
-  </div>
-  <!-- /.main-content -->
-  <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-    <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-  </a>
+    <!-- /.main-content -->
+    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+      <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
+    </a>
 
-  <!-- /.main-container -->
-</div>
+    <!-- /.main-container -->
+  </div>

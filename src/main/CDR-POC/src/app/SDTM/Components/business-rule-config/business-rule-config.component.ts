@@ -88,6 +88,10 @@ export class BusinessRuleConfigComponent implements OnInit {
         let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
         const domain = this.route.snapshot.paramMap.get('domain');
         if (domain != null && title != null) {
+            if (this.configTypeIcons.length === 4) {
+                this.configTypeIcons.unshift({ "icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png", "action": "lineage", "inputParam": this.searchBRStudy });
+                this.configTypeIcons.unshift({ "icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png", "action": "job", "inputParam": this.searchBRStudy });
+            }
             this.studyDomains = this.route.snapshot.data['reqDomains'];
             this.searchBRStudy.brStudy = title;
             this.searchBRStudy.brSdtmDomain = domain;

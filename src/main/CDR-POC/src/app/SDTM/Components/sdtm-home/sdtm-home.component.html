@@ -1,15 +1,13 @@
 <div class="main-container ace-save-state" id="main-container">
 
 	<div class="container">
-		<h4
-			style="margin-left: -50px; margin-top: 10px; text-align: left; font-family: Open Sans Regular; font-weight: 100; font-size: 13px; color: black">
-			Welcome,admin!</h4>
+		<h4 style="margin-left: -50px; margin-top: 10px; text-align: left; font-family: Open Sans Regular; font-weight: 100; font-size: 13px; color: black">
+			Welcome Jessica</h4>
 	</div>
 
 	<!-- grey box -->
-	<div class="panel panel-default"
-		style="height: boxSize px; margin-left: 15px; margin-right: 15px; border-radius: 10px; 
-		border-width: 1px; width: 97%; background: #e6e6e6;">
+	<div class="panel panel-default" style="height: boxSize px; margin-left: 15px; margin-right: 15px; border-radius: 10px; 
+				border-width: 1px; width: 97%; background: #e6e6e6;">
 
 		<div class="container">
 
@@ -18,288 +16,271 @@
 					My Studies</h4>
 				<hr style="margin-top: 0px; border-top: 2px solid #074982">
 			</div>
-            <!-- Display for each study -->
+			<!-- Display for each study -->
 			<div *ngFor="let study of dashBoardData">
-			<div style="background-color: white; box-shadow: 1px 2px #a6a6a6; padding-bottom: 0px; 
-			margin-bottom: 0px;margin-top:10px">
+				<div style="background-color: white; box-shadow: 1px 2px #a6a6a6; margin-bottom: 0px;margin-top:20px">
 
-				<!-- First panel -->
-				<div class="row" style="padding-top: 10px">
+					<a data-toggle="collapse" href="#{{study.studyID}}" role="button" aria-expanded="false" style="color:black">
+						<!-- First panel -->
+						<div class="row" style="padding-top: 10px;">
 
-					<div class="col-md-2 info-box-content pull-left"
-						style="margin-top: 15px">
-						<span class="info-box-text"
-							style="font-size: 15px; font-weight: bold; text-align: left; padding: 0px; margin: 0px;">
-							{{study.studyID}}</span>
-						<hr
-							style="margin-top: 10px; border-top: 1px solid #074982; margin-bottom: 10px" />
+							<div class="col-md-2 info-box-content pull-left" style="margin-top: 15px;    ">
+								<span class="info-box-text" style="text-align: left; padding: 0px; margin: 0px;    font-size: 18px;
+							font-weight: 600;">
+									{{study.studyID}}
+								</span>
+								<hr style="margin-top: 14px; border-top: 1px solid #074982; margin-bottom: 12px" />
 
-						<span
-							style="font-size: 12px; font-family: Open Sans Regular; text-align: left; padding: 0px; margin: 0px;">
-							{{study.studyPhase == 'Not Applicable' ? 'N/A' : study.studyPhase}} | <b>DB Lock :</b>{{study.dbLockDate}}
-						</span>
-					</div>
-
-					<div
-						class="col-md-2 info-box-content pull-left info-box bg-primary"
-						style="border-radius: 0.9rem; height: 60px;">
-						<span class="info-box-text"
-							style="font-size: 19px; font-weight: bold;">{{study.countOfDomains == null ? 0 : study.countOfDomains}}/{{study.countOfAllDomains}}</span> <span>Domains
-							Approved</span>
-					</div>
-
-					<div class="col-md-3 info-box-content pull-left"
-						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
-						<span
-							style="display: block; margin-bottom: 19px; padding-top: 10px;">
-							<span class="study-label"><b>Current Version :</b></span> {{study.currentDomainVersion == null ? 'N/A' : study.currentDomainVersion}}
-						</span> <span> <span class="study-label" style="font-weight: bold">Latest
-								Version :</span> {{study.lastDomainVersion}}
-						</span>
-					</div>
-
-					<div class="col-md-1 info-box-content pull-left"
-						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
-						<span class="info-box-text study-label"
-							style="display: block; margin-bottom: 19px; padding-top: 10px;"><b>Last
-								Job Run: </b></span> <span>{{study.lastJobRun == null ? 'N/A' : study.lastJobRun  | date : 'dd-MMM-yyyy'}}</span>
-					</div>
-
-
-					<div class="col-md-1 info-box-content pull-left">
-						<img src="../assets/images/Attention.png" style="width: 30px;">
-						<span class="info-box-text"
-							style="font-size: 12px; font-family: Open Sans Regular;">
-							1 item requires attention</span>
-					</div>
-				</div>
-                
-                <div *ngIf="study.isSectionCollapsed" >
-                
-               <!--  <button class="btn btn-sm pull-left" type="button" 
-				(click)="study.isStudySectionCollapsed = !(study.isStudySectionCollapsed);">
-				
-				<i class="fa fa-angle-right" *ngIf="study.isStudySectionCollapsed" 
-				style="margin-top:0px;padding-right:20px;height:30px;width:30px;margin-left:-5px;padding-top:-15px">
-				
-				</i>
-				<i class="fa fa-angle-down" *ngIf="!(study.isStudySectionCollapsed)"
-				style="margin-top:0px;padding-right:20px;height:30px;width:30px;margin-left:-5px;padding-top:-15px">
-				
-				</i>
-      			</button> -->
-				<!-- Second panel STUDY SETUP-->
-				<div class="row" style="padding-top: 10px; height: 70px">
-					<div class="panel-table">
-						<h4
-							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
-							Study Setup</h4>
-
-						<div  class="panel-body"><!-- *ngIf="study.isStudySectionCollapsed" -->
-							<div class="row" style="text-align: left; padding-left: 20px">
-								<span class="study-label"><b>Study Name:</b></span><span>&nbsp;{{study.studyTitle}}:</span>
-								<span>&nbsp;{{study.studyDescription}}</span>
+								<span style="font-size: 12px; font-family: Open Sans Regular; text-align: left; padding: 0px; margin: 0px;">
+									{{study.studyPhase == 'Not Applicable' ? 'N/A' : study.studyPhase}} | <b>DB Lock : </b>{{study.dbLockDate}}
+								</span>
 							</div>
-							<div class="row" style="margin-top: 25px; text-align: left;">
-								<div class="col-md-3 pull-left"
-									style="padding-left: 20px; width: 200px">
-									<span class="study-label"><b>Study Analyst:</b></span><span>{{study.studyAnalyst}}</span>
+
+							<div class="col-md-2 info-box-content pull-left info-box bg-primary" style="border-radius: 0.9rem; height: 60px;width: 140px;">
+								<span class="info-box-text" style="font-size: 19px; font-weight: bold;    padding-top: 20px;">{{study.countOfDomains
+									== null ? 0 :
+									study.countOfDomains}} / {{study.countOfAllDomains}}</span> <span>Domains
+									Approved</span>
+							</div>
+
+							<div class="col-md-3 info-box-content pull-left" style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px; width:200px">
+								<span style="display: block; margin-bottom: 19px; padding-top: 20px;">
+									<span class="study-label"><b>Current Version :</b></span> {{study.lastDomainVersion == null ? 'N/A' :
+									study.lastDomainVersion}}
+								</span>
+							</div>
+
+							<div class="col-md-1 info-box-content pull-left" style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
+								<span class="info-box-text study-label" style="display: block; margin-bottom: 19px; padding-top: 10px;"><b>Last
+										Job Run: </b></span> <span>{{study.lastJobRun == null ? 'N/A' : study.lastJobRun | date : 'dd-MMM-yyyy'}}</span>
+							</div>
+
+
+							<div class="col-md-1 info-box-content pull-left">
+								<img src="../assets/images/Attention.png" style="width: 30px;">
+								<span class="info-box-text" style="font-size: 12px; font-family: Open Sans Regular;">
+									1 item requires attention</span>
+							</div>
+						</div>
+					</a>
+					<div id="{{study.studyID}}" class="collapse" style="margin-top: 15px; padding-bottom: 18px;">
+
+						<!--  <button class="btn btn-sm pull-left" type="button" 
+						(click)="study.isStudySectionCollapsed = !(study.isStudySectionCollapsed);">
+						
+						<i class="fa fa-angle-right" *ngIf="study.isStudySectionCollapsed" 
+						style="margin-top:0px;padding-right:20px;height:30px;width:30px;margin-left:-5px;padding-top:-15px">
+						
+						</i>
+						<i class="fa fa-angle-down" *ngIf="!(study.isStudySectionCollapsed)"
+						style="margin-top:0px;padding-right:20px;height:30px;width:30px;margin-left:-5px;padding-top:-15px">
+						
+						</i>
+						  </button> -->
+						<div class="panel panel-default" style="margin-left: 40px;  width:1050px">
+							<div class="panel-heading" style="    text-align: left;">
+								<button class="accordion-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne"
+								 style="border:0; background-color: transparent;
+										 border: 0;"></button>
+								Study Setup</div>
+							<div id="collapseOne" class="panel-body collapse">
+								<!-- *ngIf="study.isStudySectionCollapsed" -->
+								<div class="row" style="text-align: left; padding-left: 20px">
+									<span class="study-label"><b>Study Name:</b></span><span>&nbsp;{{study.studyTitle}}:</span>
+									<span>&nbsp;{{study.studyDescription}}</span>
 								</div>
-								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"> <b>Study Manager:</b></span><span>{{study.studyManager}}</span>
-								</div>
-								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"> <b>Study Setup Date:</b></span><span>{{study.studySetUpdate == null ? 'N/A' : study.studySetUpdate | date : 'dd-MMM-yyyy'}}</span>
-								</div>
-								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"><b>Status:</b></span><span>{{study.studyStatus}}</span>
+								<div class="row" style="margin-top: 25px; text-align: left;">
+									<div class="col-md-3 pull-left" style="padding-left: 20px; width: 200px">
+										<span class="study-label"><b>Study Analyst:</b></span><span>{{study.studyAnalyst}}</span>
+									</div>
+									<div class="col-md-3 pull-left" style="padding-left: 20px;">
+										<span class="study-label"> <b>Study Manager:</b></span><span>{{study.studyManager}}</span>
+									</div>
+									<div class="col-md-3 pull-left" style="padding-left: 20px;">
+										<span class="study-label"> <b>Study Setup Date:</b></span><span>{{study.studySetUpdate == null ? 'N/A' :
+											study.studySetUpdate | date : 'dd-MMM-yyyy'}}</span>
+									</div>
+									<div class="col-md-3 pull-left" style="padding-left: 20px;">
+										<span class="study-label"><b>Status:</b></span><span>{{study.studyStatus}}</span>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
 
-				<!-- Third panel BRC-->
-				<div class="row" style="padding-top: 35px; height: 300px">
-					<div class="panel-table">
-						<h4
-							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
-							Business Rule Configuration</h4>
+						<!-- Business Rules config Panel-->
+						<div class="panel panel-default" style="margin-left: 40px;  width:1050px;margin-top: 20px;">
+							<div class="panel-heading" style="    text-align: left;">
+								<button class="accordion-toggle" type="button" data-toggle="collapse" data-target="#businessRuleCollapse"
+								 aria-expanded="false" aria-controls="businessRuleCollapse" style="border:0; background-color: transparent;
+											 border: 0;"></button>
+								Business Rule Configuration</div>
+							<div id="businessRuleCollapse" class="panel-body collapse">
+								<div class="row">
+									<div class="col-md-5">
+										<kendo-chart [seriesColors]="['#4682B4', '#57A0D3', '#89CFF0']" style="width: 400px; height: 250px;">
+											<kendo-chart-legend position="custom" [offsetX]="270" [offsetY]="100" [labels]="legendLabels"></kendo-chart-legend>
+											<kendo-chart-title text="Domain Config Status" font="12px Open Sans Regular" position="top" align="center"></kendo-chart-title>
+											<kendo-chart-tooltip>
+												<ng-template kendoChartSeriesTooltipTemplate let-value="value" let-category="category"> {{ category }}
+													Value is
+													{{value}} </ng-template>
+											</kendo-chart-tooltip>
+											<kendo-chart-series>
+												<kendo-chart-series-item type="pie" [labels]="seriesPieLabels" [data]="pieData" field="value" categoryField="category">
+												</kendo-chart-series-item>
+											</kendo-chart-series>
+										</kendo-chart>
+									</div>
+									<div class="col-md-3">
 
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-5">
-									<kendo-chart [seriesColors]="['#4682B4', '#57A0D3', '#89CFF0']"
-										style="width: 400px; height: 250px;"> <kendo-chart-legend
-										position="custom" [offsetX]="270" [offsetY]="100" [labels]="legendLabels"></kendo-chart-legend> <kendo-chart-title
-										text="Domain Config Status" font="12px Open Sans Regular"
-										position="top" align="center"></kendo-chart-title> <kendo-chart-tooltip>
-									<ng-template kendoChartSeriesTooltipTemplate let-value="value"
-										let-category="category"> {{ category }} Value is
-									{{value}} </ng-template> </kendo-chart-tooltip> <kendo-chart-series> <kendo-chart-series-item
-										type="pie" [labels]="seriesPieLabels" [data]="pieData"
-										field="value" categoryField="category">
-									</kendo-chart-series-item> </kendo-chart-series> </kendo-chart>
-								</div>
-								<div class="col-md-3">
+										<kendo-chart style="width: 250px; height: 250px;" type="bar" [seriesColors]="['green']">
+											<kendo-chart-title text="# of Target Domains" font="12px Open Sans" position="top" align="right"></kendo-chart-title>
+											<kendo-chart-tooltip>
+												<ng-template kendoChartSeriesTooltipTemplate let-value="value">
+													Value is {{value}} </ng-template>
+											</kendo-chart-tooltip>
+											<kendo-chart-category-axis>
+												<kendo-chart-category-axis-item [majorGridLines]="hidden" [minorGridLines]="hidden">
+												</kendo-chart-category-axis-item>
+											</kendo-chart-category-axis>
+											<kendo-chart-value-axis>
+												<kendo-chart-value-axis-item [minorTicks]="hidden"> </kendo-chart-value-axis-item>
+											</kendo-chart-value-axis>
+											<kendo-chart-series>
+												<kendo-chart-series-item [labels]="seriesLabels" type="column" [data]="seriesData" field="domains"
+												 categoryField="study">
+												</kendo-chart-series-item>
+											</kendo-chart-series>
+										</kendo-chart>
+									</div>
+									<div class="col-md-4">
 
-									<kendo-chart style="width: 250px; height: 250px;" type="bar"
-										[seriesColors]="['green']"> <kendo-chart-title
-										text="# of Target Domains" font="12px Open Sans"
-										position="top" align="right"></kendo-chart-title> <kendo-chart-tooltip>
-									<ng-template kendoChartSeriesTooltipTemplate let-value="value">
-									Value is {{value}} </ng-template> </kendo-chart-tooltip> <kendo-chart-category-axis>
-									<kendo-chart-category-axis-item [majorGridLines]="hidden"
-										[minorGridLines]="hidden"> </kendo-chart-category-axis-item> </kendo-chart-category-axis>
-									<kendo-chart-value-axis> <kendo-chart-value-axis-item
-										[minorTicks]="hidden"> </kendo-chart-value-axis-item> </kendo-chart-value-axis> <kendo-chart-series>
-									<kendo-chart-series-item [labels]="seriesLabels" type="column"
-										[data]="seriesData" field="domains" categoryField="study">
-									</kendo-chart-series-item> </kendo-chart-series> </kendo-chart>
-								</div>
-								<div class="col-md-4">
+										<kendo-chart style="width: 250px; height: 250px;">
+											<kendo-chart-title text="Upcoming & Overdue Tasks" font="12px Open Sans Regular" position="top" align="right"></kendo-chart-title>
+											<kendo-chart-value-axis>
+												<kendo-chart-value-axis-item [title]="{ text: 'Days' }" [min]="2" [max]="8">
 
-									<kendo-chart style="width: 250px; height: 250px;">
-									<kendo-chart-title text="Upcoming & Overdue Tasks"
-										font="12px Open Sans Regular" position="top" align="right"></kendo-chart-title>
-									<kendo-chart-value-axis> <kendo-chart-value-axis-item
-										[title]="{ text: 'Days' }" [min]="2" [max]="8">
-
-									</kendo-chart-value-axis-item> </kendo-chart-value-axis> <kendo-chart-tooltip> <ng-template
-										kendoChartSeriesTooltipTemplate let-value="value">
-									Value is {{value}} </ng-template> </kendo-chart-tooltip> <kendo-chart-series>
-									<kendo-chart-series-item [color]="color"
-										[labels]="seriesLabels" type="column" [data]="seriesDataTwo"
-										field="domains" categoryField="study">
-									</kendo-chart-series-item> </kendo-chart-series> </kendo-chart>
+												</kendo-chart-value-axis-item>
+											</kendo-chart-value-axis>
+											<kendo-chart-tooltip>
+												<ng-template kendoChartSeriesTooltipTemplate let-value="value">
+													Value is {{value}} </ng-template>
+											</kendo-chart-tooltip>
+											<kendo-chart-series>
+												<kendo-chart-series-item [color]="color" [labels]="seriesLabels" type="column" [data]="seriesDataTwo" field="domains"
+												 categoryField="study">
+												</kendo-chart-series-item>
+											</kendo-chart-series>
+										</kendo-chart>
+									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-				</div>
-				<!-- end of panel -->
 
+						<!--Job Execution-->
+						<div class="panel panel-default" style="margin-left: 40px;  width:1050px;margin-top: 20px;">
+							<div class="panel-heading" style="    text-align: left;">
+								<button class="accordion-toggle" type="button" data-toggle="collapse" data-target="#jobExeuctionCollapse"
+								 aria-expanded="false" aria-controls="jobExeuctionCollapse" style="border:0; background-color: transparent;
+												 border: 0;"></button>
+								Job Execution</div>
+							<div id="jobExeuctionCollapse" class="panel-body collapse">
+								<div class="row">
+									<div class="col-md-4">
+										<p class="text-center" style="margin-top: 10px; margin-bottom: 15px; margin-left: -40px">
+											Domain Details</p>
 
-				<!-- Fouth panel BRC-->
-				<div class="row" style="padding-top: 50px; height: 400px;">
-					<div class="panel-table">
-						<h4
-							style="font-size: 13px; font-weight: bold; font-family: Open Sans Regular; font-color: black; text-align: left">
-							Job Execution</h4>
+										<div style="width: 250px; padding-left: 40px;">
+											<table class="table" style="text-align: left;">
+												<thead>
+													<tr>
+														<th>Domain</th>
+														<th>Status</th>
 
-						<div class="panel-body">
-							<div class="row">
-								<div class="col-md-4">
-									<p class="text-center"
-										style="margin-top: 10px; margin-bottom: 15px; margin-left: -40px">
-										Domain Details</p>
-
-									<div style="width: 250px; padding-left: 40px;">
-										<table class="table" style="text-align: left;">
-											<thead>
-												<tr>
-													<th>Domain</th>
-													<th>Status</th>
-
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Demographics</td>
-													<td><span><img
-															src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png"
-															style="width: 25px;">
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Demographics</td>
+														<td><span><img src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png" style="width: 25px;">
 															</span><span>
-															<img style="width: 25px;"
-															src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen1.png">
-													</span></td>
+																<img style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen1.png">
+															</span></td>
 
-												</tr>
-												<tr>
-													<td>Medical History</td>
-													<td><span><img
-															src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png"
-															style="width: 25px;"></span><span> <img
-															src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey1.png"
-															style="width: 25px;"></span></td>
+													</tr>
+													<tr>
+														<td>Medical History</td>
+														<td><span><img src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png" style="width: 25px;"></span><span>
+																<img src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey1.png" style="width: 25px;"></span></td>
 
 
-												</tr>
-												<tr>
-													<td>Adverse Events</td>
-													<td><span><img
-															src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png"
-															style="width: 25px;"></span><span> <img
-															src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed1.png"
-															style="width: 25px;"></span></td>
+													</tr>
+													<tr>
+														<td>Adverse Events</td>
+														<td><span><img src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png" style="width: 25px;"></span><span>
+																<img src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed1.png" style="width: 25px;"></span></td>
 
-												</tr>
-												<tr>
-													<td>Exposure</td>
-													<td><span><img
-															src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png"
-															style="width: 25px;"></span><span> <img
-															src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow1.png"
-															style="width: 25px;"></span></td>
+													</tr>
+													<tr>
+														<td>Exposure</td>
+														<td><span><img src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png" style="width: 25px;"></span><span>
+																<img src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow1.png" style="width: 25px;"></span></td>
 
 
-												</tr>
+													</tr>
 
-											</tbody>
-										</table>
+												</tbody>
+											</table>
+										</div>
 									</div>
 
+									<div class="col-md-4">
+										<div class="row">
 
+											<kendo-chart [seriesColors]="['#2E8B57','#50C878']" style="width: 400px; height: 250px;">
+												<kendo-chart-legend position="custom" [offsetX]="270" [offsetY]="100" [labels]="legendLabels"></kendo-chart-legend>
+												<kendo-chart-title text="Job Enablement Status" font="12px Open Sans" position="top" align="center"></kendo-chart-title>
+												<kendo-chart-tooltip>
+													<ng-template kendoChartSeriesTooltipTemplate let-value="value" let-category="category"> {{ category }}
+														Value
+														is {{value}} </ng-template>
+												</kendo-chart-tooltip>
+												<kendo-chart-series>
+													<kendo-chart-series-item type="pie" [labels]="seriesPieLabels" [data]="pieDataTwo" field="value"
+													 categoryField="category">
+													</kendo-chart-series-item>
+												</kendo-chart-series>
+											</kendo-chart>
 
-
-								</div>
-
-								<div class="col-md-4">
-									<div class="row">
-
-										<kendo-chart [seriesColors]="['#2E8B57','#50C878']"
-											style="width: 400px; height: 250px;"> <kendo-chart-legend
-											position="custom" [offsetX]="270" [offsetY]="100" [labels]="legendLabels"></kendo-chart-legend> <kendo-chart-title
-											text="Job Enablement Status" font="12px Open Sans"
-											position="top" align="center"></kendo-chart-title> <kendo-chart-tooltip>
-										<ng-template kendoChartSeriesTooltipTemplate let-value="value"
-											let-category="category"> {{ category }} Value
-										is {{value}} </ng-template> </kendo-chart-tooltip> <kendo-chart-series> <kendo-chart-series-item
-											type="pie" [labels]="seriesPieLabels" [data]="pieDataTwo"
-											field="value" categoryField="category">
-										</kendo-chart-series-item> </kendo-chart-series> </kendo-chart>
+										</div>
 
 									</div>
 
 								</div>
-
 							</div>
 						</div>
-					</div>
-				</div>
-				<!-- end of panel -->
-				
-		    </div> <!-- end of collapsible panel details --> <!-- toggle for more/less -->
-				
-		    
-            </div><!-- white box -- Display for each study -->
-            <button class="btn btn-sm togglebutton" type="button" 
-				style="	background-color:white;"
-				(click)="study.isSectionCollapsed = !(study.isSectionCollapsed);">
-				
-				<i class="fa fa-angle-double-up" *ngIf="study.isSectionCollapsed" 
-				style="color:#074982;margin-top:0px;padding-right:20px;height:30px;width:30px;
-				margin-left:-5px;padding-top:-15px">
-				</i>
-				<i class="fa fa-angle-double-down" *ngIf="!(study.isSectionCollapsed)"
-				style="color:#074982;margin-top:0px;padding-right:20px;height:30px;width:30px;
-				margin-left:-5px;padding-top:-15px">
-				</i>
-      			</button>
-            </div><!-- close for loop -->
-           
+					</div> <!-- end of collapsible panel details -->
+					<!-- toggle for more/less -->
+
+
+				</div><!-- white box -- Display for each study -->
+				<!-- <button class="btn btn-sm togglebutton" type="button" style="	background-color:white;" (click)="study.isSectionCollapsed = !(study.isSectionCollapsed);">
+					<p *ngIf="study.isSectionCollapsed">
+						More
+						<i class="fa fa-angle-double-up" style="color:#074982;margin-top:0px;padding-right:20px;height:30px;width:30px;
+						margin-left:-5px;padding-top:-15px">
+
+						</i>
+					</p>
+
+					<i class="fa fa-angle-double-down" *ngIf="!(study.isSectionCollapsed)" style="color:#074982;margin-top:0px;padding-right:20px;height:30px;width:30px;
+						margin-left:-5px;padding-top:-15px">
+					</i>
+				</button> -->
+			</div><!-- close for loop -->
+
 		</div><!-- container -->
-</div>
+	</div>
 
 
 </div>

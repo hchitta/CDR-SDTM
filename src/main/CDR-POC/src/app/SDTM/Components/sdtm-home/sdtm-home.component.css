@@ -7,6 +7,19 @@
 }
 
 
+.panel-heading .accordion-toggle:after {
+  /* symbol for "opening" panels */
+  font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
+  content: "\e114";    /* adjust as needed, taken from bootstrap.css */
+  float: right;        /* adjust as needed */
+  color: grey;         /* adjust as needed */
+}
+.panel-heading .accordion-toggle.collapsed:after {
+  /* symbol for "collapsed" panels */
+  content: "\e080";    /* adjust as needed, taken from bootstrap.css */
+}
+
+
 .info-box {
   display: block;
   min-height: 60px;
@@ -45,17 +58,25 @@
 }
 
 .panel-heading{
-  font-size: 15px;
+  font-size: 13px;
   font-weight: bold;
   font-family: Open Sans Regular; 
+  height:15px;
 }
 
 .panel-table{
   padding: 5px 10px;
   margin-left: 40px;
 }
+
+.panel > .panel-heading {
+  background-image: none;
+  background-color: #cde4fe;
+
+
+}
 .panel-body{
-  border: 1px solid  #808080;
+  
   border-radius: 0.9rem;
   padding:15px 15px 15px 15px;
   margin-right :20px;
