@@ -60,7 +60,7 @@ export class BusinessRuleConfigComponent implements OnInit {
 
             { "icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png", "action": "import", "inputParam": this.importTemplate },
             { "icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action": "", "inputParam": "" },
-            { "icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action": "", "inputParam": "" },
+            { "icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "action": "download", "inputParam": this.searchBRStudy },
             { "icontitle": "Add Business Rule", "iconImageSrc": "assets/images/AddStudy.png", "action": "add", "inputParam": this.searchBRStudy }
         ];
         this.navBarItems = [
@@ -138,6 +138,8 @@ export class BusinessRuleConfigComponent implements OnInit {
             this.router.navigate(['/sdtm/jobExecution', this.searchBRStudy.brStudy]);
         } else if (data.flag === 'lineage') {
             window.open("http://ec2-52-90-18-39.compute-1.amazonaws.com:8080/Lineage.html", '_blank');
+        } else if (data.flag === 'download') {
+            window.open("http://ec2-52-90-18-39.compute-1.amazonaws.com:8080/Tableau.html", '_blank');
         } else {
             this.addHandler(data.flag, this.searchBRStudy);
         }
@@ -323,7 +325,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     public KendoGridOne() {
         this.kendoOneShow = !this.kendoOneShow;
         if (this.kendoOneShow) {
-            this.kendoTwoHeight = 170;
+            this.kendoTwoHeight = 300;
         } else {
             this.kendoTwoHeight = 300;
         }
