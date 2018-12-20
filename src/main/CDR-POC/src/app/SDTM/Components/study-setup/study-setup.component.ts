@@ -25,6 +25,7 @@ export class StudySetupComponent implements OnInit {
     take: 10
   };
   
+  
   studyConfigImg: string;
   public userName = '';
   public studyTitles: any[];
