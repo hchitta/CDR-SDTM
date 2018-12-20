@@ -42,7 +42,7 @@
 						class="col-md-2 info-box-content pull-left info-box bg-primary"
 						style="border-radius: 0.9rem; height: 60px;">
 						<span class="info-box-text"
-							style="font-size: 19px; font-weight: bold;">{{study.countOfDomains}}/{{study.countOfAllDomains}}</span> <span>Domains
+							style="font-size: 19px; font-weight: bold;">{{study.countOfDomains == null ? 0 : study.countOfDomains}}/{{study.countOfAllDomains}}</span> <span>Domains
 							Approved</span>
 					</div>
 
@@ -50,7 +50,7 @@
 						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
 						<span
 							style="display: block; margin-bottom: 19px; padding-top: 10px;">
-							<span class="study-label"><b>Current Version :</b></span> {{study.currentDomainVersion}}
+							<span class="study-label"><b>Current Version :</b></span> {{study.currentDomainVersion == null ? 'N/A' : study.currentDomainVersion}}
 						</span> <span> <span class="study-label" style="font-weight: bold">Latest
 								Version :</span> {{study.lastDomainVersion}}
 						</span>
@@ -60,7 +60,7 @@
 						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
 						<span class="info-box-text study-label"
 							style="display: block; margin-bottom: 19px; padding-top: 10px;"><b>Last
-								Job Run: </b></span> <span>{{study.lastJobRun}}</span>
+								Job Run: </b></span> <span>{{study.lastJobRun == null ? 'N/A' : study.lastJobRun  | date : 'dd-MMM-yyyy'}}</span>
 					</div>
 
 
@@ -93,7 +93,7 @@
 									<span class="study-label"> <b>Study Manager:</b></span><span>{{study.studyManager}}</span>
 								</div>
 								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"> <b>Study Setup Date:</b></span><span>{{study.studySetUpdate}}</span>
+									<span class="study-label"> <b>Study Setup Date:</b></span><span>{{study.studySetUpdate == null ? 'N/A' : study.studySetUpdate | date : 'dd-MMM-yyyy'}}</span>
 								</div>
 								<div class="col-md-3 pull-left" style="padding-left: 20px;">
 									<span class="study-label"><b>Status:</b></span><span>{{study.studyStatus}}</span>
