@@ -8,7 +8,7 @@
 
 	<!-- grey box -->
 	<div class="panel panel-default"
-		style="height: 950px; margin-left: 15px; margin-right: 15px; border-radius: 10px; border-width: 1px; width: 97%; background: #e6e6e6;">
+		style="height: boxSize px; margin-left: 15px; margin-right: 15px; border-radius: 10px; border-width: 1px; width: 97%; background: #e6e6e6;">
 
 		<div class="container">
 
@@ -18,7 +18,7 @@
 				<hr style="margin-top: 0px; border-top: 2px solid #074982">
 			</div>
 
-			<div
+			<div *ngFor="let study of dashBoardData"
 				style="background-color: white; box-shadow: 1px 2px #e6e6e6; padding-bottom: 0px; margin-bottom: 0px;">
 
 				<!-- First panel -->
@@ -28,13 +28,13 @@
 						style="margin-top: 15px">
 						<span class="info-box-text"
 							style="font-size: 15px; font-weight: bold; text-align: left; padding: 0px; margin: 0px;">
-							M45-9059282</span>
+							{{study.studyID}}</span>
 						<hr
 							style="margin-top: 10px; border-top: 1px solid #074982; margin-bottom: 10px" />
 
 						<span
 							style="font-size: 12px; font-family: Open Sans Regular; text-align: left; padding: 0px; margin: 0px;">
-							Phase2 | <b>DB Lock :</b>15-Jan-2019
+							{{study.studyPhase == 'Not Applicable' ? 'N/A' : study.studyPhase}} | <b>DB Lock :</b>{{study.dbLockDate}}
 						</span>
 					</div>
 
@@ -42,7 +42,7 @@
 						class="col-md-2 info-box-content pull-left info-box bg-primary"
 						style="border-radius: 0.9rem; height: 60px;">
 						<span class="info-box-text"
-							style="font-size: 19px; font-weight: bold;">4/35</span> <span>Domains
+							style="font-size: 19px; font-weight: bold;">{{study.countOfDomains}}/{{study.countOfAllDomains}}</span> <span>Domains
 							Approved</span>
 					</div>
 
@@ -50,10 +50,9 @@
 						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
 						<span
 							style="display: block; margin-bottom: 19px; padding-top: 10px;">
-							<span class="study-label"><b>Current Version :</b></span> SDTM
-							v2.3
+							<span class="study-label"><b>Current Version :</b></span> {{study.currentDomainVersion}}
 						</span> <span> <span class="study-label" style="font-weight: bold">Latest
-								Version :</span> SDTM v2.3
+								Version :</span> {{study.lastDomainVersion}}
 						</span>
 					</div>
 
@@ -61,7 +60,7 @@
 						style="border: 1px solid #074982; border-radius: 0.9rem; height: 60px;">
 						<span class="info-box-text study-label"
 							style="display: block; margin-bottom: 19px; padding-top: 10px;"><b>Last
-								Job Run: </b></span> <span>04-Dec-2018</span>
+								Job Run: </b></span> <span>{{study.lastJobRun}}</span>
 					</div>
 
 
@@ -82,25 +81,22 @@
 
 						<div class="panel-body">
 							<div class="row" style="text-align: left; padding-left: 20px">
-								<span class="study-label"><b>Study Name:</b></span><span>&nbsp;CALERIE:</span>
-								<span>&nbsp;Comprehensive Assessment of Long Term Effects
-									of Reducing Intake of Energy</span>
+								<span class="study-label"><b>Study Name:</b></span><span>&nbsp;{{study.studyTitle}}:</span>
+								<span>&nbsp;{{study.studyDescription}}</span>
 							</div>
 							<div class="row" style="margin-top: 25px; text-align: left;">
 								<div class="col-md-3 pull-left"
 									style="padding-left: 20px; width: 200px">
-									<span class="study-label"><b>Study Analyst:</b></span><span>Bob
-										Smith</span>
+									<span class="study-label"><b>Study Analyst:</b></span><span>{{study.studyAnalyst}}</span>
 								</div>
 								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"> <b>Study Manager:</b></span><span>Britney
-										Spears</span>
+									<span class="study-label"> <b>Study Manager:</b></span><span>{{study.studyManager}}</span>
 								</div>
 								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"> <b>Study Setup Date:</b></span><span>30-Nov-2018</span>
+									<span class="study-label"> <b>Study Setup Date:</b></span><span>{{study.studySetUpdate}}</span>
 								</div>
 								<div class="col-md-3 pull-left" style="padding-left: 20px;">
-									<span class="study-label"><b>Status:</b></span><span>Active</span>
+									<span class="study-label"><b>Status:</b></span><span>{{study.studyStatus}}</span>
 								</div>
 							</div>
 						</div>
@@ -266,7 +262,10 @@
 					</div>
 				</div>
 				<!-- end of panel -->
+				<hr style="margin-top: 0px;"> 
 </div>
+
+
 		</div>
 		<!-- container -->
 	</div>

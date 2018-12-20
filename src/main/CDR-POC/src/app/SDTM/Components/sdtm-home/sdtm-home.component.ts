@@ -9,6 +9,7 @@ import { HttpClient} from '@angular/common/http';
   styleUrls: ['./sdtm-home.component.css']
 })
 export class SdtmHomeComponent implements OnInit {
+  boxSize = 950;
   dashBoardData: any[] = [];
   navBarItems: Object[];
   appName: string;
@@ -70,7 +71,7 @@ export class SdtmHomeComponent implements OnInit {
 
       this.http.get<any[]>(`/api/CDR/pathToSdtmDashBoard`).subscribe(data => {
         this.dashBoardData = data;
+        this.boxSize = (this.boxSize * this.dashBoardData.length) + 20;
       });
   }
-
 }
