@@ -1,116 +1,116 @@
-
 <kendo-dialog *ngIf="active" (close)="closeForm()">
-<kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0">
-<b style="color : black;font-size: 14px;font-family: Open Sans;">{{ isNew ? 'Add New Study Details' : 'Edit Study Details' }}</b>
-</kendo-dialog-titlebar>
+  <kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0">
+    <b style="color : black;font-size: 14px;font-family: Open Sans;">{{ isNew ? 'Add New Study Details' : 'Edit Study
+      Details' }}</b>
+  </kendo-dialog-titlebar>
 
-<form novalidate [formGroup]="editForm"> 
-  <!--kendo-dialog title=""  (close)="close1()">
+  <form novalidate [formGroup]="editForm">
+    <!--kendo-dialog title=""  (close)="close1()">
        <p style="margin: 30px; text-align: center;">Message</p>
   </kendo-dialog-->
-  <div class="container" style="background-color: white" >
-  <div class="row">
-    <div>
-      <kendo-popup [offset]="offset" *ngIf="opened" >
-      <div *ngIf="opened" style="color : #f31700;font-size:14px;font-family: Roboto;"><b> {{errorMsg}} </b></div>
-    </kendo-popup>
-    </div>
-    <div class="col-25">
-      <label for="studyID" >Study ID:</label>
-    </div>
-    <div *ngIf="isNew" class="col-75">
-      <input class="searchLabel" type="text" placeholder="Enter Study Number" formControlName="studyID" ><span style="color: red">*</span>
-    </div>
-    <div *ngIf="!(isNew)" class="col-75">
-      <input type="text" readonly class="searchLabel" placeholder="Enter Study Number" formControlName="studyID" />&nbsp;
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="title">Title:</label>
-    </div>
-    <div class="col-75">
-      <input type="text" class="searchLabel" placeholder="Enter Study Title" formControlName="title" />&nbsp;&nbsp;
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="phase">Phase:</label>
-    </div>
-    <div class="col-75">
-      <select id="phase" class="searchLabel"  formControlName="phase" name="phase">
-        <option [ngValue]="null" style="display: none;" class="defaultOption">Select an Option</option>
-        <option *ngFor="let phase of studyPhases" value="{{phase.phase}}">{{phase.phaseDescription}}</option>
-      </select><span style="color: red">*</span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25" >
-      <label for="status">Status:</label>
-    </div>
-    <div class="col-75">
-      <select id="status" class="searchLabel" formControlName="status" name="status" >
-        <option [ngValue]="null" style="display: none;" class="defaultOption">Select an Option</option>
-        <option *ngFor="let status of studyStatuses" value="{{status.status}}">{{status.statusDescription}}</option>
-      </select><span style="color: red">*</span> 
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="therapeuticArea">Therapeutic Area:</label>
-    </div>
-    <div class="col-75">
-      <!--<input type="text" class="searchLabel" placeholder="Enter Therapeutic Area" formControlName="therapeuticArea" />-->
-      <select placeholder="Therapeutic Area" formControlName="therapeuticArea">
-          <option  [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select an Option</option>
-          <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
-      </select><span style="color: red">*</span>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-25">
-      <label for="source">Source:</label>
-    </div>
-    <div class="col-75">
-     <!-- <input type="text" placeholder="Enter Source" class="searchLabel" formControlName="source" />-->
-     <select placeholder="Source" formControlName="source">
-      <option  [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select an Option</option>
-      <option *ngFor="let source of studySources" value="{{source.source}}">{{source.sourceDescription}}</option>
-      </select><span style="color: red">*</span>
-    </div>
-  </div>
+    <div class="container" style="background-color: white">
+      <div class="row">
+        <div>
+          <kendo-popup [offset]="offset" *ngIf="opened">
+            <div *ngIf="opened" style="color : #f31700;font-size:14px;font-family: Roboto;"><b> {{errorMsg}} </b></div>
+          </kendo-popup>
+        </div>
+        <div class="col-25">
+          <label for="studyID">Study ID:</label>
+        </div>
+        <div *ngIf="isNew" class="col-75">
+          <input class="searchLabel" type="text" placeholder="Enter Study Number" formControlName="studyID"><span style="color: red">*</span>
+        </div>
+        <div *ngIf="!(isNew)" class="col-75">
+          <input type="text" readonly class="searchLabel" placeholder="Enter Study Number" formControlName="studyID" />&nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="title">Title:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" class="searchLabel" placeholder="Enter Study Title" formControlName="title" />&nbsp;&nbsp;
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="phase">Phase:</label>
+        </div>
+        <div class="col-75">
+          <select id="phase" class="searchLabel" formControlName="phase" name="phase">
+            <option [ngValue]="null" style="display: none;" class="defaultOption">Select an Option</option>
+            <option *ngFor="let phase of studyPhases" value="{{phase.phase}}">{{phase.phaseDescription}}</option>
+          </select><span style="color: red">*</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="status">Status:</label>
+        </div>
+        <div class="col-75">
+          <select id="status" class="searchLabel" formControlName="status" name="status">
+            <option [ngValue]="null" style="display: none;" class="defaultOption">Select an Option</option>
+            <option *ngFor="let status of studyStatuses" value="{{status.status}}">{{status.statusDescription}}</option>
+          </select><span style="color: red">*</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="therapeuticArea">Therapeutic Area:</label>
+        </div>
+        <div class="col-75">
+          <!--<input type="text" class="searchLabel" placeholder="Enter Therapeutic Area" formControlName="therapeuticArea" />-->
+          <select placeholder="Therapeutic Area" formControlName="therapeuticArea">
+            <option [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select an Option</option>
+            <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
+          </select><span style="color: red">*</span>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="source">Source:</label>
+        </div>
+        <div class="col-75">
+          <!-- <input type="text" placeholder="Enter Source" class="searchLabel" formControlName="source" />-->
+          <select placeholder="Source" formControlName="source">
+            <option [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select an Option</option>
+            <option *ngFor="let source of studySources" value="{{source.source}}">{{source.sourceDescription}}</option>
+          </select><span style="color: red">*</span>
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col-25">
-      <label for="title">Study Analyst:</label>
-    </div>
-    <div class="col-75">
-      <input type="text" class="searchLabel" placeholder="Enter Study Analyst" formControlName="analyst" />&nbsp;&nbsp;
-    </div>
-  </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="title">Study Analyst:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" class="searchLabel" placeholder="Enter Study Analyst" formControlName="analyst" />&nbsp;&nbsp;
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col-25">
-      <label for="title">Study Manager:</label>
-    </div>
-    <div class="col-75">
-      <input type="text" class="searchLabel" placeholder="Enter Study Manager" formControlName="manager" />&nbsp;&nbsp;
-    </div>
-  </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="title">Study Manager:</label>
+        </div>
+        <div class="col-75">
+          <input type="text" class="searchLabel" placeholder="Enter Study Manager" formControlName="manager" />&nbsp;&nbsp;
+        </div>
+      </div>
 
-  <div class="row">
-    <div class="col-25">
-      <label for="title">DB Lock Date:</label>
-    </div>
-    <div class="col-75">
-      <kendo-datepicker class="study-kendo-datepicker"
-      [navigation]="false" format="MM/dd/yyyy" formatPlaceholder="formatPattern" formControlName="dbLockDate"></kendo-datepicker>
-    </div>
-  </div>
+      <div class="row">
+        <div class="col-25">
+          <label for="title">DB Lock Date:</label>
+        </div>
+        <div class="col-75">
+          <kendo-datepicker class="study-kendo-datepicker" [navigation]="false" format="mm/dd/yyyy" formatPlaceholder="formatPattern"
+            formControlName="dbLockDate"></kendo-datepicker>
+        </div>
+      </div>
 
-</div>
+    </div>
 
-</form>
+  </form>
 
   <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;">Cancel</button>&nbsp;&nbsp;
   <button kendoButton [disabled]="!editForm.valid" (click)="onSave($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -200px;">Submit</button>
