@@ -2,6 +2,7 @@ package com.cdr.sdtm.service;
 
 import java.util.List;
 
+import com.cdr.sdtm.model.IJobRunStatus;
 import com.cdr.sdtm.model.JobRunStatus;
 
 public interface JobRunStatusService {
@@ -10,7 +11,7 @@ public interface JobRunStatusService {
 	
 	List<JobRunStatus> findByStudyAndDomains(String study, List<String> domains);
 
-	List<JobRunStatus> findByStudy(String study);
+	List<IJobRunStatus> findByStudy(String study);
 	
 	int updateJobs(Long uniqueId, String jobDisabled); 
 

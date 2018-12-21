@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cdr.sdtm.model.IJobRunStatus;
 import com.cdr.sdtm.model.JobRunStatus;
 import com.cdr.sdtm.repository.JobRunStatusRepository;
 
@@ -25,7 +26,7 @@ public class JobRunStatusServiceImpl implements JobRunStatusService {
 	}
 
 	@Override
-	public List<JobRunStatus> findByStudy(String study) {
+	public List<IJobRunStatus> findByStudy(String study) {
 		return jobRunStatusRepository.findByStudy(study);
 	}
 	

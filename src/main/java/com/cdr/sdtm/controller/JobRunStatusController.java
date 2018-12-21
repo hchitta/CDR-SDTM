@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cdr.sdtm.model.IJobRunStatus;
 import com.cdr.sdtm.model.JobRunStatus;
 import com.cdr.sdtm.service.JobRunStatusService;
 
@@ -38,7 +39,7 @@ public class JobRunStatusController {
 	}
 	
 	@GetMapping("/jobsForStudy/{study}")
-	public List<JobRunStatus> findByStudy(@PathVariable String study) {
+	public List<IJobRunStatus> findByStudy(@PathVariable String study) {
 		LOGGER.info("Jobs requested for study: " + study);
 		return jobRunStatusService.findByStudy(study);
 	}

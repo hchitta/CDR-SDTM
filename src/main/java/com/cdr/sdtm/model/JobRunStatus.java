@@ -42,7 +42,7 @@ public class JobRunStatus {
 	
 	@Column(name="status")
 	private String jobDisabled;
-
+	
 	
 	public String getJobDisabled() {
 		return jobDisabled;
@@ -107,5 +107,7 @@ public class JobRunStatus {
 	public void setMessage(String message) {
 		this.message = message;
 	}
+
+	
 	
 }
