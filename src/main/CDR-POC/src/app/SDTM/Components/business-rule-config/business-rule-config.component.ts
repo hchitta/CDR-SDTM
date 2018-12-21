@@ -28,7 +28,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     statusShowOptions = false;
     public kendoOneShow = false;
     public kendoTwoShow = true;
-    public kendoTwoHeight = 300;
+    public kendoTwoHeight = 339;
     userName = '';
     results: any[];
     public therapeuticAreas: any[];
@@ -91,6 +91,7 @@ export class BusinessRuleConfigComponent implements OnInit {
             if (this.configTypeIcons.length === 4) {
                 this.configTypeIcons.unshift({ "icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png", "action": "lineage", "inputParam": this.searchBRStudy });
                 this.configTypeIcons.unshift({ "icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png", "action": "job", "inputParam": this.searchBRStudy });
+                this.configTypeIcons.unshift({ "icontitle": "View source form join logic", "iconImageSrc": "assets/images/ObjectLevel.png", "action": "objectLevel", "inputParam": this.view1 });
             }
             this.studyDomains = this.route.snapshot.data['reqDomains'];
             this.searchBRStudy.brStudy = title;
@@ -104,6 +105,7 @@ export class BusinessRuleConfigComponent implements OnInit {
                 if (this.configTypeIcons.length === 4) {
                     this.configTypeIcons.unshift({ "icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png", "action": "lineage", "inputParam": this.searchBRStudy });
                     this.configTypeIcons.unshift({ "icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png", "action": "job", "inputParam": this.searchBRStudy });
+                    this.configTypeIcons.unshift({ "icontitle": "View source form join logic", "iconImageSrc": "assets/images/ObjectLevel.png", "action": "objectLevel", "inputParam": this.view1 });
                 }
                 this.searchBRStudy.brStudy = title;
                 this.searchBRStudy.brSdtmDomain = this.studyDomains[0].domain;
@@ -123,6 +125,7 @@ export class BusinessRuleConfigComponent implements OnInit {
             if (this.configTypeIcons.length === 4) {
                 this.configTypeIcons.unshift({ "icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png", "action": "lineage", "inputParam": this.searchBRStudy });
                 this.configTypeIcons.unshift({ "icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png", "action": "job", "inputParam": this.searchBRStudy });
+                this.configTypeIcons.unshift({ "icontitle": "View source form join logic", "iconImageSrc": "assets/images/ObjectLevel.png", "action": "objectLevel", "inputParam": this.view1 });
             }
         }
         this.sortable = true;
@@ -151,7 +154,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     public addHandler(flag: any, searchBRStudy: any) {
         this.editBizDataItem = new Matrix();
         this.editBizDataItem.study = searchBRStudy.brStudy;
-        if (flag === 'add') {
+        if (flag === 'add' || flag === 'objectLevel') {
             this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
         }
         if (flag === 'import') {
@@ -212,6 +215,11 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.businessEditService.save(this.importTemplate, this.searchBRStudy, 'import');
         this.editBizDataItem = undefined;
         this.sortable = true;
+        if (this.configTypeIcons.length === 4) {
+            this.configTypeIcons.unshift({ "icontitle": "Data Lineage", "iconImageSrc": "assets/images/DataLineage.png", "action": "lineage", "inputParam": this.searchBRStudy });
+            this.configTypeIcons.unshift({ "icontitle": "Go to job execution for this study", "iconImageSrc": "assets/images/JobExeGrey.png", "action": "job", "inputParam": this.searchBRStudy });
+            this.configTypeIcons.unshift({ "icontitle": "View source form join logic", "iconImageSrc": "assets/images/ObjectLevel.png", "action": "objectLevel", "inputParam": this.view1 });
+        }
     }
 
     filterDomains(studyTitle: any) {
@@ -257,15 +265,15 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.statusShowOptions = false;
         this.statusDrpSelected = false;
         this.businessEditService.read('clear');
-        if (this.configTypeIcons.length === 6) {
+        if (this.configTypeIcons.length === 7) {
             this.configTypeIcons.shift();
             this.configTypeIcons.shift();
-
+            this.configTypeIcons.shift();
         }
         this.sortable = false;
         this.kendoOneShow = false;
         this.kendoTwoShow = true;
-        this.kendoTwoHeight = 300;
+        this.kendoTwoHeight = 339;
     }
 
     public getDomain(): String {
@@ -278,7 +286,7 @@ export class BusinessRuleConfigComponent implements OnInit {
                     break;
                 }
             }
-            return this.capitalizeFirstLetter(selectedDomain) + ' Domain';
+            return selectedDomain + ' Domain';
         }
         return null;
     }
@@ -322,16 +330,17 @@ export class BusinessRuleConfigComponent implements OnInit {
 
     public getStudy(): String {
         if (this.searchBRStudy != null && this.searchBRStudy.brStudy != null && this.searchBRStudy.brSdtmDomain != null) {
-            return this.capitalizeFirstLetter(this.searchBRStudy.brStudy) + ' Study';
+           // return this.capitalizeFirstLetter(this.searchBRStudy.brStudy) + ' Study';
+           return this.searchBRStudy.brStudy;
         }
     }
 
     public KendoGridOne() {
         this.kendoOneShow = !this.kendoOneShow;
         if (this.kendoOneShow) {
-            this.kendoTwoHeight = 300;
+            this.kendoTwoHeight = 339;
         } else {
-            this.kendoTwoHeight = 300;
+            this.kendoTwoHeight = 339;
         }
     }
 

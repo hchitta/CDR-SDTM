@@ -220,12 +220,13 @@ export class JobExecutionComponent implements OnInit {
       	   let customObj = new JobExecutionDetails();
       	   //Model values in LHS and DB columns in RHS
       	   customObj.domain = item.domain;
-           customObj.job_end_timestamp = item.job_end_timestamp;
-           customObj.job_status = item.job_status;
+           customObj.job_end_timestamp = item.jobEndTimestamp;
+           customObj.job_status = item.jobStatus;
            customObj.message = item.message;
            customObj.jobDisabled = item.jobDisabled;
            customObj.study = item.study;
-           customObj.job_id = item.job_id;
+           customObj.job_id = item.jobId;
+           customObj.domainCode = item.domainCode;
            console.log("jobDisabled"+customObj.jobDisabled);
            this.dataResult.push(customObj);      	
       }
@@ -397,7 +398,7 @@ export class JobExecutionComponent implements OnInit {
    
     public navigateBusinessImport(dataItem: any) {
     
-        this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.study}/${dataItem.domain}`]);
+        this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.study}/${dataItem.domainCode}`]);
      
      
     }

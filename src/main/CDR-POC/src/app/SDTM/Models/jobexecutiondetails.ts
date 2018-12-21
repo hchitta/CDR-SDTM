@@ -1,7 +1,7 @@
 export class JobExecutionDetails {
 
     public domain: string;
-    public job_end_timestamp: string
+    public job_end_timestamp: string;
     public job_status: string;
     public message: string;
     public jobDisabled : string;
@@ -9,5 +9,6 @@ export class JobExecutionDetails {
     public isJobAborted : boolean;
     public study : string;
     public job_id : number;
+    public domainCode: string;
     
 }

@@ -72,7 +72,9 @@ export class SdtmHomeComponent implements OnInit {
       { "navBarTitle": "Job Execution", "navBarLink": "jobExecution" }];
 
     this.http.get<any[]>(`/api/CDR/pathToSdtmDashBoard`).subscribe(data => {
-      this.dashBoardData = data;
+      this.dashBoardData = data.reduce((item, x) =>
+        item.concat(item.find(y => y.studyID === x.studyID) ? [] : [x])
+        , []);
       this.boxSize = (this.boxSize * this.dashBoardData.length) + 100;
       this.setDataForAccordion();
     });

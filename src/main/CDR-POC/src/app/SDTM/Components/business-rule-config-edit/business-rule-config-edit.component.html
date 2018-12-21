@@ -7,6 +7,7 @@
     <span *ngIf="(isNew=='import')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Import Business
         Rules</b></span>
     <span *ngIf="(isNew=='delete')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Confirm Delete</b></span>
+    <span *ngIf="(isNew=='objectLevel')"><b style="color : black;font-size: 14px;font-family: Open Sans;">Source Form Join Logic – {{this.domainName}}</b></span>
   </kendo-dialog-titlebar>
   <!-- <kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0;padding: 5px;" *ngIf="(isNew=='delete')">
     <b style="color : black;font-size: 14px;font-family: Open Sans;">Confirm Delete</b>
@@ -171,6 +172,26 @@
   <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='delete')">
     Are you sure you want to delete this business rule?
   </form>
+  <div *ngIf="(isNew=='objectLevel')">
+    <kendo-grid [data]="this.gridData | async" [height]="162" style="width: 100%;" [sortable]="sortable"> 
+              <kendo-grid-column [width]="125" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                field="formLable" title="Source Form">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                  {{dataItem[2]}}
+                </ng-template>
+               </kendo-grid-column>
+              <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                field="joinLogic" title="Join Logic">
+                <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
+                    {{dataItem[3]}}
+                  </ng-template>
+                <ng-template kendoGridNoRecordsTemplate>
+                    <span *ngIf="searchBRStudy != null && searchBRStudy.brSdtmDomain != null && searchBRStudy.brStudy != null">No
+                      records available.</span>
+                  </ng-template>
+              </kendo-grid-column>
+              </kendo-grid>
+  </div>
   <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-top: 10px;">Cancel</button>&nbsp;&nbsp;
   <button *ngIf="(isNew=='add' || isNew=='edit')" kendoButton [disabled]="!editBusinessForm.valid" (click)="onSave($event,isNew)"
     style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -150px;margin-top: 10px;">Submit</button>

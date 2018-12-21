@@ -1,10 +1,18 @@
 <div class="main-container ace-save-state" id="main-container">
   <header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle" [configTypeIcons]="configTypeIcons"
     [studyInHeader]="getStudy()" [domainInHeader]="searchBRStudy.brSdtmDomain" (iconClick)="addHandlerIconClick($event)"></header-icons>
-  <div class="panel panel-default" style="height:650px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
+  <div class="panel panel-default" style="height:410px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
     <h3 class="row-label" style="height: 4%;margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
       <span *ngIf="(getDomain() == null)">Select a study and SDTM domain to see business rules</span>
       <b><span *ngIf="(getDomain() != null)" style="font-size: 13px;">{{getDomain()}}</span></b>
+      <select id="form-field-select-1" name="domainStatus" class="pull-right" style="height: 24px;margin-top: -4px;margin-right: -103px;"> 
+      <option value="undefined" disabled selected style="display: none;">Select an Option</option>
+      <option>Not Started</option>
+      <option>In Progress</option>
+      <option>Ready for Review</option>
+      <option>Approved</option>
+      <option>Rejected</option>
+    </select>
     </h3>
     <hr style="margin-top: -6px;border-width: 2px;" />
     <div id="sidebar" class="col-sm-2" style="width: 214px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px">
@@ -122,7 +130,7 @@
                 <b>Variable Level Transformation</b>
               </div>-->
             <!-- <div *ngIf="kendoTwoShow" style="margin-left: 15px"> -->
-            <kendo-grid [data]="view2 | async" [height]="kendoTwoHeight" [pageSize]="gridState.take" [skip]="gridState.skip"
+            <kendo-grid [data]="view2 | async" [height]="339" [pageSize]="gridState.take" [skip]="gridState.skip"
               [sort]="gridState.sort" [pageable]="true" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
               (remove)="removeHandler($event)" [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;"
               [sortable]="sortable">
@@ -165,8 +173,8 @@
                 </ng-template>
               </kendo-grid-command-column>
             </kendo-grid>
-            <div style="background-color:red">
-              <business-rule-config-edit [model]="editBizDataItem" [isNew]="isNew" (save)="saveHandler($event)"
+            <div style="background-color:#ff0000">
+              <business-rule-config-edit [domainName]="getDomain()" [gridData]="view1" [model]="editBizDataItem" [isNew]="isNew" (save)="saveHandler($event)"
                 (cancel)="cancelHandler()" (delete)="deleteHandler($event)" (fetch)="fetchHandler($event)">
               </business-rule-config-edit>
             </div>

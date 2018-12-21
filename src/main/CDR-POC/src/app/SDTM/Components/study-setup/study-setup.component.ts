@@ -89,11 +89,11 @@ export class StudySetupComponent implements OnInit {
     const userDetails = this.userService.getUser();
     if (userDetails !== undefined) {
       const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
-      this.userName = userDetail;
+      this.userName = userDetail.trim();
     } else {
       this.userName = 'Admin';
     }
-    if (userDetails !== undefined && userDetails.userName === 'admin') {
+    if (this.userName === 'Admin') {
       this.isAdmin = true;
     }
     this.editService.fetchStudyTitles().subscribe(data => {

@@ -103,7 +103,8 @@
           <label for="title">DB Lock Date:</label>
         </div>
         <div class="col-75">
-          <kendo-datepicker class="study-kendo-datepicker" [navigation]="false" format="mm/dd/yyyy" formatPlaceholder="formatPattern"
+          <kendo-datepicker class="study-kendo-datepicker" [navigation]="false" format="MM/dd/yyyy"
+          [formatPlaceholder]="{ year: 'yyyy', month: 'mm', day: 'dd' }"
             formControlName="dbLockDate"></kendo-datepicker>
         </div>
       </div>
