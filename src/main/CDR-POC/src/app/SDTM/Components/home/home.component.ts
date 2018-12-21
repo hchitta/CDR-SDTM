@@ -15,20 +15,18 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     const userDetails = this.userService.getUser();
     if (userDetails !== undefined) {
-    const userDetail = userDetails.firstName + ' ' + userDetails.lastName;
+    const userDetail = userDetails.firstName;
     if (userDetail != null) {
       this.userName = userDetail.trim();
     }
     } else {
       this.userName = 'Admin';
     }
-    if (this.userName=='sdtm sdtm')
-    {
-      this.isSdtmUser=true;
-    }
     if (this.userName=='Admin')
     {
       this.isAdminUser=true;
+    } else {
+      this.isSdtmUser=true;
     }
   }
 }

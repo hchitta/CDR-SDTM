@@ -116,7 +116,7 @@
                             [pageable]="true"
         					[scrollable]="'none'"  (pageChange)="pageChange($event)"
                             style="width: 99.5%;" [resizable]="true">
-                        <kendo-grid-column [width]="20" [headerStyle]="{'background-color': '#074982'}">
+                        <kendo-grid-column [width]="10" [headerStyle]="{'background-color': '#074982'}">
                                 <ng-template kendoGridHeaderTemplate let-dataItem >
         						<input id="customHeader" type="checkbox" name="all" [(ngModel)]='checkbox' 
         						 (change)="isCheckboxSelected = !isCheckboxSelected;" />
@@ -127,23 +127,23 @@
 									[disabled]="dataItem['jobDisabled'] =='Y'" (change)="onItemSelect(dataItem)" />
    								</ng-template> 
 						</kendo-grid-column>
-                        <kendo-grid-column [width]="180" [style]="{'text-align':'left'}" 
-                        	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
-                        	'font-size': '12px','background-color': '#074982','color':'white'}"
-                            field="domain" title="SDTM Domain"></kendo-grid-column>
                         <kendo-grid-column [width]="120" [style]="{'text-align':'left'}" 
                         	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
                         	'font-size': '12px','background-color': '#074982','color':'white'}"
-                            field="job_end_timestamp" title="Last Run"></kendo-grid-column>
-                        <kendo-grid-column [width]="120" [style]="{'text-align':'left'}"
-                        	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
-                        	'font-size': '12px','background-color': '#074982','color':'white'}"
-                            field="job_status" title="Status"></kendo-grid-column>
+                            field="domain" title="SDTM Domain"></kendo-grid-column>
                         <kendo-grid-column [width]="100" [style]="{'text-align':'left'}" 
                         	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
                         	'font-size': '12px','background-color': '#074982','color':'white'}"
+                            field="job_end_timestamp" title="Last Run"></kendo-grid-column>
+                        <kendo-grid-column [width]="80" [style]="{'text-align':'left'}"
+                        	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
+                        	'font-size': '12px','background-color': '#074982','color':'white'}"
+                            field="job_status" title="Status"></kendo-grid-column>
+                        <kendo-grid-column [width]="140" [style]="{'text-align':'left'}" 
+                        	[headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
+                        	'font-size': '12px','background-color': '#074982','color':'white'}"
                             field="message" title="Message"></kendo-grid-column>
-                        <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="150" 
+                        <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="140" 
                         [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular',
                         'font-size': '12px','background-color': '#074982','color':'white'}"
                             title="Actions">             
