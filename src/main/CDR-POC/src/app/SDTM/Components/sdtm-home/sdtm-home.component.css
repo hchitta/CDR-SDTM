@@ -9,7 +9,7 @@
 
 .panel-heading .accordion-toggle:after {
   /* symbol for "opening" panels */
-  font-family: 'Open Sans Regular';  /* essential for enabling glyphicon */
+  font-family: 'Glyphicons Halflings';  /* essential for enabling glyphicon */
   content: "\e114";    /* adjust as needed, taken from bootstrap.css */
   float: right;        /* adjust as needed */
   color: grey;         /* adjust as needed */
