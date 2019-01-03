@@ -15,7 +15,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./business-rule-config.component.css']
 })
 export class BusinessRuleConfigComponent implements OnInit {
-
+    isAdminUser = false;
     configTypeImage: string;
     configTypeTitle: string;
     configTypeIcons: Object[];
@@ -48,6 +48,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     private businessEditService: BusinessEditService;
     view1: Observable<GridDataResult>;
     view2: Observable<GridDataResult>;
+    public statusColor: any;
 
     constructor(private route: ActivatedRoute,
         private userService: UserService,
@@ -56,6 +57,11 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.businessEditService = businessEditServiceFactory();
     }
     public ngOnInit(): void {
+
+        const userDetails = this.userService.getUser();
+        if (userDetails !== undefined && userDetails.userName === 'admin') {
+            this.isAdminUser = true;
+        }
         this.configTypeIcons = [
 
             { "icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png", "action": "import", "inputParam": this.importTemplate },
@@ -154,17 +160,24 @@ export class BusinessRuleConfigComponent implements OnInit {
     public addHandler(flag: any, searchBRStudy: any) {
         this.editBizDataItem = new Matrix();
         this.editBizDataItem.study = searchBRStudy.brStudy;
-        if (flag === 'add' || flag === 'objectLevel') {
+        if (flag === 'add') {
+        this.editBizDataItem.flag = 'N';
+        }
+        if (flag === 'add' || flag === 'objectLevel' || flag === 'domainStatus') {
             this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
         }
         if (flag === 'import') {
             this.editBizDataItem.defaultMessage = searchBRStudy.defaultMessage;
+        }
+        if (flag === 'domainStatus') {
+            this.editBizDataItem.domainStatus = searchBRStudy.brdomainStatus;
         }
         this.isNew = flag;
     }
 
     public editHandler({ dataItem }) {
         this.editBizDataItem = dataItem;
+        this.editBizDataItem.flag = 'N';
         this.isNew = 'edit';
     }
 
@@ -286,6 +299,13 @@ export class BusinessRuleConfigComponent implements OnInit {
                     break;
                 }
             }
+            this.view2.forEach(o => {
+                for (const obj of o.data) {
+                    this.searchBRStudy.brdomainStatus = obj.domainStatus;
+                    this.getColor(this.searchBRStudy.brdomainStatus);
+                    break;
+                }
+            });
             return selectedDomain + ' Domain';
         }
         return null;
@@ -347,5 +367,31 @@ export class BusinessRuleConfigComponent implements OnInit {
     public KendoGridTwo() {
         this.kendoTwoShow = !this.kendoTwoShow;
     }
+
+    public confirmDomainStaus(value: any) {
+        if ((value === 'Approved' || value === 'Rejected') && !this.isAdminUser) {
+            return false;
+        }
+        this.searchBRStudy.brdomainStatus = value;
+        this.addHandler('domainStatus', this.searchBRStudy);
+    }
+
+    public getColor(status: any) {
+         switch (status) {
+            case 'Not Started' : this.statusColor = 'White'; break;
+            case 'In Progress' : this.statusColor = 'Grey'; break;
+            case 'Ready for Review' : this.statusColor = 'Yellow'; break;
+            case 'Approved' : this.statusColor = 'Green'; break;
+            case 'Rejected' : this.statusColor = 'Red'; break;
+            default : this.statusColor = 'Blue'; break;
+         }
+
+    }
+
+    public updateDomainStatus(template: Matrix) {
+        this.businessEditService.updateDomainStatus(template, this.searchBRStudy);
+        this.editBizDataItem = undefined;
+    }
+
 }
 

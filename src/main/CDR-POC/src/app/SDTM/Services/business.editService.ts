@@ -11,6 +11,7 @@ const CREATE_ACTION = 'create';
 const UPDATE_ACTION = 'update';
 const REMOVE_ACTION = 'delete';
 const IMPORT_ACTION = 'import';
+const STATUS_ACTION = 'status';
 
 @Injectable()
 export class BusinessEditService extends BehaviorSubject<any[]> {
@@ -126,6 +127,12 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
             const importUrl = '/api/CDR/matrix/fetchOrInsert';
                 return this.http.get<any[]>(`${importUrl}/${searchBRStudy.study}/${searchBRStudy.matrixStudy}/${searchBRStudy.domain}`)
                 .pipe(map(res => <any[]>res));
+        } else if (action === 'status') {
+            const updateUrl = '/api/CDR/matrix/updateDomainStatus';
+            const url = `${updateUrl}/${searchBRStudy.study}/${searchBRStudy.domain}/${searchBRStudy.domainStatus}`;
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+            return this.http.put(url, searchBRStudy, {headers: headers})
+                   .pipe(map(res => <any[]>res));
         } else {
                /* if (searchBRStudy.brStudy) {
                     params =  params.set('StudId', searchBRStudy.brStudy);
@@ -138,4 +145,10 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
             return this.http.get<any[]>(`/api/CDR/ObjectMatrices/${searchBRStudy.brStudy}/${searchBRStudy.brSdtmDomain}`)
                    .pipe(map(res => <any[]>res));
         }}
+
+        public updateDomainStatus(data: any, searchBRStudy) {
+            this.fetch(data, STATUS_ACTION)
+            .subscribe(() => this.read(searchBRStudy), () => this.read(searchBRStudy));
+
+        }
 }

@@ -4,21 +4,28 @@
   <div class="panel panel-default" style="height:410px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
     <h3 class="row-label" style="height: 4%;margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
       <span *ngIf="(getDomain() == null)">Select a study and SDTM domain to see business rules</span>
-      <b><span *ngIf="(getDomain() != null)" style="font-size: 13px;">{{getDomain()}}</span></b>
-
-
-      <select *ngIf="(getDomain() != null)" id="form-field-select-1" name="domainStatus" class="pull-right form-control business-status"
-        style="height: 24px;margin-top: -4px;margin-right: -103px; width: 130px; color:black; " [ngStyle]="setMyStyles()">
-       <!-- <option *ngFor="let status of businessRulesStatuses" title="status.title" disabled="status.disabled" selected="status.selected">{{status.value}}</option> --> 
-        <option>Not Started</option>
-        <option>In Progress</option>
-        <option>Ready for Review</option>
-        <option>Approved</option>
-        <option>Rejected</option>
-      </select>
-
-      <img *ngIf="(getDomain() != null)" class="pull-right" style="margin-top: -6px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer"
-        data-toggle="tooltip" src="assets/images/ObjectLevel.png" alt="Logo" (click)="addHandler('objectLevel',searchBRStudy)" />&nbsp;
+      <b><span *ngIf="(getDomain() != null)" style="font-size: 13px;">
+        <span class="img-circle k-icon k-i-shape-circle" [style.backgroundColor]="statusColor" title="Status: {{searchBRStudy.brdomainStatus}}"></span> 
+        {{getDomain()}}
+      </span></b>
+     
+      <img *ngIf="(getDomain() != null)" class="pull-right" style="margin-top: -4px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -35px"
+      data-toggle="tooltip" title="Add a note to selected rules" src="assets/images/AddNote.png" alt="Logo" (click)="addHandler('objectLevel',searchBRStudy)" />&nbsp;
+      <img *ngIf="(getDomain() != null)" class="pull-right" style="margin-top: -4px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -63px"
+      data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/AddFlag.png" alt="Logo" (click)="addHandler('objectLevel',searchBRStudy)" />&nbsp;
+      <div class="dropdown pull-right" *ngIf="(getDomain() != null)" style="margin-right: -90px">
+         <span class="dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+           <img title="Change status for this domain" src="assets/images/ChangeStatus.png" style="margin-top: -4px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;">
+          </span>
+          <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
+            <li>Domain Status</li>
+            <li><a (click)="confirmDomainStaus('Not Started')">Not Started</a></li>
+            <li><a (click)="confirmDomainStaus('In Progress')">In Progress</a></li>
+            <li><a (click)="confirmDomainStaus('Ready for Review')">Ready for Review</a></li>
+            <li [ngClass]="isAdminUser ? 'enabled' : 'disabled'"><a (click)="confirmDomainStaus('Approved')">Approved</a></li>
+            <li [ngClass]="isAdminUser ? 'enabled' : 'disabled'"><a (click)="confirmDomainStaus('Rejected')">Rejected</a></li>
+          </ul> 
+        </div>   
 </h3>
     <hr style="margin-top: -6px;border-width: 2px;" />
     <div id="sidebar" class="col-sm-2" style="width: 214px;border-style: solid;border-width: 1px;border-color: #E5E5E5;margin-left:3px">
@@ -138,10 +145,33 @@
             <!-- <div *ngIf="kendoTwoShow" style="margin-left: 15px"> -->
             <kendo-grid [data]="view2 | async" [height]="339" [pageSize]="gridState.take" [skip]="gridState.skip"
               [sort]="gridState.sort" [pageable]="true" (dataStateChange)="onStateChange(searchBRStudy, $event)" (edit)="editHandler($event, searchBRStudy)"
-              (remove)="removeHandler($event)" [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.5%;"
+              (remove)="removeHandler($event)" [resizable]="true" (add)="addHandler('add',$event)" style="width: 99.7%;"
               [sortable]="sortable">
-
-              <kendo-grid-column [width]="150" [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+              <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
+                <ng-template kendoGridHeaderTemplate let-dataItem>
+                  <input id="customHeader" type="checkbox" name="all"/>
+                </ng-template>
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <input type="checkbox"/> 
+                 </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
+                <ng-template kendoGridHeaderTemplate let-dataItem>
+                  <img src="assets/images/UnFlag.png" style="height: 15px;width: 15px;"/>
+                </ng-template>
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <img src="assets/images/UnFlag.png" style="height: 15px;width: 15px;" title="Click to flag this rule"/> 
+                 </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
+                <ng-template kendoGridHeaderTemplate let-dataItem>
+                  <img src="assets/images/BussNoteGray.png" style="height: 15px;width: 15px;"/>
+                </ng-template>
+                <ng-template kendoGridCellTemplate let-dataItem>
+                  <img src="assets/images/BussNote.png" style="height: 15px;width: 15px;" title="Note:"/> 
+                 </ng-template>
+              </kendo-grid-column>
+              <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="formLable" title="Source Form">
                 <ng-template kendoGridCellTemplate let-dataItem let-rowIndex="rowIndex">
                   {{dataItem.formLable}} {{(dataItem.formName != null && dataItem.formName != '') ?
@@ -159,16 +189,16 @@
                 field="transformation_type" title="Transformation Type"></kendo-grid-column>
               <kendo-grid-column [style]="{'text-align':'left'}" [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="transformation_logic" title="Transformation Logic"></kendo-grid-column>
-              <kendo-grid-column [style]="{'text-align':'left'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+              <kendo-grid-column [style]="{'text-align':'left'}" [width]="170" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 field="targetField" title="SDTM Target Variable"></kendo-grid-column>
               <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="110" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                 title="Actions">
                 <ng-template kendoGridCellTemplate>
-                  <button kendoGridEditCommand [look]="outline">
-                    <span class="k-icon k-i-pencil"></span>
+                  <button kendoGridEditCommand [look]="outline" [imageUrl]="'assets/images/KendoEdit.png'" style="height: 25px;width: 25px;" title="Edit this rule">
+                   
                   </button>
-                  <button kendoGridRemoveCommand>
-                    <span class="k-icon k-i-trash"></span>
+                  <button kendoGridRemoveCommand [imageUrl]="'assets/images/KendoDelete.png'" style="height: 25px;width: 25px;" title="Archive this rule">
+                   
                   </button>
 
 
@@ -182,7 +212,7 @@
             <div style="background-color:#ff0000">
               <business-rule-config-edit [domainName]="getDomain()" [gridData]="view1" [model]="editBizDataItem"
                 [isNew]="isNew" (save)="saveHandler($event)" (cancel)="cancelHandler()" (delete)="deleteHandler($event)"
-                (fetch)="fetchHandler($event)">
+                (fetch)="fetchHandler($event)" (update)="updateDomainStatus($event)">
               </business-rule-config-edit>
             </div>
             <!-- </div>-->
