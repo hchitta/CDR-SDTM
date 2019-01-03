@@ -94,6 +94,11 @@ public interface SdtmMatrixRepository extends JpaRepository<PathToSdtmMatrix, Lo
 			"        on 1=1;\r\n" + 
 			"")
 	List<PathToSdtmDashBoard> fetchDashBoardData();
+
+	@Transactional
+	@Modifying
+	@Query(nativeQuery=true,value="update path_to_sdtm_matrix_2 set domain_status=:status where Study_Title=:study and Domain_Name=:domain")
+	int updateDomainStatus(String study, String domain, String status);
 	
 
 }

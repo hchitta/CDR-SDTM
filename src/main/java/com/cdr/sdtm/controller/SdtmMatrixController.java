@@ -194,6 +194,7 @@ public class SdtmMatrixController {
 										matrix.setTransformation_type(template.getTransformation_type());
 										matrix.setTransformation_logic(template.getTransformation_logic());
 										matrix.setBack_transformation_logic(template.getBack_transformation_logic());
+										matrix.setDomainStatus("Not Started");
 										insertMatrices.add(matrix);
 									}
 									allMatrices.addAll(sdtmMatrixService.saveMatrixForDomain(insertMatrices));
@@ -253,5 +254,18 @@ public class SdtmMatrixController {
 	@GetMapping("/pathToSdtmDashBoard")
 	public List<PathToSdtmDashBoard> fetchPathToSdtmHomeDashBoard() {
 		return sdtmMatrixService.fetchDashBoardData();
+	}
+	
+	@PutMapping("/matrix/updateDomainStatus/{study}/{domain}/{status}")
+	public ResponseEntity<String> updateDomainStatus(@PathVariable String study, @PathVariable String domain, @PathVariable String status) {
+		int isUpdated = sdtmMatrixService.updateDomainStatus(study, domain, status);
+		if(isUpdated > 0) {
+			LOGGER.info("Matrix updated successfully.");
+			return new ResponseEntity<>("Matrix has been updated", HttpStatus.OK);
+		}
+		else {
+			LOGGER.info("Error while updating matrix.");
+			return new ResponseEntity<>("Matrix not found", HttpStatus.NOT_FOUND);
+		}
 	}
 }

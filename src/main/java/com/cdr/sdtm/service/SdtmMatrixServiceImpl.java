@@ -227,5 +227,10 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		return sdtmMatrixRepository.fetchDashBoardData();
 	}
 
+	@Override
+	public int updateDomainStatus(String study, String domain, String status) {
+		return sdtmMatrixRepository.updateDomainStatus(study, domain, status);
+	}
+
 
 }

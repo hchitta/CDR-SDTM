@@ -43,4 +43,6 @@ public interface SdtmMatrixService {
 	
 	List<PathToSdtmDashBoard> fetchDashBoardData();
 
+	int updateDomainStatus(String study, String domain, String status);
+
 }

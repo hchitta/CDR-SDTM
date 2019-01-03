@@ -63,6 +63,9 @@ public class PathToSdtmMatrix {
 	
 	@Column(name="Transformation_Code")
 	private String back_transformation_logic;
+	
+	@Column(name="Domain_Status")
+	private String domainStatus;
 
 	public String getStudy() {
 		return study;
@@ -208,7 +211,13 @@ public class PathToSdtmMatrix {
 	public void setFormExt(String formExt) {
 		this.formExt = formExt;
 	}
-	
-	
+
+	public String getDomainStatus() {
+		return domainStatus;
+	}
+
+	public void setDomainStatus(String domainStatus) {
+		this.domainStatus = domainStatus;
+	}
 	
 }
