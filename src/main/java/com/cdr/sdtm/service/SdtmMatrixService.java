@@ -45,4 +45,6 @@ public interface SdtmMatrixService {
 
 	int updateDomainStatus(String study, String domain, String status);
 
+	int updateRuleFlag(Long id, String flag);
+
 }

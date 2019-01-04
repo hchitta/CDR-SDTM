@@ -2,6 +2,7 @@ package com.cdr.sdtm.service;
 
 import java.util.List;
 
+import com.cdr.sdtm.model.DomainStatus;
 import com.cdr.sdtm.model.FormVariablesMetaData;
 import com.cdr.sdtm.model.StudyPhase;
 import com.cdr.sdtm.model.StudySource;
@@ -21,4 +22,6 @@ public interface SdtmMetaDataService {
 	List<FormVariablesMetaData> findDistinctForms();
 	
 	List<FormVariablesMetaData> findFieldsByForm(String formName);
+
+	List<DomainStatus> getDomainStatusMetaData();
 }

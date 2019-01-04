@@ -68,6 +68,8 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		Optional<PathToSdtmMatrix> _matrixData = findById(id);
 		 if(_matrixData.isPresent()) {
 			 PathToSdtmMatrix _matrix = _matrixData.get();
+			 _matrix.setRuleFlag(pathToSdtmMatrix.getRuleFlag());
+			 _matrix.setNotes(pathToSdtmMatrix.getNotes());
 			 _matrix.setTargetField(pathToSdtmMatrix.getTargetField());
 			 _matrix.setFormLable(pathToSdtmMatrix.getFormLable());
 			 _matrix.setFormName(pathToSdtmMatrix.getFormName());
@@ -197,6 +199,8 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	@Override
 	public PathToSdtmMatrix createMatrix(PathToSdtmMatrix pathToSdtmMatrix) {
 		 PathToSdtmMatrix _matrix = new PathToSdtmMatrix();
+		 _matrix.setRuleFlag(pathToSdtmMatrix.getRuleFlag());
+		 _matrix.setNotes(pathToSdtmMatrix.getNotes());
 		 _matrix.setStudy(pathToSdtmMatrix.getStudy());
 		 _matrix.setDomain(pathToSdtmMatrix.getDomain());
 		 _matrix.setSubDomain(pathToSdtmMatrix.getSubDomain());
@@ -230,6 +234,11 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 	@Override
 	public int updateDomainStatus(String study, String domain, String status) {
 		return sdtmMatrixRepository.updateDomainStatus(study, domain, status);
+	}
+
+	@Override
+	public int updateRuleFlag(Long id, String flag) {
+		return sdtmMatrixRepository.updateRuleFlag(id, flag);
 	}
 
 

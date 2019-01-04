@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.cdr.sdtm.model.DomainStatus;
 import com.cdr.sdtm.model.FormVariablesMetaData;
 import com.cdr.sdtm.model.StudyPhase;
 import com.cdr.sdtm.model.StudySource;
@@ -90,6 +91,17 @@ public class SdtmMetaDataController {
 		List<FormVariablesMetaData> formVariables = new ArrayList<FormVariablesMetaData>();
 		formVariables = sdtmMetaDataService.findFieldsByForm(formName);
 		return formVariables;
+	}
+	
+	/**
+	 * Method fetches study statuses
+	 * @return
+	 */
+	@GetMapping("/domain/statuses")
+	public List<DomainStatus> getDomainStausMetaData() {
+		List<DomainStatus> statues = new ArrayList<DomainStatus>();
+		statues = sdtmMetaDataService.getDomainStatusMetaData();
+		return statues;
 	}
 	
 
