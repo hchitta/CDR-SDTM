@@ -47,4 +47,10 @@ public interface SdtmMatrixService {
 
 	int updateRuleFlag(Long id, String flag);
 
+	int updateNotesForRules(String study, String domain, List<Long> selectedRules, boolean isAllRulesSelected,
+			String notes);
+
+	int updateFlagsForRules(String study, String domain, List<Long> selectedRules, boolean isAllRulesSelected,
+			String notes);
+
 }

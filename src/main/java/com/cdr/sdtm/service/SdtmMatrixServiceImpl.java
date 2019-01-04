@@ -241,5 +241,25 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		return sdtmMatrixRepository.updateRuleFlag(id, flag);
 	}
 
+	@Override
+	public int updateNotesForRules(String study, String domain, List<Long> selectedRules, boolean isAllRulesSelected,
+			String notes) {
+		if(isAllRulesSelected) {
+			return sdtmMatrixRepository.updateNotesForRules(study,domain,notes);
+		} else {
+			return sdtmMatrixRepository.updateNotesForSelectedRules(selectedRules,notes);
+		}
+	}
+
+	@Override
+	public int updateFlagsForRules(String study, String domain, List<Long> selectedRules, boolean isAllRulesSelected,
+			String notes) {
+		if(isAllRulesSelected) {
+			return sdtmMatrixRepository.updateFlagsForRules(study,domain,notes);
+		} else {
+			return sdtmMatrixRepository.updateFlagsForSelectedRules(selectedRules,notes);
+		}
+	}
+
 
 }
