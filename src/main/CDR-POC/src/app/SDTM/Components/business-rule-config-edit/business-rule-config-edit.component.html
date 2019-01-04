@@ -191,32 +191,19 @@
     Are you sure you want to delete this business rule?
   </form>
   <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='domainStatus')">
-      Are you sure you want to change this domain's status to <b>{{this.editBusinessForm.value.domainStatus}}</b>? 
+      <p style="font-family: Open Sans;font-size: 12px;color: black;">
+        Are you sure you want to change this domain's status to 
+        <b>{{this.editBusinessForm.value.domainStatus}}</b>? 
+      </p>
   </form>
   <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='AddNote')">
-      <div class="container" style="background-color: white;">
-          <div class="row">
-            <div class="col-25">
-            <label for="Note text">Note Text:</label>
-            </div>
-            <div class="col-75">
-            <textarea placeholder="Enter note" formControlName="notes"></textarea> &nbsp;&nbsp;
-            </div>
-          </div>
-        </div>
+      <p style="font-family: Open Sans;font-size: 12px;color: black;margin-left: -135px">Note Text (Optional):</p>
+      <textarea placeholder="Enter note" formControlName="notes" style="margin-left: -54px"></textarea>    
   </form>
   <form novalidate [formGroup]="editBusinessForm" *ngIf="(isNew=='AddFlag')">
-      Are you sure you want to add a flag to the selected rules?
-      <div class="container" style="background-color: white;">
-      <div class="row">
-          <div class="col-25">
-            <label for="Note text">Note Text (Optional):</label> 
-          </div>
-          <div class="col-75">
-            <textarea placeholder="Enter note" formControlName="notes"></textarea> &nbsp;&nbsp;
-          </div>
-        </div>
-      </div>
+      <p style="font-family: Open Sans;font-size: 12px;color: black;margin-left: -33px">Are you sure you want to add a flag to the selected rules?</p>
+      <p style="font-family: Open Sans;font-size: 12px;color: black;margin-left: -135px">Note Text (Optional):</p>
+      <textarea placeholder="Enter note" formControlName="notes" style="margin-left: -54px"></textarea>    
   </form>
   <div *ngIf="(isNew=='objectLevel')">
     <kendo-grid [data]="this.gridData | async" [height]="162" style="width: 100%;" [sortable]="sortable"> 
@@ -232,7 +219,7 @@
                     {{dataItem[3]}}
                   </ng-template>
                 <ng-template kendoGridNoRecordsTemplate>
-                    <span *ngIf="searchBRStudy != null && searchBRStudy.brSdtmDomain != null && searchBRStudy.brStudy != null">No
+                    <span *ngIf="searchBRStudy != null && searchBRStudy.brSdtmDomain != null && searchBRStudy.brStudy != null">No 
                       records available.</span>
                   </ng-template>
               </kendo-grid-column>
@@ -243,7 +230,7 @@
     style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -150px;margin-top: 10px;">Submit</button>
   <button *ngIf="(isNew=='import')" kendoButton [disabled]="!editBusinessForm.valid" (click)="fetchTemplate()" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -180px; margin-top: 10px;">Submit</button>
   <button *ngIf="(isNew=='delete')" kendoButton (click)="onDelete($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -180px; margin-top: 10px;">Ok</button>
-  <button *ngIf="(isNew=='domainStatus')" kendoButton (click)="confirm($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -180px; margin-top: 10px;">Confirm</button>
-  <button *ngIf="(isNew=='AddFlag')" kendoButton (click)="OnRuleFlag($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -180px; margin-top: 10px;">Confirm</button>
-  <button *ngIf="(isNew=='AddNote')" kendoButton (click)="OnRuleNote($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -180px; margin-top: 10px;">Confirm</button>
+  <button *ngIf="(isNew=='domainStatus')" kendoButton (click)="confirm($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -80px; margin-top: 10px;">Confirm</button>
+  <button *ngIf="(isNew=='AddFlag')" kendoButton (click)="OnRuleFlag($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -40px; margin-top: 10px;">Confirm</button>
+  <button *ngIf="(isNew=='AddNote')" kendoButton (click)="OnRuleNote($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -40px; margin-top: 10px;">Confirm</button> 
 </kendo-dialog>
