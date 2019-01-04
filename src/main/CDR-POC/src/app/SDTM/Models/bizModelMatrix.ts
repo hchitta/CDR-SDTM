@@ -17,6 +17,6 @@ export class Matrix {
     public formLable: string;
     public domainStatus: string;
     public notes: string;
-    public flag: string;
+    public ruleFlag: string;
 
 }

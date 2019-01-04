@@ -15,6 +15,7 @@ import { Router } from '@angular/router';
     styleUrls: ['./business-rule-config.component.css']
 })
 export class BusinessRuleConfigComponent implements OnInit {
+    public domainStatuses: any[];
     isAdminUser = false;
     configTypeImage: string;
     configTypeTitle: string;
@@ -49,6 +50,8 @@ export class BusinessRuleConfigComponent implements OnInit {
     view1: Observable<GridDataResult>;
     view2: Observable<GridDataResult>;
     public statusColor: any;
+    checkbox = false;
+    isCheckboxSelected = false;
 
     constructor(private route: ActivatedRoute,
         private userService: UserService,
@@ -90,6 +93,9 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.businessEditService.fetchTherapeuticAreas().subscribe(data => {
             this.therapeuticAreas = data;
         });
+        this.businessEditService.fetchDomainStatuses().subscribe(data => {
+            this.domainStatuses = data;
+          });
         const title = this.route.snapshot.paramMap.get('studyTitle');
         let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
         const domain = this.route.snapshot.paramMap.get('domain');
@@ -161,7 +167,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.editBizDataItem = new Matrix();
         this.editBizDataItem.study = searchBRStudy.brStudy;
         if (flag === 'add') {
-        this.editBizDataItem.flag = 'N';
+        this.editBizDataItem.ruleFlag = 'N';
         }
         if (flag === 'add' || flag === 'objectLevel' || flag === 'domainStatus') {
             this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
@@ -177,7 +183,6 @@ export class BusinessRuleConfigComponent implements OnInit {
 
     public editHandler({ dataItem }) {
         this.editBizDataItem = dataItem;
-        this.editBizDataItem.flag = 'N';
         this.isNew = 'edit';
     }
 
@@ -287,6 +292,8 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.kendoOneShow = false;
         this.kendoTwoShow = true;
         this.kendoTwoHeight = 339;
+        this.checkbox = false;
+        this.isCheckboxSelected = false;
     }
 
     public getDomain(): String {
@@ -391,6 +398,15 @@ export class BusinessRuleConfigComponent implements OnInit {
     public updateDomainStatus(template: Matrix) {
         this.businessEditService.updateDomainStatus(template, this.searchBRStudy);
         this.editBizDataItem = undefined;
+    }
+
+    public switchRuleFlag(dataItem, flag) {
+        dataItem.ruleFlag = flag;
+        this.businessEditService.updateBusinessRuleFlag(dataItem, this.searchBRStudy);
+    }
+
+    public updateFlagNote(template: Matrix) {
+        console.log('Notes' + template.notes);
     }
 
 }
