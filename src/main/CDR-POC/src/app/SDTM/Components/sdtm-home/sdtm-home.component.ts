@@ -19,16 +19,14 @@ export class SdtmHomeComponent implements OnInit {
   dashBoardData: any[] = [];
   //pieDataItem	=[];
   //pieDataItemTwo =[];
+  public valuePlotBands: any[] = [];
   navBarItems: Object[];
   appName: string;
   firstName: string;
   public isCollapsed = false;
   dashboardResultItemMap = new Map();
   
-  public seriesData: any[] = [{
-    study: 'This Study',
-    domains: 35
-  }];
+  public seriesData: any[] = [];
 
   public seriesDataTwo: any[] = [{
     study: 'Overdue',
@@ -206,4 +204,23 @@ export class SdtmHomeComponent implements OnInit {
   [key: string]: dashboardResultItem;
 }*/
 
+  
+   public getValuePlotBands(countOfDomains,countOfAllDomains){
+   this.valuePlotBands = [{
+        from: countOfAllDomains,
+        to: (countOfAllDomains-1),
+        color: '#074982',
+        opacity: 0.6
+    }];
+   return this.valuePlotBands;
+   }
+
+	public getSeriesData(countOfDomains){
+	this.seriesData =[{
+    study: 'This Study',
+    domains: countOfDomains
+  	}];
+	   return this.seriesData;
+	
+	}
 }

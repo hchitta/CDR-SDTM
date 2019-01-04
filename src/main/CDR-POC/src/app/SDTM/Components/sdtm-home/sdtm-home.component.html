@@ -133,21 +133,25 @@
 									</div>
 									<div class="col-md-3">
 
-										<kendo-chart style="width: 250px; height: 250px;" type="bar" [seriesColors]="['green']">
-											<kendo-chart-title text="# of Target Domains" font="12px Open Sans Regular" position="top" align="right"></kendo-chart-title>
+										<kendo-chart style="width: 250px; height: 250px;"  [seriesColors]="['green']">
+										    <kendo-chart-title text="# of Target Domains" font="12px Open Sans Regular"
+										     position="top" align="right"></kendo-chart-title>
 											<kendo-chart-tooltip>
 												<ng-template kendoChartSeriesTooltipTemplate let-value="value">
 													Value is {{value}} </ng-template>
 											</kendo-chart-tooltip>
-											<kendo-chart-category-axis>
+											<kendo-chart-category-axis >
 												<kendo-chart-category-axis-item [majorGridLines]="hidden" [minorGridLines]="hidden">
 												</kendo-chart-category-axis-item>
 											</kendo-chart-category-axis>
-											<kendo-chart-value-axis>
-												<kendo-chart-value-axis-item [minorTicks]="hidden"> </kendo-chart-value-axis-item>
+											<kendo-chart-value-axis >
+												<kendo-chart-value-axis-item
+												 [plotBands]="getValuePlotBands(study.countOfDomains,study.countOfAllDomains)" 
+												[minorTicks]="hidden"> </kendo-chart-value-axis-item>
 											</kendo-chart-value-axis>
 											<kendo-chart-series>
-												<kendo-chart-series-item [labels]="seriesLabels" type="column" [data]="seriesData" field="domains"
+												<kendo-chart-series-item type="bar" [labels]="seriesLabels" type="column" 
+												[data]="getSeriesData(study.countOfDomains)" field="domains"
 												 categoryField="study">
 												</kendo-chart-series-item>
 											</kendo-chart-series>
