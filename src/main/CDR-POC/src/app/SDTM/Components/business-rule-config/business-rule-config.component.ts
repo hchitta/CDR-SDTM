@@ -15,7 +15,8 @@ import { Router } from '@angular/router';
     styleUrls: ['./business-rule-config.component.css']
 })
 export class BusinessRuleConfigComponent implements OnInit {
-
+    public domainStatuses: any[];
+    isAdminUser = false;
     configTypeImage: string;
     configTypeTitle: string;
     configTypeIcons: Object[];
@@ -48,6 +49,10 @@ export class BusinessRuleConfigComponent implements OnInit {
     private businessEditService: BusinessEditService;
     view1: Observable<GridDataResult>;
     view2: Observable<GridDataResult>;
+    public statusColor: any;
+    checkbox = false;
+    isCheckboxSelected = false;
+    selectedItemsList = [];
 
     constructor(private route: ActivatedRoute,
         private userService: UserService,
@@ -56,6 +61,11 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.businessEditService = businessEditServiceFactory();
     }
     public ngOnInit(): void {
+
+        const userDetails = this.userService.getUser();
+        if (userDetails !== undefined && userDetails.userName === 'admin') {
+            this.isAdminUser = true;
+        }
         this.configTypeIcons = [
 
             { "icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png", "action": "import", "inputParam": this.importTemplate },
@@ -84,6 +94,9 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.businessEditService.fetchTherapeuticAreas().subscribe(data => {
             this.therapeuticAreas = data;
         });
+        this.businessEditService.fetchDomainStatuses().subscribe(data => {
+            this.domainStatuses = data;
+          });
         const title = this.route.snapshot.paramMap.get('studyTitle');
         let therapeuticArea = this.route.snapshot.paramMap.get('therapeuticArea');
         const domain = this.route.snapshot.paramMap.get('domain');
@@ -154,11 +167,18 @@ export class BusinessRuleConfigComponent implements OnInit {
     public addHandler(flag: any, searchBRStudy: any) {
         this.editBizDataItem = new Matrix();
         this.editBizDataItem.study = searchBRStudy.brStudy;
-        if (flag === 'add' || flag === 'objectLevel') {
+        if (flag === 'add') {
+        this.editBizDataItem.ruleFlag = 'N';
+        }
+        if (flag === 'add' || flag === 'objectLevel' || flag === 'domainStatus'
+              || flag === 'AddNote' || flag === 'AddFlag') {
             this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
         }
         if (flag === 'import') {
             this.editBizDataItem.defaultMessage = searchBRStudy.defaultMessage;
+        }
+        if (flag === 'domainStatus') {
+            this.editBizDataItem.domainStatus = searchBRStudy.brdomainStatus;
         }
         this.isNew = flag;
     }
@@ -274,6 +294,9 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.kendoOneShow = false;
         this.kendoTwoShow = true;
         this.kendoTwoHeight = 339;
+        this.checkbox = false;
+        this.isCheckboxSelected = false;
+        this.selectedItemsList = [];
     }
 
     public getDomain(): String {
@@ -286,6 +309,13 @@ export class BusinessRuleConfigComponent implements OnInit {
                     break;
                 }
             }
+            this.view2.forEach(o => {
+                for (const obj of o.data) {
+                    this.searchBRStudy.brdomainStatus = obj.domainStatus;
+                    this.getColor(this.searchBRStudy.brdomainStatus);
+                    break;
+                }
+            });
             return selectedDomain + ' Domain';
         }
         return null;
@@ -347,5 +377,56 @@ export class BusinessRuleConfigComponent implements OnInit {
     public KendoGridTwo() {
         this.kendoTwoShow = !this.kendoTwoShow;
     }
+
+    public confirmDomainStaus(value: any) {
+        if ((value === 'Approved' || value === 'Rejected') && !this.isAdminUser) {
+            return false;
+        }
+        this.searchBRStudy.brdomainStatus = value;
+        this.addHandler('domainStatus', this.searchBRStudy);
+    }
+
+    public getColor(status: any) {
+         switch (status) {
+            case 'Not Started' : this.statusColor = 'White'; break;
+            case 'In Progress' : this.statusColor = 'Grey'; break;
+            case 'Ready for Review' : this.statusColor = 'Yellow'; break;
+            case 'Approved' : this.statusColor = 'Green'; break;
+            case 'Rejected' : this.statusColor = 'Red'; break;
+            default : this.statusColor = 'Blue'; break;
+         }
+
+    }
+
+    public updateDomainStatus(template: Matrix) {
+        this.businessEditService.updateDomainStatus(template, this.searchBRStudy);
+        this.editBizDataItem = undefined;
+    }
+
+    public switchRuleFlag(dataItem, flag) {
+        dataItem.ruleFlag = flag;
+        this.businessEditService.updateBusinessRuleFlag(dataItem, this.searchBRStudy);
+    }
+
+    public updateNotes(template: Matrix) {
+        this.businessEditService.updateNotes(template, this.selectedItemsList, this.checkbox, this.searchBRStudy);
+        this.editBizDataItem = undefined;
+        this.checkbox = false;
+        this.isCheckboxSelected = false;
+        this.selectedItemsList = [];
+    }
+
+    public updateFlags(template: Matrix) {
+        this.businessEditService.updateFlags(template, this.selectedItemsList, this.checkbox, this.searchBRStudy);
+        this.editBizDataItem = undefined;
+        this.checkbox = false;
+        this.isCheckboxSelected = false;
+        this.selectedItemsList = [];
+    }
+
+    onItemSelect (item: any) {
+        this.selectedItemsList.push(item.id);
+     }
+
 }
 

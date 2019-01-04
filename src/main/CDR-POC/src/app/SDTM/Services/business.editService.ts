@@ -11,9 +11,15 @@ const CREATE_ACTION = 'create';
 const UPDATE_ACTION = 'update';
 const REMOVE_ACTION = 'delete';
 const IMPORT_ACTION = 'import';
+const STATUS_ACTION = 'status';
+const FLAG_ACTION = 'flag';
 
 @Injectable()
 export class BusinessEditService extends BehaviorSubject<any[]> {
+
+    public fetchDomainStatuses(): any {
+        return this.http.get<any[]>(`/api/CDR/domain/statuses`);
+    }
     constructor(private http: HttpClient) {
         super([]);
     }
@@ -126,6 +132,18 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
             const importUrl = '/api/CDR/matrix/fetchOrInsert';
                 return this.http.get<any[]>(`${importUrl}/${searchBRStudy.study}/${searchBRStudy.matrixStudy}/${searchBRStudy.domain}`)
                 .pipe(map(res => <any[]>res));
+        } else if (action === 'status') {
+            const updateUrl = '/api/CDR/matrix/updateDomainStatus';
+            const url = `${updateUrl}/${searchBRStudy.study}/${searchBRStudy.domain}/${searchBRStudy.domainStatus}`;
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+            return this.http.put(url, searchBRStudy, {headers: headers})
+                   .pipe(map(res => <any[]>res));
+        } else if (action === 'flag') {
+            const updateUrl = '/api/CDR/matrix/updateRuleFlag';
+            const url = `${updateUrl}/${searchBRStudy.id}/${searchBRStudy.ruleFlag}`;
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+            return this.http.put(url, searchBRStudy, {headers: headers})
+                   .pipe(map(res => <any[]>res));
         } else {
                /* if (searchBRStudy.brStudy) {
                     params =  params.set('StudId', searchBRStudy.brStudy);
@@ -138,4 +156,64 @@ export class BusinessEditService extends BehaviorSubject<any[]> {
             return this.http.get<any[]>(`/api/CDR/ObjectMatrices/${searchBRStudy.brStudy}/${searchBRStudy.brSdtmDomain}`)
                    .pipe(map(res => <any[]>res));
         }}
+
+        public updateDomainStatus(data: any, searchBRStudy) {
+            this.fetch(data, STATUS_ACTION)
+            .subscribe(() => this.read(searchBRStudy), () => this.read(searchBRStudy));
+        }
+
+        public updateBusinessRuleFlag(data: any, searchBRStudy) {
+            this.fetch(data, FLAG_ACTION)
+            .subscribe(() => this.read(searchBRStudy), () => this.read(searchBRStudy));
+        }
+
+        public updateNotes(data, selectedRules, isAllRulesSelected, searchBRStudy) {
+            let params = new HttpParams();
+            if (data.study) {
+                params =  params.set('study', data.study);
+            }
+            if (data.domain) {
+                params =  params.set('domain', data.domain);
+            }
+            if (selectedRules) {
+                params =  params.set('selectedRules', selectedRules);
+            }
+            if (isAllRulesSelected) {
+                params =  params.set('isAllRulesSelected', isAllRulesSelected);
+            }
+            if (data.notes) {
+                params =  params.set('notes', data.notes);
+            }
+            const updateUrl = '/api/CDR/matrix/updateNotesForRules';
+            const url = `${updateUrl}`;
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+            return this.http.put(url, searchBRStudy, {params: params})
+                   .pipe(map(res => <any[]>res))
+                   .subscribe(() => this.read(searchBRStudy), () => this.read(searchBRStudy)); 
+        }
+
+        public updateFlags(data, selectedRules, isAllRulesSelected, searchBRStudy) {
+            let params = new HttpParams();
+            if (data.study) {
+                params =  params.set('study', data.study);
+            }
+            if (data.domain) {
+                params =  params.set('domain', data.domain);
+            }
+            if (selectedRules) {
+                params =  params.set('selectedRules', selectedRules);
+            }
+            if (isAllRulesSelected) {
+                params =  params.set('isAllRulesSelected', isAllRulesSelected);
+            }
+            if (data.notes) {
+                params =  params.set('notes', data.notes);
+            }
+            const updateUrl = '/api/CDR/matrix/updateFlagsForRules';
+            const url = `${updateUrl}`;
+            const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+            return this.http.put(url, searchBRStudy, { params: params })
+                   .pipe(map(res => <any[]>res))
+                   .subscribe(() => this.read(searchBRStudy), () => this.read(searchBRStudy));
+        }
 }

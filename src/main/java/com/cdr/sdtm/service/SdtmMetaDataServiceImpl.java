@@ -5,11 +5,13 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.cdr.sdtm.model.DomainStatus;
 import com.cdr.sdtm.model.FormVariablesMetaData;
 import com.cdr.sdtm.model.StudyPhase;
 import com.cdr.sdtm.model.StudySource;
 import com.cdr.sdtm.model.StudyStatus;
 import com.cdr.sdtm.model.StudyType;
+import com.cdr.sdtm.repository.DomainStatusRepository;
 import com.cdr.sdtm.repository.FormVariableRepository;
 import com.cdr.sdtm.repository.StudyPhaseRepository;
 import com.cdr.sdtm.repository.StudySourceRepository;
@@ -33,6 +35,9 @@ public class SdtmMetaDataServiceImpl implements SdtmMetaDataService{
 	
 	@Autowired
 	FormVariableRepository formVariableRepository;
+	
+	@Autowired
+	DomainStatusRepository domainStatusRepository;
 
 	@Override
 	public List<StudyType> getStudyTypeMetaData() {
@@ -62,6 +67,11 @@ public class SdtmMetaDataServiceImpl implements SdtmMetaDataService{
 	@Override
 	public List<FormVariablesMetaData> findDistinctForms() {
 		return formVariableRepository.findDistinctForms();
+	}
+
+	@Override
+	public List<DomainStatus> getDomainStatusMetaData() {
+		return domainStatusRepository.findAll();
 	}
 	
 	

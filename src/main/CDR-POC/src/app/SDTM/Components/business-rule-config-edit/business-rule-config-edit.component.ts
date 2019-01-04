@@ -55,7 +55,10 @@ export class BusinessRuleConfigEditComponent implements OnInit {
         'transformation_logic': new FormControl(),
         'defaultMessage': new FormControl(),
         'formName': new FormControl(),
-        'formLable': new FormControl()
+        'formLable': new FormControl(),
+        'domainStatus': new FormControl(),
+        'notes': new FormControl(),
+        'ruleFlag': new FormControl()
     });
 
     constructor(private http: HttpClient, @Inject(BusinessEditService) businessEditServiceFactory: any) {
@@ -83,6 +86,9 @@ export class BusinessRuleConfigEditComponent implements OnInit {
     @Output() save: EventEmitter<Matrix> = new EventEmitter();
     @Output() delete: EventEmitter<Matrix> = new EventEmitter();
     @Output() fetch: EventEmitter<Matrix> = new EventEmitter();
+    @Output() update: EventEmitter<Matrix> = new EventEmitter();
+    @Output() ruleFlag: EventEmitter<Matrix> = new EventEmitter();
+    @Output() ruleNote: EventEmitter<Matrix> = new EventEmitter();
 
     public onSave(e, isNew: any) {
         e.preventDefault();
@@ -255,6 +261,32 @@ export class BusinessRuleConfigEditComponent implements OnInit {
                 this.previousLength = 0;
             }
         });
+    }
+
+    public confirm(e) {
+        e.preventDefault();
+        this.update.emit(this.editBusinessForm.value);
+        this.active = false;
+    }
+
+    public switchFlag() {
+        if (this.editBusinessForm.value.ruleFlag === 'Y') {
+            this.editBusinessForm.value.ruleFlag = 'N';
+        } else {
+            this.editBusinessForm.value.ruleFlag = 'Y';
+        }
+    }
+
+    public OnRuleFlag(e) {
+        e.preventDefault();
+        this.ruleFlag.emit(this.editBusinessForm.value);
+        this.active = false;
+    }
+
+    public OnRuleNote(e) {
+        e.preventDefault();
+        this.ruleNote.emit(this.editBusinessForm.value);
+        this.active = false;
     }
 }
 

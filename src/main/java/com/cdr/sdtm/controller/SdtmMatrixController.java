@@ -194,6 +194,9 @@ public class SdtmMatrixController {
 										matrix.setTransformation_type(template.getTransformation_type());
 										matrix.setTransformation_logic(template.getTransformation_logic());
 										matrix.setBack_transformation_logic(template.getBack_transformation_logic());
+										matrix.setDomainStatus("Not Started");
+										matrix.setRuleFlag(template.getRuleFlag());
+										matrix.setNotes(template.getNotes());
 										insertMatrices.add(matrix);
 									}
 									allMatrices.addAll(sdtmMatrixService.saveMatrixForDomain(insertMatrices));
@@ -254,4 +257,66 @@ public class SdtmMatrixController {
 	public List<PathToSdtmDashBoard> fetchPathToSdtmHomeDashBoard() {
 		return sdtmMatrixService.fetchDashBoardData();
 	}
+	
+	@PutMapping("/matrix/updateDomainStatus/{study}/{domain}/{status}")
+	public ResponseEntity<String> updateDomainStatus(@PathVariable String study, @PathVariable String domain, @PathVariable String status) {
+		int isUpdated = sdtmMatrixService.updateDomainStatus(study, domain, status);
+		if(isUpdated > 0) {
+			LOGGER.info("Matrix Status updated successfully.");
+			return new ResponseEntity<>("Matrix has been updated", HttpStatus.OK);
+		}
+		else {
+			LOGGER.info("Error while updating matrix status.");
+			return new ResponseEntity<>("Matrix not found", HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	@PutMapping("/matrix/updateRuleFlag/{id}/{flag}")
+	public ResponseEntity<String> updateRuleFlag(@PathVariable Long id, @PathVariable String flag) {
+		int isUpdated = sdtmMatrixService.updateRuleFlag(id, flag);
+		if(isUpdated > 0) {
+			LOGGER.info("Matrix Flag updated successfully.");
+			return new ResponseEntity<>("Matrix has been updated", HttpStatus.OK);
+		}
+		else {
+			LOGGER.info("Error while updating matrix flag.");
+			return new ResponseEntity<>("Matrix not found", HttpStatus.NOT_FOUND);
+		}
+	}
+	
+	
+	@PutMapping("/matrix/updateNotesForRules")
+	public ResponseEntity<String> updateNotesForRules(@RequestParam(value="study",required=false) String study,
+			@RequestParam(value="domain",required=false) String domain,
+			@RequestParam(value="selectedRules",required=false) List<Long> selectedRules,
+			@RequestParam(value="isAllRulesSelected",required=false) boolean isAllRulesSelected,
+			@RequestParam(value="notes",required=false) String notes) {
+		int isUpdated = sdtmMatrixService.updateNotesForRules(study,domain,selectedRules,isAllRulesSelected,notes);
+		if(isUpdated > 0) {
+			LOGGER.info("Matrix notes updated successfully.");
+			return new ResponseEntity<>("Matrix has been updated", HttpStatus.OK);
+		}
+		else {
+			LOGGER.info("Error while updating matrix notes.");
+			return new ResponseEntity<>("Matrix not found", HttpStatus.NOT_FOUND);
+		}
+	}
+
+	@PutMapping("/matrix/updateFlagsForRules")
+	public ResponseEntity<String> updateFlagsForRules(@RequestParam(value="study",required=false) String study,
+			@RequestParam(value="domain",required=false) String domain,
+			@RequestParam(value="selectedRules",required=false) List<Long> selectedRules,
+			@RequestParam(value="isAllRulesSelected",required=false) boolean isAllRulesSelected,
+			@RequestParam(value="notes",required=false) String notes) {
+		int isUpdated = sdtmMatrixService.updateFlagsForRules(study,domain,selectedRules,isAllRulesSelected,notes);
+		if(isUpdated > 0) {
+			LOGGER.info("Matrix Flags updated successfully.");
+			return new ResponseEntity<>("Matrix has been updated", HttpStatus.OK);
+		}
+		else {
+			LOGGER.info("Error while updating matrix flags.");
+			return new ResponseEntity<>("Matrix not found", HttpStatus.NOT_FOUND);
+		}
+	}
+
 }

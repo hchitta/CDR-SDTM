@@ -43,4 +43,14 @@ public interface SdtmMatrixService {
 	
 	List<PathToSdtmDashBoard> fetchDashBoardData();
 
+	int updateDomainStatus(String study, String domain, String status);
+
+	int updateRuleFlag(Long id, String flag);
+
+	int updateNotesForRules(String study, String domain, List<Long> selectedRules, boolean isAllRulesSelected,
+			String notes);
+
+	int updateFlagsForRules(String study, String domain, List<Long> selectedRules, boolean isAllRulesSelected,
+			String notes);
+
 }

@@ -15,5 +15,8 @@ export class Matrix {
     public defaultMessage: string;
     public formName: string;
     public formLable: string;
+    public domainStatus: string;
+    public notes: string;
+    public ruleFlag: string;
 
 }

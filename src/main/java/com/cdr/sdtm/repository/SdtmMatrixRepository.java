@@ -94,6 +94,36 @@ public interface SdtmMatrixRepository extends JpaRepository<PathToSdtmMatrix, Lo
 			"        on 1=1;\r\n" + 
 			"")
 	List<PathToSdtmDashBoard> fetchDashBoardData();
+
+	@Transactional
+	@Modifying
+	@Query(nativeQuery=true,value="update path_to_sdtm_matrix_2 set domain_status=:status where Study_Title=:study and Domain_Name=:domain")
+	int updateDomainStatus(String study, String domain, String status);
+
+	@Transactional
+	@Modifying
+	@Query(nativeQuery=true,value="update path_to_sdtm_matrix_2 set rule_flag=:flag where Matrix_ID=:id")
+	int updateRuleFlag(Long id, String flag);
+
+	@Transactional
+	@Modifying
+	@Query(nativeQuery=true,value="update path_to_sdtm_matrix_2 set notes=:notes where Study_Title=:study and Domain_Name=:domain")
+	int updateNotesForRules(String study, String domain, String notes);
+
+	@Transactional
+	@Modifying
+	@Query(nativeQuery=true,value="update path_to_sdtm_matrix_2 set notes=:notes where Matrix_ID in (:selectedRules)")
+	int updateNotesForSelectedRules(List<Long> selectedRules, String notes);
+
+	@Transactional
+	@Modifying
+	@Query(nativeQuery=true,value="update path_to_sdtm_matrix_2 set notes=:notes, rule_flag='Y' where Study_Title=:study and Domain_Name=:domain")
+	int updateFlagsForRules(String study, String domain, String notes);
+
+	@Transactional
+	@Modifying
+	@Query(nativeQuery=true,value="update path_to_sdtm_matrix_2 set notes=:notes, rule_flag='Y' where Matrix_ID in (:selectedRules)")
+	int updateFlagsForSelectedRules(List<Long> selectedRules, String notes);
 	
 
 }
