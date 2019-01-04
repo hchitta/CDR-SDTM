@@ -382,8 +382,16 @@ export class BusinessRuleConfigComponent implements OnInit {
         if ((value === 'Approved' || value === 'Rejected') && !this.isAdminUser) {
             return false;
         }
+        if (this.searchBRStudy.brdomainStatus === 'Not Started' && value === 'In Progress') {
+            this.editBizDataItem = new Matrix();
+            this.editBizDataItem.study = this.searchBRStudy.brStudy;
+            this.editBizDataItem.domain = this.searchBRStudy.brSdtmDomain;
+            this.editBizDataItem.domainStatus = value;
+            this.updateDomainStatus(this.editBizDataItem);
+        } else {
         this.searchBRStudy.brdomainStatus = value;
         this.addHandler('domainStatus', this.searchBRStudy);
+        }
     }
 
     public getColor(status: any) {
