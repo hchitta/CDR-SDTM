@@ -126,7 +126,7 @@
 													{{value}} </ng-template>
 											</kendo-chart-tooltip>
 											<kendo-chart-series>
-												<kendo-chart-series-item type="pie" [labels]="seriesPieLabels" [data]="pieData" field="value" categoryField="category">
+												<kendo-chart-series-item type="pie" [labels]="seriesPieLabels" [data]="getPieData(study.studyID)" field="value" categoryField="category">
 												</kendo-chart-series-item>
 											</kendo-chart-series>
 										</kendo-chart>
@@ -200,6 +200,40 @@
 													</tr>
 												</thead>
 												<tbody>
+												 	<tr *ngFor="let item of dashboardResultItemMap.get(study.studyID).jobExecutionDomainDetails">
+												 	<td>{{item.category}}</td>
+												 	<td>
+												 		<span>
+												 		<img *ngIf="item.businessRuleConfigStatus=='Approved'" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png">
+												 		<img *ngIf="item.businessRuleConfigStatus=='In Progress'" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey.png">
+												 		<img *ngIf="item.businessRuleConfigStatus=='Not Started'" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusWhite.png">
+												 		<img *ngIf="item.businessRuleConfigStatus=='Ready for Review'" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png">
+												 		<img *ngIf="item.businessRuleConfigStatus=='Rejected'" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed.png">
+												 		</span>
+												 		
+												 		<span>
+												 		<img *ngIf="item.jobExecutionStatus=='Completed'" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen1.png">
+												 		<img *ngIf="(item.jobExecutionStatus=='Running') || (item.jobExecutionStatus=='Waiting')" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey1.png">
+												 		<img *ngIf="(item.jobExecutionStatus=='Aborted') || (item.jobExecutionStatus=='Failed')" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed1.png">
+												 			<img *ngIf="item.jobExecutionStatus=='Not started'" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusWhite1.png">
+												 		<!-- waiting for approval -->
+												 		</span>
+												 		<span>
+												 		<img *ngIf="item.jobDisabledStatus=='Disabled'" 
+												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusDisbaled.png">
+												 		</span>
+												 	</td>	
+												 	</tr>
+												 <!--  
 													<tr>
 														<td>Demographics</td>
 														<td><span><img src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png" style="width: 25px;">
@@ -228,7 +262,7 @@
 
 
 													</tr>
-
+-->
 												</tbody>
 											</table>
 										</div>
@@ -246,7 +280,7 @@
 														is {{value}} </ng-template>
 												</kendo-chart-tooltip>
 												<kendo-chart-series>
-													<kendo-chart-series-item type="pie" [labels]="seriesPieLabels" [data]="pieDataTwo" field="value"
+													<kendo-chart-series-item type="pie" [labels]="seriesPieLabels" [data]="getPieDataTwo(study.studyID)" field="value"
 													 categoryField="category">
 													</kendo-chart-series-item>
 												</kendo-chart-series>
