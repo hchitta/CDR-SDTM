@@ -147,10 +147,11 @@
               [sortable]="sortable">
               <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
                 <ng-template kendoGridHeaderTemplate let-dataItem>
-                  <input id="customHeader" type="checkbox" name="all"/>
+                  <input id="customHeader" type="checkbox" name="all" [(ngModel)]='checkbox' 
+                  (change)="isCheckboxSelected = !isCheckboxSelected;"/>
                 </ng-template>
                 <ng-template kendoGridCellTemplate let-dataItem>
-                  <input type="checkbox"/> 
+                  <input type="checkbox" [checked]="isCheckboxSelected" (change)="onItemSelect(dataItem)"/> 
                  </ng-template>
               </kendo-grid-column>
               <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
@@ -211,7 +212,7 @@
             <div style="background-color:#ff0000">
               <business-rule-config-edit [domainName]="getDomain()" [gridData]="view1" [model]="editBizDataItem"
                 [isNew]="isNew" (save)="saveHandler($event)" (cancel)="cancelHandler()" (delete)="deleteHandler($event)"
-                (fetch)="fetchHandler($event)" (update)="updateDomainStatus($event)" (flagNote)="updateFlagNote($event)">
+                (fetch)="fetchHandler($event)" (update)="updateDomainStatus($event)" (ruleNote)="updateNotes($event)" (ruleFlag)="updateFlags($event)">
               </business-rule-config-edit>
             </div>
             <!-- </div>-->

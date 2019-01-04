@@ -87,7 +87,8 @@ export class BusinessRuleConfigEditComponent implements OnInit {
     @Output() delete: EventEmitter<Matrix> = new EventEmitter();
     @Output() fetch: EventEmitter<Matrix> = new EventEmitter();
     @Output() update: EventEmitter<Matrix> = new EventEmitter();
-    @Output() flagNote: EventEmitter<Matrix> = new EventEmitter();
+    @Output() ruleFlag: EventEmitter<Matrix> = new EventEmitter();
+    @Output() ruleNote: EventEmitter<Matrix> = new EventEmitter();
 
     public onSave(e, isNew: any) {
         e.preventDefault();
@@ -276,9 +277,15 @@ export class BusinessRuleConfigEditComponent implements OnInit {
         }
     }
 
-    public OnFlagNote(e) {
+    public OnRuleFlag(e) {
         e.preventDefault();
-        this.flagNote.emit(this.editBusinessForm.value);
+        this.ruleFlag.emit(this.editBusinessForm.value);
+        this.active = false;
+    }
+
+    public OnRuleNote(e) {
+        e.preventDefault();
+        this.ruleNote.emit(this.editBusinessForm.value);
         this.active = false;
     }
 }

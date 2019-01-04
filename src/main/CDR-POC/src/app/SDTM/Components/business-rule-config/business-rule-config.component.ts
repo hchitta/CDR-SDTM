@@ -52,6 +52,7 @@ export class BusinessRuleConfigComponent implements OnInit {
     public statusColor: any;
     checkbox = false;
     isCheckboxSelected = false;
+    selectedItemsList = [];
 
     constructor(private route: ActivatedRoute,
         private userService: UserService,
@@ -169,7 +170,8 @@ export class BusinessRuleConfigComponent implements OnInit {
         if (flag === 'add') {
         this.editBizDataItem.ruleFlag = 'N';
         }
-        if (flag === 'add' || flag === 'objectLevel' || flag === 'domainStatus') {
+        if (flag === 'add' || flag === 'objectLevel' || flag === 'domainStatus'
+              || flag === 'AddNote' || flag === 'AddFlag') {
             this.editBizDataItem.domain = searchBRStudy.brSdtmDomain;
         }
         if (flag === 'import') {
@@ -294,6 +296,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.kendoTwoHeight = 339;
         this.checkbox = false;
         this.isCheckboxSelected = false;
+        this.selectedItemsList = [];
     }
 
     public getDomain(): String {
@@ -405,9 +408,25 @@ export class BusinessRuleConfigComponent implements OnInit {
         this.businessEditService.updateBusinessRuleFlag(dataItem, this.searchBRStudy);
     }
 
-    public updateFlagNote(template: Matrix) {
-        console.log('Notes' + template.notes);
+    public updateNotes(template: Matrix) {
+        this.businessEditService.updateNotes(template, this.selectedItemsList, this.checkbox, this.searchBRStudy);
+        this.editBizDataItem = undefined;
+        this.checkbox = false;
+        this.isCheckboxSelected = false;
+        this.selectedItemsList = [];
     }
+
+    public updateFlags(template: Matrix) {
+        this.businessEditService.updateFlags(template, this.selectedItemsList, this.checkbox, this.searchBRStudy);
+        this.editBizDataItem = undefined;
+        this.checkbox = false;
+        this.isCheckboxSelected = false;
+        this.selectedItemsList = [];
+    }
+
+    onItemSelect (item: any) {
+        this.selectedItemsList.push(item.id);
+     }
 
 }
 
