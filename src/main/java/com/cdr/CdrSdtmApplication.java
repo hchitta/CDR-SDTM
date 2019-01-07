@@ -1,4 +1,4 @@
-package com.cdr.sdtm;
+package com.cdr;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

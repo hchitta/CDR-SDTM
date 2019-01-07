@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="SDTM_Transformation_Metadata")
-@Table(name="SDTM_Transformation_Metadata")
+@Entity(name="sdtm_transformation_metadata")
+@Table(name="sdtm_transformation_metadata")
 public class Transformation {
 	
 	@Id

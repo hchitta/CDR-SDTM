@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="Study_Type_Metadata")
-@Table(name="Study_Type_Metadata")
+@Entity(name="study_type_metadata")
+@Table(name="study_type_metadata")
 public class StudyType {
 	
 	@Id
