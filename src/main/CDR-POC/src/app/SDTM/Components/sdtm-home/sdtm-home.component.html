@@ -7,7 +7,7 @@
 
 	<!-- grey box -->
 	<div class="panel panel-default" style="height: boxSize px; margin-left: 15px; margin-right: 15px; border-radius: 10px; 
-				border-width: 1px; width: 97%; background: #e6e6e6;">
+				border-width: 1px; width: 97%; background: #e6e6e6; padding-bottom: 25px;">
 
 		<div class="container">
 
@@ -79,11 +79,11 @@
 						  </button> -->
 						<div class="panel panel-default" style="margin-left: 40px;  width:1050px">
 							<div class="panel-heading" style="    text-align: left;">
-								<button class="accordion-toggle" type="button" data-toggle="collapse" data-target="#collapseOne" aria-controls="collapseOne"
-								 style="border:0; background-color: transparent;
+								<button class="accordion-toggle" type="button" data-toggle="collapse" attr.data-target="#SSCollapse{{study.studyID}}"
+								 attr.aria-controls="SSCollapse{{study.studyID}}" style="border:0; background-color: transparent;
 										 border: 0;"></button>
 								Study Setup</div>
-							<div id="collapseOne" class="panel-body collapse">
+							<div id="SSCollapse{{study.studyID}}" class="panel-body collapse" attr.data-parent="#{{study.studyID}}">
 								<!-- *ngIf="study.isStudySectionCollapsed" -->
 								<div class="row" style="text-align: left; padding-left: 20px">
 									<span class="study-label"><b>Study Name:</b></span><span>&nbsp;{{study.studyTitle}}:</span>
@@ -110,11 +110,11 @@
 						<!-- Business Rules config Panel-->
 						<div class="panel panel-default" style="margin-left: 40px;  width:1050px;margin-top: 20px;">
 							<div class="panel-heading" style="    text-align: left;">
-								<button class="accordion-toggle" type="button" data-toggle="collapse" data-target="#businessRuleCollapse"
-								 aria-expanded="false" aria-controls="businessRuleCollapse" style="border:0; background-color: transparent;
+								<button class="accordion-toggle" type="button" data-toggle="collapse" attr.data-target="#BRCollapse{{study.studyID}}"
+								 aria-expanded="false" attr.aria-controls="BRCollapse{{study.studyID}}" style="border:0; background-color: transparent;
 											 border: 0;"></button>
 								Business Rule Configuration</div>
-							<div id="businessRuleCollapse" class="panel-body collapse">
+							<div id="BRCollapse{{study.studyID}}" class="panel-body collapse" attr.data-parent="#{{study.studyID}}">
 								<div class="row">
 									<div class="col-md-5">
 										<kendo-chart [seriesColors]="['#4682B4', '#57A0D3', '#89CFF0']" style="width: 400px; height: 250px;">
@@ -126,33 +126,31 @@
 													{{value}} </ng-template>
 											</kendo-chart-tooltip>
 											<kendo-chart-series>
-												<kendo-chart-series-item type="pie" [labels]="seriesPieLabels" [data]="getPieData(study.studyID)" field="value" categoryField="category">
+												<kendo-chart-series-item type="pie" [labels]="seriesPieLabels" [data]="getPieData(study.studyID)" field="value"
+												 categoryField="category">
 												</kendo-chart-series-item>
 											</kendo-chart-series>
 										</kendo-chart>
 									</div>
 									<div class="col-md-3">
 
-										<kendo-chart style="width: 250px; height: 250px;"  [seriesColors]="['green']">
-										    <kendo-chart-title text="# of Target Domains" font="12px Open Sans Regular"
-										     position="top" align="right"></kendo-chart-title>
+										<kendo-chart style="width: 250px; height: 250px;" [seriesColors]="['green']">
+											<kendo-chart-title text="# of Target Domains" font="12px Open Sans Regular" position="top" align="right"></kendo-chart-title>
 											<kendo-chart-tooltip>
 												<ng-template kendoChartSeriesTooltipTemplate let-value="value">
 													Value is {{value}} </ng-template>
 											</kendo-chart-tooltip>
-											<kendo-chart-category-axis >
+											<kendo-chart-category-axis>
 												<kendo-chart-category-axis-item [majorGridLines]="hidden" [minorGridLines]="hidden">
 												</kendo-chart-category-axis-item>
 											</kendo-chart-category-axis>
-											<kendo-chart-value-axis >
-												<kendo-chart-value-axis-item
-												 [plotBands]="getValuePlotBands(study.countOfDomains,study.countOfAllDomains)" 
-												[minorTicks]="hidden"> </kendo-chart-value-axis-item>
+											<kendo-chart-value-axis>
+												<kendo-chart-value-axis-item [plotBands]="getValuePlotBands(study.countOfDomains,study.countOfAllDomains)"
+												 [minorTicks]="hidden"> </kendo-chart-value-axis-item>
 											</kendo-chart-value-axis>
 											<kendo-chart-series>
-												<kendo-chart-series-item type="bar" [labels]="seriesLabels" type="column" 
-												[data]="getSeriesData(study.countOfDomains)" field="domains"
-												 categoryField="study">
+												<kendo-chart-series-item type="bar" [labels]="seriesLabels" type="column" [data]="getSeriesData(study.countOfDomains)"
+												 field="domains" categoryField="study">
 												</kendo-chart-series-item>
 											</kendo-chart-series>
 										</kendo-chart>
@@ -184,11 +182,11 @@
 						<!--Job Execution-->
 						<div class="panel panel-default" style="margin-left: 40px;  width:1050px;margin-top: 20px;">
 							<div class="panel-heading" style="    text-align: left;">
-								<button class="accordion-toggle" type="button" data-toggle="collapse" data-target="#jobExeuctionCollapse"
-								 aria-expanded="false" aria-controls="jobExeuctionCollapse" style="border:0; background-color: transparent;
+								<button class="accordion-toggle" type="button" data-toggle="collapse" attr.data-target="#JECollapse{{study.studyID}}"
+								 aria-expanded="false" attr.aria-controls="JECollapse{{study.studyID}}" style="border:0; background-color: transparent;
 												 border: 0;"></button>
 								Job Execution</div>
-							<div id="jobExeuctionCollapse" class="panel-body collapse">
+							<div id="JECollapse{{study.studyID}}" class="panel-body collapse" attr.data-parent="#{{study.studyID}}">
 								<div class="row">
 									<div class="col-md-4">
 										<p class="text-center" style="margin-top: 10px; margin-bottom: 15px; margin-left: -40px">
@@ -204,40 +202,32 @@
 													</tr>
 												</thead>
 												<tbody>
-												 	<tr *ngFor="let item of dashboardResultItemMap.get(study.studyID).jobExecutionDomainDetails">
-												 	<td>{{item.category}}</td>
-												 	<td>
-												 		<span>
-												 		<img *ngIf="item.businessRuleConfigStatus=='Approved'" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png">
-												 		<img *ngIf="item.businessRuleConfigStatus=='In Progress'" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey.png">
-												 		<img *ngIf="item.businessRuleConfigStatus=='Not Started'" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusWhite.png">
-												 		<img *ngIf="item.businessRuleConfigStatus=='Ready for Review'" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png">
-												 		<img *ngIf="item.businessRuleConfigStatus=='Rejected'" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed.png">
-												 		</span>
-												 		
-												 		<span>
-												 		<img *ngIf="item.jobExecutionStatus=='Completed'" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen1.png">
-												 		<img *ngIf="(item.jobExecutionStatus=='Running') || (item.jobExecutionStatus=='Waiting')" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey1.png">
-												 		<img *ngIf="(item.jobExecutionStatus=='Aborted') || (item.jobExecutionStatus=='Failed')" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed1.png">
-												 			<img *ngIf="item.jobExecutionStatus=='Not started'" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusWhite1.png">
-												 		<!-- waiting for approval -->
-												 		</span>
-												 		<span>
-												 		<img *ngIf="item.jobDisabledStatus=='Disabled'" 
-												 		style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusDisbaled.png">
-												 		</span>
-												 	</td>	
-												 	</tr>
-												 <!--  
+													<tr *ngFor="let item of dashboardResultItemMap.get(study.studyID).jobExecutionDomainDetails">
+														<td>{{item.category}}</td>
+														<td>
+															<span>
+																<img *ngIf="item.businessRuleConfigStatus=='Approved'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png">
+																<img *ngIf="item.businessRuleConfigStatus=='In Progress'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey.png">
+																<img *ngIf="item.businessRuleConfigStatus=='Not Started'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusWhite.png">
+																<img *ngIf="item.businessRuleConfigStatus=='Ready for Review'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png">
+																<img *ngIf="item.businessRuleConfigStatus=='Rejected'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed.png">
+															</span>
+
+															<span>
+																<img *ngIf="item.jobExecutionStatus=='Completed'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen1.png">
+																<img *ngIf="(item.jobExecutionStatus=='Running') || (item.jobExecutionStatus=='Waiting')" style="width: 25px;"
+																 src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey1.png">
+																<img *ngIf="(item.jobExecutionStatus=='Aborted') || (item.jobExecutionStatus=='Failed')" style="width: 25px;"
+																 src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed1.png">
+																<img *ngIf="item.jobExecutionStatus=='Not started'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusWhite1.png">
+																<!-- waiting for approval -->
+															</span>
+															<span>
+																<img *ngIf="item.jobDisabledStatus=='Disabled'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusDisbaled.png">
+															</span>
+														</td>
+													</tr>
+													<!--  
 													<tr>
 														<td>Demographics</td>
 														<td><span><img src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png" style="width: 25px;">

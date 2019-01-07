@@ -71,7 +71,7 @@ public class SdtmMetaDataServiceImpl implements SdtmMetaDataService{
 
 	@Override
 	public List<DomainStatus> getDomainStatusMetaData() {
-		return domainStatusRepository.findAll();
+		return domainStatusRepository.findAllByOrderByIdAsc();
 	}
 	
 	
