@@ -220,7 +220,7 @@ export class JobExecutionComponent implements OnInit {
       	   let customObj = new JobExecutionDetails();
       	   //Model values in LHS and DB columns in RHS
       	   customObj.domain = item.domain;
-           customObj.job_end_timestamp = item.jobEndTimestamp;
+           customObj.job_end_timestamp = this.formatTs(item.jobEndTimestamp);
            customObj.job_status = item.jobStatus;
            customObj.message = item.message;
            customObj.jobDisabled = item.jobDisabled;
@@ -233,6 +233,14 @@ export class JobExecutionComponent implements OnInit {
       
       this.loadTable();
   
+  }
+  
+  public formatTs(timestamp){
+  let index = timestamp.indexOf("T");
+  let tsFirst = timestamp.substring(0,index);
+  let tsSecond = timestamp.substring(index+1,index+9);
+  
+  return (tsFirst+" " +tsSecond);
   }
 
   public onStateChange(state: State) {

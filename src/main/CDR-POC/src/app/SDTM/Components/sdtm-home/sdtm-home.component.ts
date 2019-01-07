@@ -113,7 +113,8 @@ export class SdtmHomeComponent implements OnInit {
   			
   			let dashboardResultItems = new DashboardResultItem();
   			dashboardResultItems.studyID=item.studyID;
-  		    dashboardResultItems.pieData=pieDataItem;
+  			dashboardResultItems.countOfAllDomains=1;
+  			dashboardResultItems.pieData=pieDataItem;
   		    dashboardResultItems.pieDataTwo=pieDataItemTwo;
   		    
             let jobExecutionDomainDetails = [
@@ -139,6 +140,7 @@ export class SdtmHomeComponent implements OnInit {
   			
   			dashboardResultItems.pieData = pieDataItem;
   			dashboardResultItems.pieDataTwo = pieDataItemTwo;
+  			dashboardResultItems.countOfAllDomains = (dashboardResultItems.countOfAllDomains)+1;
   			
   			 let jobExecutionDomainDetails = [
               { category: item.jobDomainName, 
