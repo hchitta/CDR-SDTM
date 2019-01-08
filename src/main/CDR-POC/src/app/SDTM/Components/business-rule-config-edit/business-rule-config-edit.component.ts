@@ -222,6 +222,10 @@ export class BusinessRuleConfigEditComponent implements OnInit {
         const matrixStudy = this.editBusinessForm.value.matrixStudy;
         let domains = [];
         this.selectedDomains = this.editBusinessForm.value.importDomain;
+        if (study === null || matrixStudy === null || (this.selectedDomains === null)) {
+            this.opened = true;
+            this.errorMsg = 'Please select values to import business rules';
+        } else {
         for (let i = 0; i < this.selectedDomains.length; i++) {
             domains.push(this.selectedDomains[i].domain);
         }
@@ -261,6 +265,7 @@ export class BusinessRuleConfigEditComponent implements OnInit {
                 this.previousLength = 0;
             }
         });
+     }
     }
 
     public confirm(e) {
