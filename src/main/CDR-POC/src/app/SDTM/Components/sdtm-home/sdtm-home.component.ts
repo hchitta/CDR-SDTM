@@ -101,7 +101,10 @@ export class SdtmHomeComponent implements OnInit {
   		 	let pieDataItem = [
               { category: 'In Progress', value: 0 },
     	      { category: 'Ready for Review', value: 0 },
-    	      { category: 'Approved', value: 0 }];
+    	      { category: 'Approved', value: 0 },
+    	      { category: 'Rejected', value: 0 },
+    	      { category: 'Not Started', value: 0 }
+    	      ];
   			let pieDataItemTwo = [
     		  { category: 'Enabled', value: 0 },
     	      { category: 'Disabled', value: 0 }
