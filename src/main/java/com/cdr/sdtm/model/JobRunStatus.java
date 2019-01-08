@@ -11,8 +11,8 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-@Entity(name="Job_Run_Statistics")
-@Table(name="Job_Run_Statistics")
+@Entity(name="job_run_statistics")
+@Table(name="job_run_statistics")
 public class JobRunStatus {
 	
 	@Id

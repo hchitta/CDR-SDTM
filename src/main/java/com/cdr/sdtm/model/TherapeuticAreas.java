@@ -5,8 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity(name="TA_Metadata")
-@Table(name="TA_Metadata")
+@Entity(name="ta_metadata")
+@Table(name="ta_metadata")
 public class TherapeuticAreas {
 	
 	@Id

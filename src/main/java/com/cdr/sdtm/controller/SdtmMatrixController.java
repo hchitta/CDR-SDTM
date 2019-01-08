@@ -1,6 +1,7 @@
 package com.cdr.sdtm.controller;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -35,6 +36,7 @@ public class SdtmMatrixController {
 	
 	@Autowired
 	SdtmMatrixService sdtmMatrixService;
+	
 	@Autowired
 	LookUpService lookUpService; 
 	
@@ -197,6 +199,7 @@ public class SdtmMatrixController {
 										matrix.setDomainStatus("Not Started");
 										matrix.setRuleFlag(template.getRuleFlag());
 										matrix.setNotes(template.getNotes());
+										matrix.setInitialCreationDate(new Date());
 										insertMatrices.add(matrix);
 									}
 									allMatrices.addAll(sdtmMatrixService.saveMatrixForDomain(insertMatrices));
