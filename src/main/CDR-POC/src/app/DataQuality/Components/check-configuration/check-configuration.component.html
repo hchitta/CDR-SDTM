@@ -15,25 +15,6 @@
                 id="studyInfo" class="tab-pane in active">
                 <form name="form" #f="ngForm" novalidate>
                     <fieldset>
-                        <!-- Study Info SEARCH -->
-                        <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
-                            <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
-                                <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                        Therapeutic Area<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
-                                id="form-field-select-1">
-                                <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                                    [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
-                                    <option value="undefined" selected disabled style="display: none;">Select an Option</option>
-                                    <option value="all">--All--</option>
-                                    <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
-                                </select>
-                            </div>
-                        </div>
                         <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                             <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                 <li style="border-bottom: 0px;">
@@ -173,7 +154,37 @@
             <div class="main-content-inner">
                 <div class="page-content">
                     <div class="row" style="margin-top: -23px;">
-                        <kendo-grid [data]="view | async" [height]="360">
+                        <kendo-grid [data]="dqJobs" [height]="360">
+                            <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
+                                <ng-template kendoGridHeaderTemplate let-dataItem>
+                                    <input id="customHeader" type="checkbox" name="all" [(ngModel)]='checkbox' (change)="isCheckboxSelected = !isCheckboxSelected;" />
+                                </ng-template>
+                                <ng-template kendoGridCellTemplate let-dataItem>
+                                    <input type="checkbox" [checked]="isCheckboxSelected" (change)="onItemSelect(dataItem)" />
+                                </ng-template>
+                            </kendo-grid-column>
+                            <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
+                                <ng-template kendoGridHeaderTemplate let-dataItem>
+                                    <img src="assets/images/UnFlag.png" style="height: 15px;width: 15px;" />
+                                </ng-template>
+                                <ng-template kendoGridCellTemplate let-dataItem>
+                                    <img (click)="switchRuleFlag(dataItem,'Y')" *ngIf="dataItem.ruleFlag == 'N'" src="assets/images/UnFlag.png"
+                                        style="height: 15px;width: 15px;" title="Click to flag this rule" />
+                                    <img (click)="switchRuleFlag(dataItem,'N')" *ngIf="dataItem.ruleFlag == 'Y'" src="assets/images/Flag.png"
+                                        style="height: 15px;width: 15px;" title="Rule flagged. Click to unflag" />
+                                </ng-template>
+                            </kendo-grid-column>
+                            <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
+                                <ng-template kendoGridHeaderTemplate let-dataItem>
+                                    <img src="assets/images/BussNoteGray.png" style="height: 15px;width: 15px;" />
+                                </ng-template>
+                                <ng-template kendoGridCellTemplate let-dataItem>
+                                    <img *ngIf="dataItem.notes != null" src="assets/images/BussNote.png" style="height: 15px;width: 15px;"
+                                        title="Note: {{dataItem.notes}}" />
+                                </ng-template>
+                            </kendo-grid-column>
+                            <kendo-grid-column [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
+                                field="category" title="Category"></kendo-grid-column>
                             <kendo-grid-column [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                                 field="check" title="Check"></kendo-grid-column>
                             <kendo-grid-column [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
@@ -181,7 +192,7 @@
                             <kendo-grid-column [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                                 field="input" title="Input"></kendo-grid-column>
                             <kendo-grid-column [style]="{'text-align':'center'}" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
-                                field="status" title="Status"></kendo-grid-column>
+                                field="jobStatus" title="Status"></kendo-grid-column>
                             <kendo-grid-command-column [style]="{'text-align':'center'}" [width]="190" [headerStyle]="{'text-align':'center','font-family': 'Open Sans Regular','font-size': '12px','background-color': '#074982','color':'white'}"
                                 title="Actions">
 

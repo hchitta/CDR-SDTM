@@ -16,7 +16,7 @@ import com.cdr.dq.model.DqMatrix;
 import com.cdr.dq.service.DqCheckService;
 
 @RestController
-@RequestMapping("/CDR/DQ")
+@RequestMapping("/api/CDR/DQ")
 public class DqCheckController {
 	
 	private static final Logger LOGGER = LoggerFactory.getLogger(DqCheckController.class);

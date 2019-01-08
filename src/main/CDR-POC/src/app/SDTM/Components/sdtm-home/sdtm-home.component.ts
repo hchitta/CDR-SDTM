@@ -6,6 +6,7 @@ import { LegendLabels } from '@progress/kendo-angular-charts';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../Services';
 import { DashboardResultItem } from '../../Models';
+import { NotificationItem } from '../../Models/notification';
 
 @Component({
   selector: 'sdtm-home',
@@ -18,11 +19,11 @@ export class SdtmHomeComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private http: HttpClient,
-    private userService: UserService    
-  ){ }
+    private userService: UserService
+  ) { }
   boxSize = 970;
-  
-  dashboardResults:any[] =[];
+
+  dashboardResults: any[] = [];
   //listStudyIds = [];
   //dashboardResultItems : dashboardResultItem[]=[];
   dashBoardData: any[] = [];
@@ -34,7 +35,8 @@ export class SdtmHomeComponent implements OnInit {
   firstName: string;
   public isCollapsed = false;
   dashboardResultItemMap = new Map();
-  
+  notifications: NotificationItem[] = [];
+
   public seriesData: any[] = [];
 
   public seriesDataTwo: any[] = [{
@@ -70,6 +72,26 @@ export class SdtmHomeComponent implements OnInit {
 
 
   ngOnInit() {
+    this.notifications = [
+      {
+        "studyID": "You have been assigned Study Analyst to EDC Study1",
+        "notification_desc": "You have been assigned Study Analyst to Study Name",
+        "create_dt": "2019-01-08",
+        "notification_delete": "N",
+        "notification_stop": "Y",
+        "task_desc": "Configure business rules for Demographics domain",
+        "task_due_date": "2019-01-18"
+      },
+      {
+        "studyID": "You have been assigned Study Analyst to Calerie",
+        "notification_desc": "DB Lock Date has been set as 2019-01-22",
+        "create_dt": "2019-01-08",
+        "notification_delete": "N",
+        "notification_stop": "Y",
+        "task_desc": "Configure business rules for Medical History domain",
+        "task_due_date": "2019-01-18"
+      }
+    ]
     this.appName = " - Path to SDTM";
     this.navBarItems = [
       { "navBarTitle": "Home", "navBarLink": "/sdtmHome" },
@@ -82,128 +104,132 @@ export class SdtmHomeComponent implements OnInit {
       this.dashBoardData = data.reduce((item, x) =>
         item.concat(item.find(y => y.studyID === x.studyID) ? [] : [x])
         , []);
-    console.log("before the call ");
-    this.populateGraphs();
-    console.log("after the call ");
+      console.log("before the call ");
+      this.populateGraphs();
+      console.log("after the call ");
       this.boxSize = (this.boxSize * this.dashBoardData.length) + 100;
       this.setDataForAccordion();
     });
-   
-    
+
+
     const userDetails = this.userService.getUser();
     this.firstName = userDetails.firstName;
   }
-  
-  public populateGraphs(){
-        console.log("inside the call ");
-      console.log("data size: "+this.dashboardResults.length); 
-      let domains = {}; 	
-		
-  	    for (let item of this.dashboardResults) {
-      	console.log("inside the loop ");  	    
-  		console.log("printing studyids : "+item.studyID);
-  		if(!(this.dashboardResultItemMap.has(item.studyID))){
-        domains = {};
-  		 	console.log("new item to push"+item.studyID)
-  		 	//this.listStudyIds.push(item.studyID);// all unique ids in this list
-  		 	//let pieDataItem=[];
-  		    //let pieDataItemTwo=[];
-  		 	let pieDataItem = [
-              { category: 'In Progress', value: 0 },
-    	      { category: 'Ready for Review', value: 0 },
-    	      { category: 'Approved', value: 0 },
-    	      { category: 'Rejected', value: 0 },
-    	      { category: 'Not Started', value: 0 }
-    	      ];
-  			let pieDataItemTwo = [
-    		  { category: 'Enabled', value: 0 },
-    	      { category: 'Disabled', value: 0 }
-  			];
-  			console.log("list size beginning"+pieDataItem.length);
-  			
-  			pieDataItem = this.incrementCount(pieDataItem,item.domainStatus);
-  			pieDataItemTwo = this.incrementCount(pieDataItemTwo,item.jobEnablementStatus);
-  			
-  			let dashboardResultItems = new DashboardResultItem();
-  			dashboardResultItems.studyID=item.studyID;
-  			dashboardResultItems.countOfAllDomains=1;
-  			dashboardResultItems.pieData=pieDataItem;
-  		    dashboardResultItems.pieDataTwo=pieDataItemTwo;
-  		    
-            domains = 
-              { category: item.jobDomainName,
-                code: item.domainName,
-                businessRuleConfigStatus: item.domainStatus ,
-                jobExecutionStatus:item.jobStatus,
-                jobDisabledSatus:item.jobEnablementStatus }
-             ;
-            dashboardResultItems.jobExecutionDomainDetails.push(domains);
-  		    
-  		    this.dashboardResultItemMap.set (item.studyID ,dashboardResultItems);
-  		    
 
-  		}//if
-  		else{
-  		console.log("old item already in list"+item.studyID)
-  		let pieDataItem=[];
-      let pieDataItemTwo=[];
-      domains = {};
-      
-  			let dashboardResultItems = this.dashboardResultItemMap.get(item.studyID);
-  			pieDataItem=this.incrementCount(dashboardResultItems.pieData,item.domainStatus); 
-  			pieDataItemTwo=this.incrementCount(dashboardResultItems.pieDataTwo,item.jobEnablementStatus);
-  			console.log("list size beginning old"+pieDataItem.length);
-  			
-  			dashboardResultItems.pieData = pieDataItem;
-  			dashboardResultItems.pieDataTwo = pieDataItemTwo;
-  			dashboardResultItems.countOfAllDomains = (dashboardResultItems.countOfAllDomains)+1;
-  			
-  			  domains = 
-              { category: item.jobDomainName, 
-                code: item.domainName,
-                businessRuleConfigStatus: item.domainStatus ,
-                jobExecutionStatus:item.jobStatus,
-                jobDisabledSatus:item.jobEnablementStatus }
-             ;
-            dashboardResultItems.jobExecutionDomainDetails.push(domains);
-  			//delete old entry and insert updated values in map
-  			this.dashboardResultItemMap.delete (item.studyID);
-  			this.dashboardResultItemMap.set (item.studyID ,dashboardResultItems);
-  			
-  		}
-  		
-  	}//end of for
-  	
-  	//loop over the map and add to list which will be used to display on screen
+  public populateGraphs() {
+    console.log("inside the call ");
+    console.log("data size: " + this.dashboardResults.length);
+    let domains = {};
+
+    for (let item of this.dashboardResults) {
+      console.log("inside the loop ");
+      console.log("printing studyids : " + item.studyID);
+      if (!(this.dashboardResultItemMap.has(item.studyID))) {
+        domains = {};
+        console.log("new item to push" + item.studyID)
+        //this.listStudyIds.push(item.studyID);// all unique ids in this list
+        //let pieDataItem=[];
+        //let pieDataItemTwo=[];
+        let pieDataItem = [
+          { category: 'In Progress', value: 0 },
+          { category: 'Ready for Review', value: 0 },
+          { category: 'Approved', value: 0 },
+          { category: 'Rejected', value: 0 },
+          { category: 'Not Started', value: 0 }
+        ];
+        let pieDataItemTwo = [
+          { category: 'Enabled', value: 0 },
+          { category: 'Disabled', value: 0 }
+        ];
+        console.log("list size beginning" + pieDataItem.length);
+
+        pieDataItem = this.incrementCount(pieDataItem, item.domainStatus);
+        pieDataItemTwo = this.incrementCount(pieDataItemTwo, item.jobEnablementStatus);
+
+        let dashboardResultItems = new DashboardResultItem();
+        dashboardResultItems.studyID = item.studyID;
+        dashboardResultItems.countOfAllDomains = 1;
+        dashboardResultItems.pieData = pieDataItem;
+        dashboardResultItems.pieDataTwo = pieDataItemTwo;
+
+        domains =
+          {
+            category: item.jobDomainName,
+            code: item.domainName,
+            businessRuleConfigStatus: item.domainStatus,
+            jobExecutionStatus: item.jobStatus,
+            jobDisabledSatus: item.jobEnablementStatus
+          }
+          ;
+        dashboardResultItems.jobExecutionDomainDetails.push(domains);
+
+        this.dashboardResultItemMap.set(item.studyID, dashboardResultItems);
+
+
+      }//if
+      else {
+        console.log("old item already in list" + item.studyID)
+        let pieDataItem = [];
+        let pieDataItemTwo = [];
+        domains = {};
+
+        let dashboardResultItems = this.dashboardResultItemMap.get(item.studyID);
+        pieDataItem = this.incrementCount(dashboardResultItems.pieData, item.domainStatus);
+        pieDataItemTwo = this.incrementCount(dashboardResultItems.pieDataTwo, item.jobEnablementStatus);
+        console.log("list size beginning old" + pieDataItem.length);
+
+        dashboardResultItems.pieData = pieDataItem;
+        dashboardResultItems.pieDataTwo = pieDataItemTwo;
+        dashboardResultItems.countOfAllDomains = (dashboardResultItems.countOfAllDomains) + 1;
+
+        domains =
+          {
+            category: item.jobDomainName,
+            code: item.domainName,
+            businessRuleConfigStatus: item.domainStatus,
+            jobExecutionStatus: item.jobStatus,
+            jobDisabledSatus: item.jobEnablementStatus
+          }
+          ;
+        dashboardResultItems.jobExecutionDomainDetails.push(domains);
+        //delete old entry and insert updated values in map
+        this.dashboardResultItemMap.delete(item.studyID);
+        this.dashboardResultItemMap.set(item.studyID, dashboardResultItems);
+
+      }
+
+    }//end of for
+
+    //loop over the map and add to list which will be used to display on screen
   	/*for (let value of this.dashboardResultItemMap.values()) {
       console.log(value);
       this.dashBoardData.push(value);
 	}*/
-  	
+
   }
-  
-  public incrementCount(list,categoryToFind){
-    let indexInList=0;
-    console.log("list size"+list.length);
-  	for(let item of list){
-  	 if(item.category == categoryToFind){
-  	 item.value = item.value+1;
-  	 indexInList = list.indexOf(item); 
-  	 list[indexInList]= item;
-  	 break;
-  	 }
-  	}  
-  	return list;
+
+  public incrementCount(list, categoryToFind) {
+    let indexInList = 0;
+    console.log("list size" + list.length);
+    for (let item of list) {
+      if (item.category == categoryToFind) {
+        item.value = item.value + 1;
+        indexInList = list.indexOf(item);
+        list[indexInList] = item;
+        break;
+      }
+    }
+    return list;
   }
-  
-  public getPieData(studyID){
-   return this.dashboardResultItemMap.get(studyID).pieData;
+
+  public getPieData(studyID) {
+    return this.dashboardResultItemMap.get(studyID).pieData;
   }
-  
-   public getPieDataTwo(studyID){
-   return this.dashboardResultItemMap.get(studyID).pieDataTwo;
+
+  public getPieDataTwo(studyID) {
+    return this.dashboardResultItemMap.get(studyID).pieDataTwo;
   }
-  
+
   public setDataForAccordion() {
     let index = 0;
     for (const study of this.dashBoardData) {
@@ -216,45 +242,45 @@ export class SdtmHomeComponent implements OnInit {
       //this.dashBoardData[index].isStudySectionCollapsed = false;
     }
   }
-  
-  
+
+
   /*
   export interface dashboardResultItemMap {
   [key: string]: dashboardResultItem;
 }*/
 
-  
-   public getValuePlotBands(countOfDomains,countOfAllDomains){
-   this.valuePlotBands = [{
-        from: countOfAllDomains,
-        to: (countOfAllDomains-1),
-        color: '#074982',
-        opacity: 0.6
-    }];
-   return this.valuePlotBands;
-   }
 
-	public getSeriesData(countOfDomains){
-	this.seriesData =[{
-    study: 'This Study',
-    domains: countOfDomains
-  	}];
-	   return this.seriesData;
-	
-	}
-	
-	 public navigateToBusinessRules(dataItem: any, item: any) {
-    	console.log("inside first routing method");    
-    	this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.studyTitle}/${item.code}`]);
-     
-     
-    }
-    public navigateToJobExecution(dataItem: any) {
-    
-		console.log("inside routing method");    
-        this.router.navigate([`/sdtm/jobExecution/${dataItem.studyTitle}`]);
-     
-     
-    }
-    
+  public getValuePlotBands(countOfDomains, countOfAllDomains) {
+    this.valuePlotBands = [{
+      from: countOfAllDomains,
+      to: (countOfAllDomains - 1),
+      color: '#074982',
+      opacity: 0.6
+    }];
+    return this.valuePlotBands;
+  }
+
+  public getSeriesData(countOfDomains) {
+    this.seriesData = [{
+      study: 'This Study',
+      domains: countOfDomains
+    }];
+    return this.seriesData;
+
+  }
+
+  public navigateToBusinessRules(dataItem: any, item: any) {
+    console.log("inside first routing method");
+    this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.studyTitle}/${item.code}`]);
+
+
+  }
+  public navigateToJobExecution(dataItem: any) {
+
+    console.log("inside routing method");
+    this.router.navigate([`/sdtm/jobExecution/${dataItem.studyTitle}`]);
+
+
+  }
+
 }
