@@ -96,12 +96,14 @@ export class SdtmHomeComponent implements OnInit {
   
   public populateGraphs(){
         console.log("inside the call ");
-  		console.log("data size: "+this.dashboardResults.length);  	
+      console.log("data size: "+this.dashboardResults.length); 
+      let domains = {}; 	
 		
   	    for (let item of this.dashboardResults) {
       	console.log("inside the loop ");  	    
   		console.log("printing studyids : "+item.studyID);
   		if(!(this.dashboardResultItemMap.has(item.studyID))){
+        domains = {};
   		 	console.log("new item to push"+item.studyID)
   		 	//this.listStudyIds.push(item.studyID);// all unique ids in this list
   		 	//let pieDataItem=[];
@@ -128,13 +130,14 @@ export class SdtmHomeComponent implements OnInit {
   			dashboardResultItems.pieData=pieDataItem;
   		    dashboardResultItems.pieDataTwo=pieDataItemTwo;
   		    
-            let jobExecutionDomainDetails = [
+            domains = 
               { category: item.jobDomainName,
+                code: item.domainName,
                 businessRuleConfigStatus: item.domainStatus ,
                 jobExecutionStatus:item.jobStatus,
                 jobDisabledSatus:item.jobEnablementStatus }
-             ];
-            dashboardResultItems.jobExecutionDomainDetails=jobExecutionDomainDetails;
+             ;
+            dashboardResultItems.jobExecutionDomainDetails.push(domains);
   		    
   		    this.dashboardResultItemMap.set (item.studyID ,dashboardResultItems);
   		    
@@ -143,7 +146,9 @@ export class SdtmHomeComponent implements OnInit {
   		else{
   		console.log("old item already in list"+item.studyID)
   		let pieDataItem=[];
-  		let pieDataItemTwo=[];
+      let pieDataItemTwo=[];
+      domains = {};
+      
   			let dashboardResultItems = this.dashboardResultItemMap.get(item.studyID);
   			pieDataItem=this.incrementCount(dashboardResultItems.pieData,item.domainStatus); 
   			pieDataItemTwo=this.incrementCount(dashboardResultItems.pieDataTwo,item.jobEnablementStatus);
@@ -153,13 +158,14 @@ export class SdtmHomeComponent implements OnInit {
   			dashboardResultItems.pieDataTwo = pieDataItemTwo;
   			dashboardResultItems.countOfAllDomains = (dashboardResultItems.countOfAllDomains)+1;
   			
-  			 let jobExecutionDomainDetails = [
+  			  domains = 
               { category: item.jobDomainName, 
+                code: item.domainName,
                 businessRuleConfigStatus: item.domainStatus ,
                 jobExecutionStatus:item.jobStatus,
                 jobDisabledSatus:item.jobEnablementStatus }
-             ];
-            dashboardResultItems.jobExecutionDomainDetails.push(jobExecutionDomainDetails);
+             ;
+            dashboardResultItems.jobExecutionDomainDetails.push(domains);
   			//delete old entry and insert updated values in map
   			this.dashboardResultItemMap.delete (item.studyID);
   			this.dashboardResultItemMap.set (item.studyID ,dashboardResultItems);
@@ -237,9 +243,9 @@ export class SdtmHomeComponent implements OnInit {
 	
 	}
 	
-	 public navigateToBusinessRules(dataItem: any) {
+	 public navigateToBusinessRules(dataItem: any, item: any) {
     	console.log("inside first routing method");    
-    	this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.studyTitle}/${dataItem.domainName}`]);
+    	this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.studyTitle}/${item.code}`]);
      
      
     }

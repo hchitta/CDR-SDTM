@@ -206,7 +206,7 @@
 														<td>{{item.category}}</td>
 														<td>
 															<span>
-															    <a type="button" (click)="navigateToBusinessRules(study)">
+															    <a type="button" (click)="navigateToBusinessRules(study,item)" title="Go to Business Rules">
 															    
 																<img *ngIf="item.businessRuleConfigStatus=='Approved'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png">
 																<img *ngIf="item.businessRuleConfigStatus=='In Progress'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey.png">
@@ -217,7 +217,7 @@
 															</span>
 
 															<span>
-																<a type="button" (click)="navigateToJobExecution(study)">
+																<a type="button" (click)="navigateToJobExecution(study)" title="Go to job execution for this study">
 															
 																<img *ngIf="item.jobExecutionStatus=='Completed'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen1.png">
 																<img *ngIf="(item.jobExecutionStatus=='Running') || (item.jobExecutionStatus=='Waiting')" style="width: 25px;"
