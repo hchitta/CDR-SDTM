@@ -206,14 +206,19 @@
 														<td>{{item.category}}</td>
 														<td>
 															<span>
+															    <a type="button" (click)="navigateToBusinessRules(study)">
+															    
 																<img *ngIf="item.businessRuleConfigStatus=='Approved'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen.png">
 																<img *ngIf="item.businessRuleConfigStatus=='In Progress'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey.png">
 																<img *ngIf="item.businessRuleConfigStatus=='Not Started'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusWhite.png">
 																<img *ngIf="item.businessRuleConfigStatus=='Ready for Review'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusYellow.png">
 																<img *ngIf="item.businessRuleConfigStatus=='Rejected'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed.png">
+																</a>
 															</span>
 
 															<span>
+																<a type="button" (click)="navigateToJobExecution(study)">
+															
 																<img *ngIf="item.jobExecutionStatus=='Completed'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusGreen1.png">
 																<img *ngIf="(item.jobExecutionStatus=='Running') || (item.jobExecutionStatus=='Waiting')" style="width: 25px;"
 																 src="../assets/images/icons_for_dashboard/JobExecHomeStatusGrey1.png">
@@ -221,6 +226,7 @@
 																 src="../assets/images/icons_for_dashboard/JobExecHomeStatusRed1.png">
 																<img *ngIf="item.jobExecutionStatus=='Not started'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusWhite1.png">
 																<!-- waiting for approval -->
+																</a>
 															</span>
 															<span>
 																<img *ngIf="item.jobDisabledStatus=='Disabled'" style="width: 25px;" src="../assets/images/icons_for_dashboard/JobExecHomeStatusDisbaled.png">

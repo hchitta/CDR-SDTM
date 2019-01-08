@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { SeriesLabels } from '@progress/kendo-angular-charts';
 import { LegendLabels } from '@progress/kendo-angular-charts';
@@ -11,6 +13,13 @@ import { DashboardResultItem } from '../../Models';
   styleUrls: ['./sdtm-home.component.css']
 })
 export class SdtmHomeComponent implements OnInit {
+
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private http: HttpClient,
+    private userService: UserService    
+  ){ }
   boxSize = 970;
   
   dashboardResults:any[] =[];
@@ -58,7 +67,6 @@ export class SdtmHomeComponent implements OnInit {
   };
 
   public hidden: any = { visible: false };
-  constructor(private http: HttpClient, private userService: UserService) { }
 
 
   ngOnInit() {
@@ -121,7 +129,7 @@ export class SdtmHomeComponent implements OnInit {
   		    dashboardResultItems.pieDataTwo=pieDataItemTwo;
   		    
             let jobExecutionDomainDetails = [
-              { category: item.jobDomainName, 
+              { category: item.jobDomainName,
                 businessRuleConfigStatus: item.domainStatus ,
                 jobExecutionStatus:item.jobStatus,
                 jobDisabledSatus:item.jobEnablementStatus }
@@ -228,4 +236,19 @@ export class SdtmHomeComponent implements OnInit {
 	   return this.seriesData;
 	
 	}
+	
+	 public navigateToBusinessRules(dataItem: any) {
+    	console.log("inside first routing method");    
+    	this.router.navigate([`/sdtm/businessRulesFromJob/${dataItem.studyTitle}/${dataItem.domainName}`]);
+     
+     
+    }
+    public navigateToJobExecution(dataItem: any) {
+    
+		console.log("inside routing method");    
+        this.router.navigate([`/sdtm/jobExecution/${dataItem.studyTitle}`]);
+     
+     
+    }
+    
 }

@@ -236,11 +236,13 @@ export class JobExecutionComponent implements OnInit {
   }
   
   public formatTs(timestamp){
-  let index = timestamp.indexOf("T");
-  let tsFirst = timestamp.substring(0,index);
-  let tsSecond = timestamp.substring(index+1,index+9);
+  if(timestamp!=null){
+  	let index = timestamp.indexOf("T");
+  	let tsFirst = timestamp.substring(0,index);
+  	let tsSecond = timestamp.substring(index+1,index+9);
   
-  return (tsFirst+" " +tsSecond);
+  	return (tsFirst+" " +tsSecond);
+  }
   }
 
   public onStateChange(state: State) {
