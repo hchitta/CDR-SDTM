@@ -1,7 +1,6 @@
 package com.cdr.sdtm.controller;
 
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -150,62 +149,15 @@ public class SdtmMatrixController {
 	@GetMapping("/matrix/checkOverride/{newStudy}/{study}/{domains}")
 	public ResponseEntity<List<String>> checkForDomains(@PathVariable String newStudy, @PathVariable String study, @PathVariable List<String> domains) {
 		List<String> existingDomains = new ArrayList<String>();
-		List<PathToSdtmMatrix> matrices = null;
-		for(String domain : domains) {
-			matrices = sdtmMatrixService.findByStudyAndDomain(newStudy,domain);
-				if(matrices != null && matrices.size() > 0) {
-					existingDomains.add(domain);
-				} 
-		}
+		existingDomains = sdtmMatrixService.checkForDomains(newStudy, domains);
 		return new ResponseEntity<>(existingDomains, HttpStatus.OK);
 	}
 	
 	
 	@GetMapping("/matrix/fetchOrInsert/{newStudy}/{study}/{domains}")
 	public List<PathToSdtmMatrix> importData(@PathVariable String newStudy, @PathVariable String study, @PathVariable List<String> domains) {
-		List<PathToSdtmMatrix> matrices,insertMatrices = null;
 		List<PathToSdtmMatrix> allMatrices = new ArrayList<PathToSdtmMatrix>();
-		PathToSdtmMatrix matrix = null;
-		
-		for(String domain : domains) { 
-				matrices = sdtmMatrixService.findByStudyAndDomain(newStudy,domain);
-					if(matrices != null && matrices.size() > 0) {
-						   int deleted = sdtmMatrixService.deleteMatricesByStudyandDomain(newStudy, domain);
-						   LOGGER.info("Business rules deleted for study " + newStudy + " and domain " + domain + ". Deleted entries:" + deleted);
-						   matrices = null;
-						   //allMatrices.addAll(matrices); 
-					} //else {
-							matrices = sdtmMatrixService.findByStudyAndDomain(study,domain);
-							if(matrices != null && matrices.size() > 0) {
-									insertMatrices = new ArrayList<PathToSdtmMatrix>();
-									for(PathToSdtmMatrix template : matrices) {
-										matrix = new PathToSdtmMatrix();
-										matrix.setStudy(newStudy);
-										matrix.setDomain(template.getDomain());
-										matrix.setDomainLabel(template.getDomainLabel());
-										matrix.setDomainNameExt(template.getDomainNameExt());
-										matrix.setSubDomain(template.getSubDomain());
-										matrix.setFormName(template.getFormName());
-										matrix.setFormLable(template.getFormLable());
-										matrix.setFormExt(template.getFormExt());
-										matrix.setTargetField(template.getTargetField());
-										matrix.setTargetFile(template.getTargetFile());
-										matrix.setSourceFile(template.getSourceFile());
-										matrix.setSourceField(template.getSourceField());
-										matrix.setJoinLogic(template.getJoinLogic());
-										matrix.setTransformation_type(template.getTransformation_type());
-										matrix.setTransformation_logic(template.getTransformation_logic());
-										matrix.setBack_transformation_logic(template.getBack_transformation_logic());
-										matrix.setDomainStatus("Not Started");
-										matrix.setRuleFlag(template.getRuleFlag());
-										matrix.setNotes(template.getNotes());
-										matrix.setInitialCreationDate(new Date());
-										insertMatrices.add(matrix);
-									}
-									allMatrices.addAll(sdtmMatrixService.saveMatrixForDomain(insertMatrices));
-							}
-				  // }
-		}
+		allMatrices = sdtmMatrixService.importBusinessRules(newStudy, study, domains);
 		return allMatrices;
 	}
 	

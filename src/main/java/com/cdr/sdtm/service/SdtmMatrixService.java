@@ -3,6 +3,8 @@ package com.cdr.sdtm.service;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.web.bind.annotation.PathVariable;
+
 import com.cdr.sdtm.model.Domain;
 import com.cdr.sdtm.model.PathToSdtmDashBoard;
 import com.cdr.sdtm.model.PathToSdtmMatrix;
@@ -52,5 +54,9 @@ public interface SdtmMatrixService {
 
 	int updateFlagsForRules(String study, String domain, List<Long> selectedRules, boolean isAllRulesSelected,
 			String notes);
+	
+	List<PathToSdtmMatrix> importBusinessRules(String newStudy, String study, List<String> domains);
+	
+	List<String> checkForDomains(String newStudy, List<String> domains);
 
 }

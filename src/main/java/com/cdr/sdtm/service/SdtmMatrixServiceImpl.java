@@ -218,6 +218,8 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		 _matrix.setBack_transformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
 		 }
 		 _matrix.setInitialCreationDate(new Date());
+		 _matrix.setDomainLabel(pathToSdtmMatrix.getFormLable());
+		 _matrix.setDomainStatus(pathToSdtmMatrix.getDomainStatus());
 		return sdtmMatrixRepository.save(_matrix);
 	}
 
@@ -262,6 +264,65 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		} else {
 			return sdtmMatrixRepository.updateFlagsForSelectedRules(selectedRules,notes);
 		}
+	}
+
+	@Override
+	public List<PathToSdtmMatrix> importBusinessRules(String newStudy, String study, List<String> domains) {
+		
+		List<PathToSdtmMatrix> matrices,insertMatrices = null;
+		List<PathToSdtmMatrix> allMatrices = new ArrayList<PathToSdtmMatrix>();
+		PathToSdtmMatrix matrix = null;
+		
+		for(String domain : domains) {
+			matrices = findByStudyAndDomain(newStudy,domain);
+				if(matrices != null && matrices.size() > 0) {
+					   int deleted = deleteMatricesByStudyandDomain(newStudy, domain);
+					   matrices = null;
+				} 
+						matrices = findByStudyAndDomain(study,domain);
+						if(matrices != null && matrices.size() > 0) {
+								insertMatrices = new ArrayList<PathToSdtmMatrix>();
+								for(PathToSdtmMatrix template : matrices) {
+									matrix = new PathToSdtmMatrix();
+									matrix.setStudy(newStudy);
+									matrix.setDomain(template.getDomain());
+									matrix.setDomainLabel(template.getDomainLabel());
+									matrix.setDomainNameExt(template.getDomainNameExt());
+									matrix.setSubDomain(template.getSubDomain());
+									matrix.setFormName(template.getFormName());
+									matrix.setFormLable(template.getFormLable());
+									matrix.setFormExt(template.getFormExt());
+									matrix.setTargetField(template.getTargetField());
+									matrix.setTargetFile(template.getTargetFile());
+									matrix.setSourceFile(template.getSourceFile());
+									matrix.setSourceField(template.getSourceField());
+									matrix.setJoinLogic(template.getJoinLogic());
+									matrix.setTransformation_type(template.getTransformation_type());
+									matrix.setTransformation_logic(template.getTransformation_logic());
+									matrix.setBack_transformation_logic(template.getBack_transformation_logic());
+									matrix.setDomainStatus("Not Started");
+									matrix.setRuleFlag(template.getRuleFlag());
+									matrix.setNotes(template.getNotes());
+									matrix.setInitialCreationDate(new Date());
+									insertMatrices.add(matrix);
+								}
+								allMatrices.addAll(saveMatrixForDomain(insertMatrices));
+						}
+	    }
+		return allMatrices;
+	}
+
+	@Override
+	public List<String> checkForDomains(String newStudy, List<String> domains) {
+		List<String> existingDomains = new ArrayList<String>();
+		List<PathToSdtmMatrix> matrices = null;
+		for(String domain : domains) {
+			matrices = findByStudyAndDomain(newStudy,domain);
+				if(matrices != null && matrices.size() > 0) {
+					existingDomains.add(domain);
+				} 
+		}
+		return existingDomains;
 	}
 
 

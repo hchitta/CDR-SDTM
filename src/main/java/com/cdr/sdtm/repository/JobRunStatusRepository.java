@@ -22,7 +22,7 @@ public interface JobRunStatusRepository extends JpaRepository<JobRunStatus, Long
 			"a.study=b.study_title and\r\n" + 
 			"a.domain=b.domain_name and\r\n" + 
 			"a.study=:study\r\n" + 
-			"group by b.domain_label")
+			"group by a.domain")
 	List<IJobRunStatus> findByStudy(String study);
 	
 	@Transactional
