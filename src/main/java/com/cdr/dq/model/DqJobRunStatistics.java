@@ -34,11 +34,11 @@ public class DqJobRunStatistics {
 	@Column(name="job_status")
 	private String jobStatus;
 	
-	@Column(name="jobStartTimestamp")
-	private String job_start_timestamp;
+	@Column(name="job_start_timestamp")
+	private String jobStartTimestamp;
 	
-	@Column(name="jobEndTimestamp")
-	private String job_end_timestamp;
+	@Column(name="job_end_timestamp")
+	private String jobEndTimestamp;
 	
 	@Column(name="message")
 	private String message;
@@ -107,20 +107,20 @@ public class DqJobRunStatistics {
 		this.jobStatus = jobStatus;
 	}
 
-	public String getJob_start_timestamp() {
-		return job_start_timestamp;
+	public String getJobStartTimestamp() {
+		return jobStartTimestamp;
 	}
 
-	public void setJob_start_timestamp(String job_start_timestamp) {
-		this.job_start_timestamp = job_start_timestamp;
+	public void setJobStartTimestamp(String jobStartTimestamp) {
+		this.jobStartTimestamp = jobStartTimestamp;
 	}
 
-	public String getJob_end_timestamp() {
-		return job_end_timestamp;
+	public String getJobEndTimestamp() {
+		return jobEndTimestamp;
 	}
 
-	public void setJob_end_timestamp(String job_end_timestamp) {
-		this.job_end_timestamp = job_end_timestamp;
+	public void setJobEndTimestamp(String jobEndTimestamp) {
+		this.jobEndTimestamp = jobEndTimestamp;
 	}
 
 	public String getMessage() {
