@@ -177,7 +177,7 @@ export class BusinessRuleConfigComponent implements OnInit {
         if (flag === 'import') {
             this.editBizDataItem.defaultMessage = searchBRStudy.defaultMessage;
         }
-        if (flag === 'domainStatus') {
+        if (flag === 'domainStatus' || flag === 'add') {
             this.editBizDataItem.domainStatus = searchBRStudy.brdomainStatus;
         }
         this.isNew = flag;
