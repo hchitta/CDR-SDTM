@@ -1,6 +1,7 @@
 package com.cdr.sdtm.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -81,6 +82,7 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 			 if(pathToSdtmMatrix.getTransformation_logic() != null && pathToSdtmMatrix.getTransformation_logic() != "" && pathToSdtmMatrix.getTransformation_type() != null) {
 			 _matrix.setBack_transformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
 			 }
+			 _matrix.setUpdateDate(new Date());
 		     sdtmMatrixRepository.save(_matrix);
 		  return true;
 		 }
@@ -215,6 +217,7 @@ public class SdtmMatrixServiceImpl implements SdtmMatrixService {
 		 if(pathToSdtmMatrix.getTransformation_logic() != null && pathToSdtmMatrix.getTransformation_logic() != "" && pathToSdtmMatrix.getTransformation_type() != null) {
 		 _matrix.setBack_transformation_logic(getTransformationLogic(pathToSdtmMatrix.getTransformation_type(),pathToSdtmMatrix.getTransformation_logic()));
 		 }
+		 _matrix.setInitialCreationDate(new Date());
 		return sdtmMatrixRepository.save(_matrix);
 	}
 

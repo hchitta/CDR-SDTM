@@ -1,11 +1,17 @@
 package com.cdr.sdtm.model;
 
+
+
+import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 @Entity(name="path_to_sdtm_matrix_2")
 @Table(name="path_to_sdtm_matrix_2")
@@ -72,6 +78,14 @@ public class PathToSdtmMatrix {
 	
 	@Column(name="notes")
 	private String notes;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="initial_creation_date", updatable=false)
+	private Date initialCreationDate;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="update_date", insertable=false)
+	private Date updateDate;
 
 	public String getStudy() {
 		return study;
@@ -241,5 +255,23 @@ public class PathToSdtmMatrix {
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
+
+	public Date getInitialCreationDate() {
+		return initialCreationDate;
+	}
+
+	public void setInitialCreationDate(Date initialCreationDate) {
+		this.initialCreationDate = initialCreationDate;
+	}
+
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
+	}
+	
+	
 	
 }
