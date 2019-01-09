@@ -2,7 +2,27 @@
     <header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle" [configTypeIcons]="configTypeIcons"
         (iconClick)="addHandlerIconClick($event)"></header-icons>
     <div class="panel panel-default" style="height:420px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
-        <h3 class="row-label" style="height: 2%; margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
+        <h3 class="row-label" style="height: 5%; margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
+               <span> Select a Study and Form to see Data Quality Checks </span>
+
+<img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -35px"
+data-toggle="tooltip" title="Add a note to selected rules" src="assets/images/AddNote.png" alt="Logo">&nbsp;
+<img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -63px"
+data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/AddFlag.png" alt="Logo"/>&nbsp; 
+
+                <div class="dropdown pull-right" style="margin-right: -90px">
+                <span class="dropdown-toggle"id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                <img title="Change status for this domain" src="assets/images/ChangeStatus.png" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;">
+                </span>
+                <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
+                <li>Domain Status</li>
+                <li *ngFor="let status of domainStatuses" >
+                <a>{{status.domainStatusDescription}}</a>
+                </li> 
+                </ul>
+                </div> 
+ 
+
         </h3>
         <hr style="margin-top: -6px;border-width: 2px;" />
         <div>
@@ -36,7 +56,7 @@
                         <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                             <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                 <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                                         Study<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                     </a>
                                 </li>
@@ -54,7 +74,7 @@
                         <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                             <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                 <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                                         Form<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                     </a>
                                 </li>
@@ -72,7 +92,7 @@
                         <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                             <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                 <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                                         Category<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                     </a>
                                 </li>
@@ -90,7 +110,7 @@
                         <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                             <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                 <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                                         Check<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                     </a>
                                 </li>
@@ -108,7 +128,7 @@
                         <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                             <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                 <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                                         Variable<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                     </a>
                                 </li>
@@ -126,7 +146,7 @@
                         <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                             <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                                 <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                                         Status<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                     </a>
                                 </li>

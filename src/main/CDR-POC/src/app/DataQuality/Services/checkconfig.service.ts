@@ -17,4 +17,9 @@ export class CheckconfigService {
   getJobs() {
     return this.http.get<JobItem[]>(`/api/CDR/DQ/dqMatrix/jobs`);
   }
+
+  public fetchDomainStatuses(): any {
+    return this.http.get<any[]>(`/api/CDR/domain/statuses`);
+}
+
 }
