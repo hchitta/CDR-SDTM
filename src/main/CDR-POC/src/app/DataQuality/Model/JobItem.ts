@@ -13,5 +13,8 @@ export class JobItem {
     jobStartTimestamp: Date;
     jobEndTimestamp: Date;
     message: string;
+    checkEnable: string;
+    public notes: string;
+    public checkFlag: string;
 
 }

@@ -9,6 +9,8 @@ import { JobItem } from '../../Model/JobItem';
 })
 export class CheckConfigurationComponent implements OnInit {
   public domainStatuses: any[];
+  public popupType: any;
+  public jobItem: JobItem;
   appName: string;
   configTypeIcons: Object[];
   configTypeImage: string;
@@ -20,12 +22,12 @@ export class CheckConfigurationComponent implements OnInit {
     this.configTypeImage = "assets/images/NewStudyConf.png";
     this.configTypeTitle = "Data Quality Checks";
     this.configTypeIcons = [
-      { "icontitle": "Add Study", "iconImageSrc": "assets/images/AddStudy.png", "action": "add", "inputParam": "" },
+      { "icontitle": "Create New Check", "iconImageSrc": "assets/images/AddStudy.png", "action": "add", "inputParam": "" },
       { "icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action": "", "inputParam": "" },
       { "icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "": "", "inputParam": "" },
       { "icontitle": "Refresh", "iconImageSrc": "assets/images/Refresh.png" }
-      {"icontitle": "Email", "iconImageSrc": "assets/images/Email.png"},
-      { "icontitle": "Import from Template or Library", "iconImageSrc": "assets/images/RightImage1.png", "action": "import" } 
+      {"icontitle": "Report", "iconImageSrc": "assets/images/Email.png", "action": "report"},
+      { "icontitle": "Import", "iconImageSrc": "assets/images/RightImage1.png", "action": "import" } 
 
     ];
     this.appName = "Data Quality";
@@ -34,6 +36,66 @@ export class CheckConfigurationComponent implements OnInit {
       this.domainStatuses = data;
     });
 
+  }
+
+
+  addHandlerIconClick(data) {
+    if (!data.flag) {
+      return;
+    } else {
+      this.addHandler(data.flag);
+    }
+   }
+
+   public addHandler(flag: any) {
+    this.jobItem = new JobItem();
+    this.popupType = flag;
+   }
+
+   public cancelHandler() {
+    this.jobItem = undefined;
+   }
+
+   public importHandler(template: JobItem) {
+    this.jobItem = undefined;
+   }
+
+   public saveHandler(template: JobItem) {
+    this.jobItem = undefined;
+   }
+
+   public updateHandler(template: JobItem) {
+    this.jobItem = undefined;
+   }
+
+   public downloadHandler(template: JobItem) {
+    this.jobItem = undefined;
+   }
+
+   public emailHandler(template: JobItem) {
+    this.jobItem = undefined;
+   }
+
+   public editHandler({ dataItem }) {
+    this.jobItem = dataItem;
+    this.popupType = 'edit';
+   }
+
+   public removeHandler({ dataItem }) {
+      this.jobItem = dataItem;
+      this.popupType = 'delete';
+    }
+
+    public deleteHandler(template: JobItem) {
+        this.jobItem = undefined;
+    }
+
+    public flagHandler(template: JobItem) {
+      this.jobItem = undefined;
+    }
+
+  public noteHandler(template: JobItem) {
+    this.jobItem = undefined;
   }
 
 }

@@ -1,0 +1,19 @@
+<kendo-dialog *ngIf="active" (close)="closeForm()" [width]="450">
+    <kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0">
+      <span>
+        <b style="color : black;font-size: 14px;font-family: Open Sans;">
+            Add a Flag
+        </b>
+      </span>
+    </kendo-dialog-titlebar>
+    
+    
+    <form name="form" [formGroup]="dqFlagForm" novalidate>
+        <p style="font-family: Open Sans;font-size: 12px;color: black;margin-left: -33px">Are you sure you want to add a flag to the selected checks?</p>
+        <p style="font-family: Open Sans;font-size: 12px;color: black;margin-left: -135px">Note Text (Optional):</p>
+        <textarea placeholder="Enter note" formControlName="notes" style="margin-left: -54px"></textarea>
+    </form>
+  
+   <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-top: 10px;">Cancel</button> &nbsp;
+   <button kendoButton [disabled]="!dqFlagForm.valid" (click)="onSave($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -150px;margin-top: 10px;">Submit</button> 
+  </kendo-dialog>

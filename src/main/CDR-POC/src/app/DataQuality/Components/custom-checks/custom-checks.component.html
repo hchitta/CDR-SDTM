@@ -1,3 +1,78 @@
-<p>
-  custom-checks works!
-</p>
+<kendo-dialog *ngIf="active" (close)="closeForm()" [width]="450">
+    <kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0">
+      <span>
+        <b style="color : black;font-size: 14px;font-family: Open Sans;">
+          Custom Checks
+        </b>
+      </span>
+    </kendo-dialog-titlebar>
+    
+    
+    <form name="form" [formGroup]="dqCustomCheck" novalidate>
+      <div class="container" style="background-color: white;">
+        <div *ngIf="opened" style="color : #f31700;font-size:12px;font-family: Open Sans;">{{errorMsg}}</div>
+        <div class="row">
+          <div class="col-25">
+            <label style="padding-bottom: 0px;" for="Form">
+                Form:
+            </label>
+          </div>
+          <div class="col-75">
+              <input type="text" placeholder="Form Name" formControlName="form" />&nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label style="padding-bottom: 0px;" for="Category">
+              Category:
+            </label>
+          </div>
+          <div class="col-75">
+            <select placeholder="Select Check Category" formControlName="category">
+              <option [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select Check Category</option>
+              <option *ngFor="let category of categories" value="{{category}}">{{category}}</option>
+            </select>&nbsp;
+          </div>
+        </div>
+        <div class="row">
+            <div class="col-25">
+              <label style="padding-bottom: 0px;" for="Check">
+                Check:
+              </label>
+            </div>
+            <div class="col-75">
+              <select placeholder="Select Check" formControlName="check">
+                <option [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select Check</option>
+                <option *ngFor="let check of checks" value="{{check}}">{{check}}</option>
+              </select>&nbsp;
+            </div>
+          </div>
+          <div class="row">
+              <div class="col-25">
+                <label style="padding-bottom: 0px;" for="Form Variable">
+                  Form Variable:
+                </label>
+              </div>
+              <div class="col-75">
+                <select placeholder="Select Variable" formControlName="variable">
+                  <option [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Select Variable</option>
+                  <option *ngFor="let variable of variables" value="{{variable}}">{{variable}}</option>
+                </select>&nbsp;
+              </div>
+            </div>
+            <div class="row">
+                <div class="col-25">
+                  <label style="padding-bottom: 0px;" for="Input">
+                      Input:
+                  </label>
+                </div>
+                <div class="col-75">
+                    <input type="text" placeholder="Ex." formControlName="input" />&nbsp;
+                </div>
+              </div>
+      </div>
+    </form>
+  
+    <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-top: 10px;">Cancel</button>&nbsp;&nbsp;
+    <button kendoButton [disabled]="!dqCustomCheck.valid" (click)="onSave($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -150px;margin-top: 10px;">Submit</button> 
+  </kendo-dialog>

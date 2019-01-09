@@ -17,6 +17,10 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { SharedModule } from '../Shared/shared.module';
 import { DataqualityHomeComponent } from './Components/dataquality-home/dataquality-home.component';
+import { DataqualityReportComponent } from './Components/dataquality-report/dataquality-report.component';
+import { DataqualityDeleteComponent } from './Components/dataquality-delete/dataquality-delete.component';
+import { DataqualityNotesComponent } from './Components/dataquality-notes/dataquality-notes.component';
+import { DataqualityFlagsComponent } from './Components/dataquality-flags/dataquality-flags.component';
 
 @NgModule({
   imports: [
@@ -40,6 +44,6 @@ import { DataqualityHomeComponent } from './Components/dataquality-home/dataqual
     CheckConfigurationComponent, 
     ImportChecksComponent, 
     CustomChecksComponent, 
-    EditChecksComponent, DataqualityHomeComponent]
+    EditChecksComponent, DataqualityHomeComponent, DataqualityReportComponent, DataqualityDeleteComponent, DataqualityNotesComponent, DataqualityFlagsComponent]
 })
 export class DataQualityModule { }

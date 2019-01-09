@@ -1,3 +1,45 @@
-<p>
-  import-checks works!
-</p>
+<kendo-dialog *ngIf="active" (close)="closeForm()" [width]="450">
+    <kendo-dialog-titlebar style="background-color : white;border-radius: 30px 30px 0 0">
+      <span>
+        <b style="color : black;font-size: 14px;font-family: Open Sans;">
+          Import Library
+        </b>
+      </span>
+    </kendo-dialog-titlebar>
+    
+    
+    <form name="form" [formGroup]="dqImportForm" novalidate>
+      <div class="container" style="background-color: white;">
+        <div *ngIf="opened" style="color : #f31700;font-size:12px;font-family: Open Sans;">{{errorMsg}}</div>
+        <div class="row">
+          <div class="col-25">
+            <label style="padding-bottom: 0px;" for="I want to create data quality checks for: ">
+                I want to create data quality checks for:
+            </label>
+          </div>
+          <div class="col-75">
+            <select placeholder="Study Form" formControlName="study">
+              <option [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Study Form</option>
+              <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
+            </select>&nbsp;
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-25">
+            <label style="padding-bottom: 0px;" for="Use global/study library for reference:">
+              Use global/study library for reference:
+            </label>
+          </div>
+          <div class="col-75">
+            <select placeholder="Global/study Library" formControlName="library">
+              <option [ngValue]="null" disabled selected style="display: none;" class="defaultOption">Global/study Library</option>
+              <option *ngFor="let library of libraries" value="{{library}}">{{library}}</option>
+            </select>&nbsp;
+          </div>
+        </div>
+      </div>
+    </form>
+  
+    <button kendoButton (click)="onCancel($event)" style="color : white;background-color : rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-top: 10px;">Cancel</button>&nbsp;&nbsp;
+    <button kendoButton [disabled]="!dqImportForm.valid" (click)="onImport($event)" style="color : white;background-color :  rgb(7, 73, 130);border-color: white;font-family: Open Sans Regular;font-size: 12px;width: 70px;border-radius: 6px;margin-right: -150px;margin-top: 10px;">Import</button> 
+  </kendo-dialog>

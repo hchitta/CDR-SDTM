@@ -6,9 +6,9 @@
                <span> Select a Study and Form to see Data Quality Checks </span>
 
 <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -35px"
-data-toggle="tooltip" title="Add a note to selected rules" src="assets/images/AddNote.png" alt="Logo">&nbsp;
+data-toggle="tooltip" title="Add a note to selected rules" src="assets/images/AddNote.png" alt="Logo" (click)="addHandler('note')">&nbsp;
 <img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -63px"
-data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/AddFlag.png" alt="Logo"/>&nbsp; 
+data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/AddFlag.png" alt="Logo" (click)="addHandler('flags')"/>&nbsp; 
 
                 <div class="dropdown pull-right" style="margin-right: -90px">
                 <span class="dropdown-toggle"id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -174,7 +174,7 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
             <div class="main-content-inner">
                 <div class="page-content">
                     <div class="row" style="margin-top: -23px;">
-                        <kendo-grid [data]="dqJobs" [height]="360">
+                        <kendo-grid [data]="dqJobs" [height]="360" (edit)="editHandler($event)" (remove)="removeHandler($event)"> 
                             <kendo-grid-column [width]="35" [headerStyle]="{'background-color': '#074982'}">
                                 <ng-template kendoGridHeaderTemplate let-dataItem>
                                     <input id="customHeader" type="checkbox" name="all" [(ngModel)]='checkbox' (change)="isCheckboxSelected = !isCheckboxSelected;" />
@@ -235,12 +235,31 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                             </kendo-grid-command-column>
                         </kendo-grid>
                         <div style="background-color:red">
-                            <!--  <study-setup-edit [model]="editDataItem" [isNew]="isNew" [isDelete]="isDelete"
-                            (save)="saveHandler($event)"
+                        <dq-import-checks [model]="jobItem" [popupType]="popupType"
+                            (import)="importHandler($event)"
                             (cancel)="cancelHandler()">
-                        </study-setup-edit>-->
-                            <kendo-grid-remove-form [isDelete]="isDelete" [model]="editDataItem" (cancel)="cancelHandler()"
-                                (delete)="deleteHandler($event)"></kendo-grid-remove-form>
+                        </dq-import-checks>
+                        <dq-custom-checks [model]="jobItem" [popupType]="popupType"
+                        (save)="saveHandler($event)"
+                        (cancel)="cancelHandler()">
+                        </dq-custom-checks> 
+                        <dq-edit-checks [model]="jobItem" [popupType]="popupType"
+                        (update)="updateHandler($event)"
+                        (cancel)="cancelHandler()">
+                        </dq-edit-checks>
+                        <dq-dataquality-report [model]="jobItem" [popupType]="popupType"
+                        (download)="downloadHandler($event)" (email)="emailHandler($event)"
+                        (cancel)="cancelHandler()">
+                        </dq-dataquality-report>
+                        <dq-dataquality-delete [popupType]="popupType" [model]="jobItem" (cancel)="cancelHandler()"
+                                (delete)="deleteHandler($event)">
+                        </dq-dataquality-delete>
+                        <dq-dataquality-flags [popupType]="popupType" [model]="jobItem" (cancel)="cancelHandler()"
+                                (flag)="flagHandler($event)">
+                        </dq-dataquality-flags>
+                        <dq-dataquality-notes [popupType]="popupType" [model]="jobItem" (cancel)="cancelHandler()"
+                                (note)="noteHandler($event)">
+                        </dq-dataquality-notes>
                         </div>
                     </div>
                     <!-- /.row -->
