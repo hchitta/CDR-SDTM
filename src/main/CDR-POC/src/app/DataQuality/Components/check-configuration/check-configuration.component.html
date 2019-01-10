@@ -38,16 +38,16 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                     <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                         <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                           <li style="border-bottom: 0px;">
-                            <a data-toggle="tab" (click)="statusDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                            <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                               Therapeutic Area<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                             </a>
                           </li>
                         </ul>
-                        <div *ngIf="statusShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
+                        <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                           id="form-field-select-1">
-                          <select class="form-control" id="form-field-select-1" name="brTherapeuticArea" >
-                          <!-- [(ngModel)]="searchBRStudy.brTherapeuticArea"
-                            (change)="filterStudies($event.target.value);"> -->
+                          <select class="form-control" id="form-field-select-1" name="therapeuticArea"
+                           [(ngModel)]="searchDqChecks.therapeuticArea"
+                            (change)="filterStudies($event.target.value);">
                             <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                             <option value="all">--All--</option>
                             <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticCode}}">{{area.therapeuticDescription}}</option>
@@ -66,9 +66,9 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                     </ul>
                     <div *ngIf="studyShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                       id="form-field-select-1">
-                      <select class="form-control" id="form-field-select-1" name="brStudy" >
-                      <!-- [(ngModel)]="searchBRStudy.brStudy"
-                        (change)="filterDomains($event.target.value);"> -->
+                      <select class="form-control" id="form-field-select-1" name="study"
+                      [(ngModel)]="searchDqChecks.study">
+                      <!--   (change)="filterDomains($event.target.value);"> -->
                         <option value="undefined" disabled selected style="display: none;">Select an Option</option>
                         <option *ngFor="let title of studyTitles" value="{{title}}">{{title}}</option>
                       </select>
@@ -85,12 +85,12 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                         </ul>
                         <div *ngIf="formshowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                             id="form-field-select-1">
-                            <select class="form-control" id="form-field-select-1" name="brTherapeuticArea">
-                                <!-- [(ngModel)]="searchStudy.brTherapeuticArea" 
-                                (change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
+                            <select class="form-control" id="form-field-select-1" name="form"
+                                 [(ngModel)]="searchDqChecks.form" (change)="getVariables($event.target.value)">
+                                <!--(change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
                                 <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                                 <option value="all">--All--</option>
-                                <option *ngFor="let f of form" value="{{f[0]}}">{{f[1]}}</option>
+                                <option *ngFor="let f of form" value="{{f[0]}}">{{f[1]}}</option> 
                             </select>
                         </div>
                     </div>
@@ -105,9 +105,9 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                 </ul>
                 <div *ngIf="categoryShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                     id="form-field-select-1">
-                    <select class="form-control" id="form-field-select-1" name="brTherapeuticArea">
-                        <!-- [(ngModel)]="searchStudy.brTherapeuticArea" 
-                        (change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
+                    <select class="form-control" id="form-field-select-1" name="category"
+                        [(ngModel)]="searchDqChecks.category" >
+                       <!--  (change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
                         <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                         <option value="all">--All--</option>
                         <option *ngFor="let category of studyCategory" value="{{category.categoryName}}">{{category.categoryName}}</option>
@@ -124,9 +124,9 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                 </ul>
                 <div *ngIf="checkShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                     id="form-field-select-1">
-                    <select class="form-control" id="form-field-select-1" name="brTherapeuticArea">
-                        <!-- [(ngModel)]="searchStudy.brTherapeuticArea" 
-                        (change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
+                    <select class="form-control" id="form-field-select-1" name="check"
+                        [(ngModel)]="searchDqChecks.check" >
+                        <!-- (change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
                         <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                         <option value="all">--All--</option>
                         <option *ngFor="let check of studyCheck" value="{{check.checkName}}">{{check.checkName}}</option>
@@ -136,34 +136,34 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
             <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                 <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                     <li style="border-bottom: 0px;">
-                        <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                        <a data-toggle="tab" (click)="variableDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                             Variable<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                         </a>
                     </li>
                 </ul>
-                <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
+                <div *ngIf="variableShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                     id="form-field-select-1">
-                    <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                        [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
+                    <select class="form-control" id="form-field-select-1" name="variable"
+                        [(ngModel)]="searchDqChecks.variable">
                         <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                         <option value="all">--All--</option>
-                        <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
+                        <option *ngFor="let variable of variables" value="{{variable.fieldName}}">{{variable.fieldDesc}}</option>
                     </select>
                 </div>
             </div>
             <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
                 <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                     <li style="border-bottom: 0px;">
-                        <a data-toggle="tab" (click)="statDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
+                        <a data-toggle="tab" (click)="statusDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
                             Status<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                         </a>
                     </li>
                 </ul>
-                <div *ngIf="statshowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
+                <div *ngIf="statusShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                     id="form-field-select-1">
-                    <select class="form-control" id="form-field-select-1" name="brTherapeuticArea">
-                        <!-- [(ngModel)]="searchStudy.brTherapeuticArea" 
-                        (change)="filterStudies($event.target.value);fetch(searchStudy);">-->
+                    <select class="form-control" id="form-field-select-1" name="status"
+                        [(ngModel)]="searchDqChecks.status" >
+                        <!-- (change)="filterStudies($event.target.value);fetch(searchStudy);">-->
                         <option value="undefined" selected disabled style="display: none;">Select an Option</option> 
                         <option value="all">--All--</option>
                         <option *ngFor="let stat of studyStatus" value="{{stat.dqJobStatusName}}">{{stat.dqJobStatusName}}</option>
@@ -172,136 +172,6 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
             </div>
 
             <button (click)="clear()" style="height:24px;width: 50px;border-radius: 3px;font-size: 12px; font-family: Open Sans Regular;color : white;background-color : rgb(7, 73, 130);border-color: #074982;font-weight: 400;">Clear</button>
-
-                    <!-- <fieldset>
-                        <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
-                            <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
-                                <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 9px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                        Therapeutic Area<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
-                                id="form-field-select-1">
-                                <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                                    [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
-                                    <option value="undefined" selected disabled style="display: none;">Select an Option</option>
-                                    <option value="all">--All--</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
-                            <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
-                                <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                        Study<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
-                                id="form-field-select-1">
-                                <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                                    [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
-                                    <option value="undefined" selected disabled style="display: none;">Select an Option</option>
-                                    <option value="all">--All--</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
-                            <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
-                                <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                        Form<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
-                                id="form-field-select-1">
-                                <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                                    [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
-                                    <option value="undefined" selected disabled style="display: none;">Select an Option</option>
-                                    <option value="all">--All--</option>
-
-                                </select>
-                            </div>
-                        </div>
-                        <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
-                            <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
-                                <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                        Category<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
-                                id="form-field-select-1">
-                                <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                                    [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
-                                    <option value="undefined" selected disabled style="display: none;">Select an Option</option>
-                                    <option value="all">--All--</option>
-                                    <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
-                            <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
-                                <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                        Check<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
-                                id="form-field-select-1">
-                                <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                                    [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
-                                    <option value="undefined" selected disabled style="display: none;">Select an Option</option>
-                                    <option value="all">--All--</option>
-                                    <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
-                            <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
-                                <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                        Variable<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
-                                id="form-field-select-1">
-                                <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                                    [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
-                                    <option value="undefined" selected disabled style="display: none;">Select an Option</option>
-                                    <option value="all">--All--</option>
-                                    <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="nav nav-tabs-flt padding-6" sytle="border-bottom: 0px;">
-                            <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
-                                <li style="border-bottom: 0px;">
-                                    <a data-toggle="tab" (click)="therapeuticAreaDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                        Status<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
-                                    </a>
-                                </li>
-                            </ul>
-                            <div *ngIf="therapeuticAreasShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
-                                id="form-field-select-1">
-                                <select class="form-control" id="form-field-select-1" name="brTherapeuticArea"
-                                    [(ngModel)]="searchStudy.brTherapeuticArea" (change)="filterStudies($event.target.value);fetch(searchStudy);">
-                                    <option value="undefined" selected disabled style="display: none;">Select an Option</option>
-                                    <option value="all">--All--</option>
-                                    <option *ngFor="let area of therapeuticAreas" value="{{area.therapeuticArea}}">{{area.therapeuticArea}}</option>
-                                </select>
-                            </div>
-                        </div>
-
-                        <button (click)="clear()" style="height:24px;width: 50px;border-radius: 3px;font-size: 12px; font-family: Open Sans Regular;color : white;background-color : rgb(7, 73, 130);border-color: #074982;font-weight: 400;">Clear</button> -->
 
                     </fieldset>
                 </form>

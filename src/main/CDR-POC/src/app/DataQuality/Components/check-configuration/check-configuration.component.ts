@@ -19,20 +19,24 @@ export class CheckConfigurationComponent implements OnInit {
   statusDrpSelected = false;
   studyDrpSelected = false;
   studyShowOptions = false;
-  categoryDrpSelected=false;
-  categoryShowOptions=false;
-  checkDrpSelected=false;
-  checkShowOptions=false;
-  statDrpSelected=false;
-  statshowOptions=false;
-  formDrpSelected=false;
-  formshowOptions=false;
+  categoryDrpSelected = false;
+  categoryShowOptions = false;
+  checkDrpSelected = false;
+  checkShowOptions = false;
+  formDrpSelected = false;
+  formshowOptions = false;
+  therapeuticAreaDrpSelected = false;
+  therapeuticAreasShowOptions = false;
+  variableShowOptions = false;
+  variableDrpSelected = false;
   public therapeuticAreas: any[];
   public studyTitles: any[];
   public studyCategory: any[];
-  public studyCheck:any[];
-  public studyStatus:any[];
-  public form:any[];
+  public studyCheck: any[];
+  public studyStatus: any[];
+  public form: any[];
+  public variables: any[];
+  public searchDqChecks: any = {};
 
   constructor(private checkConfigService: CheckconfigService) { }
   dqJobs: JobItem[] = [];
@@ -170,12 +174,12 @@ public checkDrp(): void {
   }
 }
 public statDrp(): void {
-  if (this.statDrpSelected === false) {
-      this.statshowOptions = true;
-      this.statDrpSelected = true;
+  if (this.statusDrpSelected === false) {
+      this.statusShowOptions = true;
+      this.statusDrpSelected = true;
   } else {
-      this.statshowOptions = false;
-      this.statDrpSelected = false;
+      this.statusShowOptions = false;
+      this.statusDrpSelected = false;
   }
 }
 public formDrp(): void {
@@ -187,4 +191,71 @@ public formDrp(): void {
       this.formDrpSelected = false;
   }
 }
+
+public therapeuticAreaDrp(): void {
+  if (this.therapeuticAreaDrpSelected === false) {
+    this.therapeuticAreasShowOptions = true;
+    this.therapeuticAreaDrpSelected = true;
+  } else {
+    this.therapeuticAreasShowOptions = false;
+    this.therapeuticAreaDrpSelected = false;
+  }
+}
+
+public variableDrp(): void {
+  if (this.variableDrpSelected === false) {
+    this.variableShowOptions = true;
+    this.variableDrpSelected = true;
+  } else {
+    this.variableShowOptions = false;
+    this.variableDrpSelected = false;
+  }
+}
+
+public filterDqChecks() {
+  this.checkConfigService.filterDqChecks(this.searchDqChecks);
+}
+
+public clear() {
+  this.checkConfigService.fetchStudyTitles().subscribe(data => {
+      this.studyTitles = data;
+  });
+  this.searchDqChecks = {};
+  this.variables = [];
+  this.studyShowOptions = false;
+  this.studyDrpSelected = false;
+  this.formDrpSelected = false;
+  this.formshowOptions = false;
+  this.categoryDrpSelected = false;
+  this.categoryShowOptions = false;
+  this.checkDrpSelected = false;
+  this.checkShowOptions = false;
+  this.variableDrpSelected = false;
+  this.variableShowOptions = false;
+  this.therapeuticAreaDrpSelected = false;
+  this.therapeuticAreasShowOptions = false;
+  this.statusShowOptions = false;
+  this.statusDrpSelected = false;
+}
+
+filterStudies(therapeuticArea: any) {
+  if (therapeuticArea === 'undefined') {
+      // do nothing
+  } else if (therapeuticArea === 'all') {
+      this.checkConfigService.fetchStudyTitles().subscribe(data => {
+          this.studyTitles = data;
+      });
+  } else {
+      this.checkConfigService.fetchStudiessBytherapeuticArea(therapeuticArea).subscribe(data => {
+          this.studyTitles = data;
+      });
+  }
+}
+
+public getVariables(table: any) {
+  this.checkConfigService.fetchVariables(table).subscribe(data => {
+      this.variables = data;
+  });
+}
+
 }
