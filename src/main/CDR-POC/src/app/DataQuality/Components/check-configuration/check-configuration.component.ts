@@ -25,7 +25,7 @@ export class CheckConfigurationComponent implements OnInit {
       { "icontitle": "Create New Check", "iconImageSrc": "assets/images/AddStudy.png", "action": "add", "inputParam": "" },
       { "icontitle": "Upload", "iconImageSrc": "assets/images/NewNote.png", "action": "", "inputParam": "" },
       { "icontitle": "Download", "iconImageSrc": "assets/images/studyDownload.png", "": "", "inputParam": "" },
-      { "icontitle": "Refresh", "iconImageSrc": "assets/images/Refresh.png" }
+      { "icontitle": "Refresh", "iconImageSrc": "assets/images/Refresh.png" },
       {"icontitle": "Report", "iconImageSrc": "assets/images/Email.png", "action": "report"},
       { "icontitle": "Import", "iconImageSrc": "assets/images/RightImage1.png", "action": "import" } 
 
