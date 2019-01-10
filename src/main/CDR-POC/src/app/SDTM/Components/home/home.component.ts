@@ -11,6 +11,7 @@ export class HomeComponent implements OnInit {
   userName = '';
   isSdtmUser=false;
   isAdminUser=false;
+  isDqUser=false;
   constructor(private userService: UserService) { }
   ngOnInit() {
     const userDetails = this.userService.getUser();
@@ -22,11 +23,12 @@ export class HomeComponent implements OnInit {
     } else {
       this.userName = 'Admin';
     }
-    if (this.userName=='Admin')
-    {
-      this.isAdminUser=true;
-    } else {
-      this.isSdtmUser=true;
+    if (this.userName === 'Admin') {
+      this.isAdminUser = true;
+    } else if (this.userName === 'Mary') {
+      this.isSdtmUser = true;
+    } else if (this.userName === 'Harry') {
+      this.isDqUser = true;
     }
   }
 }

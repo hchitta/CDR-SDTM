@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { JobItem } from '../Model/JobItem';
+import { Observable } from '../../../../node_modules/rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -47,13 +48,13 @@ public fetchStudiessBytherapeuticArea(therapeuticArea: any) {
   return this.http.get<any[]>(`/api/CDR/study/ByTherapeuticArea`, {params: params});
 }
 
-filterDqChecks(searchDqChecks: any): any {
+filterDqChecks(searchDqChecks: any): Observable<any> {
   let params = new HttpParams();
   if (searchDqChecks.study) {
     params =  params.set('study', searchDqChecks.study);
     }
-    if (searchDqChecks.form) {
-    params =  params.set('form', searchDqChecks.form);
+    if (searchDqChecks.formName) {
+    params =  params.set('form', searchDqChecks.formName);
     }
     if (searchDqChecks.category) {
     params =  params.set('category', searchDqChecks.category);

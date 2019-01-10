@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CheckconfigService } from '../../Services/checkconfig.service';
 import { JobItem } from '../../Model/JobItem';
+import { UserService } from '../../../SDTM/Services/user.service';
 
 @Component({
   selector: 'check-configuration',
@@ -37,10 +38,17 @@ export class CheckConfigurationComponent implements OnInit {
   public form: any[];
   public variables: any[];
   public searchDqChecks: any = {};
-
-  constructor(private checkConfigService: CheckconfigService) { }
+  isAdminUser = false;
   dqJobs: JobItem[] = [];
+
+  constructor(private checkConfigService: CheckconfigService, private userService: UserService) { }
   ngOnInit() {
+
+    const userDetails = this.userService.getUser();
+        if (userDetails !== undefined && userDetails.userName === 'admin') {
+            this.isAdminUser = true;
+        }
+
     this.checkConfigService.getJobs().subscribe(jobs => this.dqJobs = jobs);
     this.configTypeImage = "assets/images/NewStudyConf.png";
     this.configTypeTitle = "Data Quality Checks";
@@ -213,7 +221,9 @@ public variableDrp(): void {
 }
 
 public filterDqChecks() {
-  this.checkConfigService.filterDqChecks(this.searchDqChecks);
+  this.checkConfigService.filterDqChecks(this.searchDqChecks).subscribe(data => {
+    this.dqJobs = data;
+  });
 }
 
 public clear() {
@@ -236,6 +246,7 @@ public clear() {
   this.therapeuticAreasShowOptions = false;
   this.statusShowOptions = false;
   this.statusDrpSelected = false;
+  this.dqJobs = [];
 }
 
 filterStudies(therapeuticArea: any) {
@@ -253,9 +264,37 @@ filterStudies(therapeuticArea: any) {
 }
 
 public getVariables(table: any) {
+  if (this.form != null) {
+    const selectedItem = this.form.find((x: any) => x[0] === table);
+    if (selectedItem) {
+        this.searchDqChecks.formName = selectedItem[1];
+    }
+}
   this.checkConfigService.fetchVariables(table).subscribe(data => {
       this.variables = data;
   });
+  }
+
+  public getStudy(): String {
+    if (this.searchDqChecks != null && this.searchDqChecks.study != null && this.searchDqChecks.form != null) {
+       return this.searchDqChecks.study;
+    }
+   }
+
+   public getDomain(): String {
+    let selectedDomain = '';
+    if (this.searchDqChecks != null && this.searchDqChecks.form != null
+        && this.form != null && this.form.length > 0) {
+        for (let i = 0; i < this.form.length; i++) {
+            if (this.form[i][0] === this.searchDqChecks.form) {
+                selectedDomain = this.form[i][1];
+                break;
+            }
+        }
+        return selectedDomain + ' Form';
+    }
+    return null;
 }
+
 
 }

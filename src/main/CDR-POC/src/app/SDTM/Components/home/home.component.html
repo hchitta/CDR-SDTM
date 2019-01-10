@@ -9,14 +9,14 @@
 <div class="container" style="width: 986px; margin-left: 188px;">
   <div class="row">
     <div class="col-xs-12 col-sm-3">
-      <div class="panel panel-default" *ngIf="isSdtmUser||isAdminUser">
+      <div class="panel panel-default" *ngIf="isSdtmUser || isAdminUser">
         <div class="panel-body">
           <a type="button" class="span3 btn-block" routerLink="/sdtm" [routerLinkActive]="['active']">
             <img src="../assets/images/Picture1.png" alt="Path to SDTM" style="width: 100px;height:100px;">
           </a>
         </div>
       </div>
-      <div class="panel panel-default" *ngIf="!isSdtmUser&&!isAdminUser">
+      <div class="panel panel-default" *ngIf="!isSdtmUser && !isAdminUser">
         <div class="panel-body">
           <a type="button" class="span3 btn-block" routerLink="/sdtm" [routerLinkActive]="['active']">
             <img src="../assets/images/Picture1.png" alt="Path to SDTM" style="width: 100px;height:100px;-webkit-filter: grayscale(100%);
@@ -27,14 +27,14 @@
       <div class="panel-footer"><label>Path to SDTM</label></div>
     </div>
     <div class="col-xs-12 col-sm-3">
-      <div class="panel panel-default" *ngIf="isAdminUser">
+      <div class="panel panel-default" *ngIf="isAdminUser || isDqUser">
         <div class="panel-body">
           <a type="button" class="span3 btn-block" routerLink="/dataQuality" [routerLinkActive]="['active']">
             <img src="../assets/images/Picture2.png" alt="Path to SDTM" style="width: 100px;height:100px;">
           </a>
         </div>
       </div>
-      <div class="panel panel-default" *ngIf="!isAdminUser">
+      <div class="panel panel-default" *ngIf="!isAdminUser && !isDqUser">
         <div class="panel-body">
 
           <img src="../assets/images/Picture2.png" alt="Path to SDTM" style="width: 100px;height:100px;-webkit-filter: grayscale(100%);

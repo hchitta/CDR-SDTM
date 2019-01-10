@@ -1,22 +1,26 @@
 <div class="main-container ace-save-state" id="main-container">
     <header-icons [configTypeImage]="configTypeImage" [configTypeTitle]="configTypeTitle" [configTypeIcons]="configTypeIcons"
-        (iconClick)="addHandlerIconClick($event)"></header-icons>
+    [studyInHeader]="getStudy()" (iconClick)="addHandlerIconClick($event)"></header-icons>
     <div class="panel panel-default" style="height:420px;margin-left: 6px;border-radius: 10px;border-width: 1px;width: 99%;margin-top: 2px;padding-bottom: 3px;background: white;">
         <h3 class="row-label" style="height: 5%; margin-top: 7px;text-align:left;font-family:Open Sans Regular;font-size:12px;width:90%;">
-               <span> Select a Study and Form to see Data Quality Checks </span>
+               <span  *ngIf="(getDomain() == null)"> Select a Study and Form to see Data Quality Checks </span>
+               <b><span *ngIf="(getDomain() != null)" style="font-size: 13px;">
+                <span class="img-circle k-icon k-i-shape-circle" title="Status"></span>
+                {{getDomain()}}
+              </span></b>
 
-<img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -35px"
+<img *ngIf="(getDomain() != null)" class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -35px"
 data-toggle="tooltip" title="Add a note to selected rules" src="assets/images/AddNote.png" alt="Logo" (click)="addHandler('note')">&nbsp;
-<img class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -63px"
+<img *ngIf="(getDomain() != null)" class="pull-right" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;margin-right: -63px"
 data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/AddFlag.png" alt="Logo" (click)="addHandler('flags')"/>&nbsp; 
 
-                <div class="dropdown pull-right" style="margin-right: -90px">
+                <div class="dropdown pull-right" style="margin-right: -90px" *ngIf="(getDomain() != null)">
                 <span class="dropdown-toggle"id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                 <img title="Change status for this domain" src="assets/images/ChangeStatus.png" style="margin-top: -3px;width: 27.5px;font-family:Open Sans Regular;font-size:10px; cursor: pointer;">
                 </span>
                 <ul class="dropdown-menu dropdown-menu-left" aria-labelledby="dropdownMenu1">
                 <li>Check Status</li>
-                <li *ngFor="let status of domainStatuses" >
+                <li *ngFor="let status of domainStatuses" [ngClass]="(!isAdminUser && (status.domainStatus == 'Approved' || status.domainStatus == 'Rejected')) ? 'disabled' : 'enabled'">
                 <a>{{status.domainStatusDescription}}</a>
                 </li> 
                 </ul>
@@ -60,7 +64,7 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                     <ul class="nav  nav-tabs" style="border-bottom: 0px;">
                       <li style="border-bottom: 0px;">
                         <a data-toggle="tab" (click)="studyDrp()" style="margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                          Study<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                          Study *<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                         </a>
                       </li>
                     </ul>
@@ -79,14 +83,14 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                         <ul class="nav  nav-tabs" style="border-bottom: 0px;" id="myTab4">
                             <li style="border-bottom: 0px;">
                                 <a data-toggle="tab" (click)="formDrp()" style="margin-top: 0px;margin-left: 10px;margin-bottom:6px;padding-top: 3px;color:black;width:178px;background-color: #E4E6E9;height:24px;text-align:left;font-family: Open Sans Regular;font-size: 12px;">
-                                    Form<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
+                                    Form *<span class="pull-right"><i class="fa fa-angle-down" style="padding-top: 3px;"></i></span>
                                 </a>
                             </li>
                         </ul>
                         <div *ngIf="formshowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                             id="form-field-select-1">
                             <select class="form-control" id="form-field-select-1" name="form"
-                                 [(ngModel)]="searchDqChecks.form" (change)="getVariables($event.target.value)">
+                                 [(ngModel)]="searchDqChecks.form" (change)="getVariables($event.target.value);filterDqChecks();">
                                 <!--(change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
                                 <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                                 <option value="all">--All--</option>
@@ -106,7 +110,7 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                 <div *ngIf="categoryShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                     id="form-field-select-1">
                     <select class="form-control" id="form-field-select-1" name="category"
-                        [(ngModel)]="searchDqChecks.category" >
+                        [(ngModel)]="searchDqChecks.category" (change)="filterDqChecks();">
                        <!--  (change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
                         <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                         <option value="all">--All--</option>
@@ -125,8 +129,7 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                 <div *ngIf="checkShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                     id="form-field-select-1">
                     <select class="form-control" id="form-field-select-1" name="check"
-                        [(ngModel)]="searchDqChecks.check" >
-                        <!-- (change)="filterStudies($event.target.value);fetch(searchStudy);"> -->
+                        [(ngModel)]="searchDqChecks.check" (change)="filterDqChecks();">
                         <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                         <option value="all">--All--</option>
                         <option *ngFor="let check of studyCheck" value="{{check.checkName}}">{{check.checkName}}</option>
@@ -144,7 +147,7 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                 <div *ngIf="variableShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                     id="form-field-select-1">
                     <select class="form-control" id="form-field-select-1" name="variable"
-                        [(ngModel)]="searchDqChecks.variable">
+                        [(ngModel)]="searchDqChecks.variable" (change)="filterDqChecks();">
                         <option value="undefined" selected disabled style="display: none;">Select an Option</option>
                         <option value="all">--All--</option>
                         <option *ngFor="let variable of variables" value="{{variable.fieldName}}">{{variable.fieldDesc}}</option>
@@ -162,8 +165,7 @@ data-toggle="tooltip" title="Add a flag to selected rules" src="assets/images/
                 <div *ngIf="statusShowOptions" class="dropdown-container" style="border-bottom: 0px;margin-top: 2px;margin-left: 10px;font-family: Open Sans Regular;font-size:12px;width: 89%;height: 35px;"
                     id="form-field-select-1">
                     <select class="form-control" id="form-field-select-1" name="status"
-                        [(ngModel)]="searchDqChecks.status" >
-                        <!-- (change)="filterStudies($event.target.value);fetch(searchStudy);">-->
+                        [(ngModel)]="searchDqChecks.status" (change)="filterDqChecks();">
                         <option value="undefined" selected disabled style="display: none;">Select an Option</option> 
                         <option value="all">--All--</option>
                         <option *ngFor="let stat of studyStatus" value="{{stat.dqJobStatusName}}">{{stat.dqJobStatusName}}</option>
