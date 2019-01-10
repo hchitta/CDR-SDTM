@@ -15,6 +15,7 @@ export class JobItem {
     message: string;
     checkEnable: string;
     public notes: string;
-    public checkFlag: string;
+    public checkFlag: string; 
+  
 
 }
