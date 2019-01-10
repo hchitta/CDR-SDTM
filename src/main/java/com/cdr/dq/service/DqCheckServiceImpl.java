@@ -58,7 +58,7 @@ public class DqCheckServiceImpl implements DqCheckService {
 		ExampleMatcher matcher = ExampleMatcher.matching()
 											   .withIgnoreNullValues()
 											   .withStringMatcher(StringMatcher.CONTAINING)
-											   .withIgnorePaths("id");
+											   .withIgnorePaths("uniqueId");
 		
 		Example<DqJobRunStatistics> example = Example.of(jobRunStat, matcher);
 		
