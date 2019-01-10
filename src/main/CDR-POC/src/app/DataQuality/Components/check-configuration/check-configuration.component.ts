@@ -15,6 +15,25 @@ export class CheckConfigurationComponent implements OnInit {
   configTypeIcons: Object[];
   configTypeImage: string;
   configTypeTitle: string;
+  statusShowOptions = false;
+  statusDrpSelected = false;
+  studyDrpSelected = false;
+  studyShowOptions = false;
+  categoryDrpSelected=false;
+  categoryShowOptions=false;
+  checkDrpSelected=false;
+  checkShowOptions=false;
+  statDrpSelected=false;
+  statshowOptions=false;
+  formDrpSelected=false;
+  formshowOptions=false;
+  public therapeuticAreas: any[];
+  public studyTitles: any[];
+  public studyCategory: any[];
+  public studyCheck:any[];
+  public studyStatus:any[];
+  public form:any[];
+
   constructor(private checkConfigService: CheckconfigService) { }
   dqJobs: JobItem[] = [];
   ngOnInit() {
@@ -35,7 +54,24 @@ export class CheckConfigurationComponent implements OnInit {
     this.checkConfigService.fetchDomainStatuses().subscribe(data => {
       this.domainStatuses = data;
     });
-
+    this.checkConfigService.fetchTherapeuticAreas().subscribe(data => {
+      this.therapeuticAreas = data;
+    });
+    this.checkConfigService.fetchStudyTitles().subscribe(data => {
+      this.studyTitles = data;
+    });
+    this.checkConfigService.fetchStudyCategory().subscribe(data => {
+      this.studyCategory = data;
+    });
+    this.checkConfigService.fetchStudyCheck().subscribe(data => {
+      this.studyCheck = data;
+    });
+    this.checkConfigService.fetchStatus().subscribe(data => {
+      this.studyStatus = data;
+    });
+    this.checkConfigService.fetchForm().subscribe(data => {
+      this.form = data;
+    });
   }
 
 
@@ -97,5 +133,58 @@ export class CheckConfigurationComponent implements OnInit {
   public noteHandler(template: JobItem) {
     this.jobItem = undefined;
   }
-
+  public statusDrp(): void {
+    if (this.statusDrpSelected === false) {
+        this.statusShowOptions = true;
+        this.statusDrpSelected = true;
+    } else {
+        this.statusShowOptions = false;
+        this.statusDrpSelected = false;
+    }
+}
+public studyDrp(): void {
+  if (this.studyDrpSelected === false) {
+      this.studyShowOptions = true;
+      this.studyDrpSelected = true;
+  } else {
+      this.studyShowOptions = false;
+      this.studyDrpSelected = false;
+  }
+}
+public categoryDrp(): void {
+  if (this.categoryDrpSelected === false) {
+      this.categoryShowOptions = true;
+      this.categoryDrpSelected = true;
+  } else {
+      this.categoryShowOptions = false;
+      this.categoryDrpSelected = false;
+  }
+}
+public checkDrp(): void {
+  if (this.checkDrpSelected === false) {
+      this.checkShowOptions = true;
+      this.checkDrpSelected = true;
+  } else {
+      this.checkShowOptions = false;
+      this.checkDrpSelected = false;
+  }
+}
+public statDrp(): void {
+  if (this.statDrpSelected === false) {
+      this.statshowOptions = true;
+      this.statDrpSelected = true;
+  } else {
+      this.statshowOptions = false;
+      this.statDrpSelected = false;
+  }
+}
+public formDrp(): void {
+  if (this.formDrpSelected === false) {
+      this.formshowOptions = true;
+      this.formDrpSelected = true;
+  } else {
+      this.formshowOptions = false;
+      this.formDrpSelected = false;
+  }
+}
 }
