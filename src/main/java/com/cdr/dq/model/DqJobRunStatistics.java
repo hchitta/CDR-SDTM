@@ -42,6 +42,21 @@ public class DqJobRunStatistics {
 	
 	@Column(name="message")
 	private String message;
+	
+	public DqJobRunStatistics() {
+		
+	}
+	
+	public DqJobRunStatistics(String study, String form, String category, String check, String variable,
+			String jobStatus) {
+		super();
+		this.study = study;
+		this.form = form;
+		this.category = category;
+		this.check = check;
+		this.variable = variable;
+		this.jobStatus = jobStatus;
+	}
 
 	public int getUniqueId() {
 		return uniqueId;

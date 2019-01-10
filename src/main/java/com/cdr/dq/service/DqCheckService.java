@@ -11,4 +11,6 @@ public interface DqCheckService {
 	
 	List<DqJobRunStatistics> getDqJobRunDetails();
 
+	List<DqJobRunStatistics> getDqJobRunDetails(DqJobRunStatistics jobRunStat);
+
 }

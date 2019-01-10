@@ -15,7 +15,7 @@ import com.cdr.dq.model.DqStatusMetadata;
 import com.cdr.dq.service.DqMetaDataService;
 
 @RestController
-@RequestMapping("/CDR/DQ")
+@RequestMapping("/api/CDR/DQ")
 public class DqMetaDataController {
 	
 	@Autowired
